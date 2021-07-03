@@ -34,7 +34,6 @@ public class EventFragment extends Fragment {
 //        image.setClipToOutline(true);
         startActivity(new Intent(context, EventActivity.class));
 
-
         return view;
     }
 }

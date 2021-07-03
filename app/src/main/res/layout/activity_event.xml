@@ -28,7 +28,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/eventClubLogo"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="30dp"
@@ -38,7 +38,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/eventClubName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -46,9 +46,9 @@
                     android:text="Music Club VIT"
                     android:textColor="#DCD0FF"
                     android:textSize="15dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-                    app:layout_constraintStart_toEndOf="@+id/imageView7"
-                    app:layout_constraintTop_toTopOf="@+id/imageView7" />
+                    app:layout_constraintBottom_toBottomOf="@+id/eventClubLogo"
+                    app:layout_constraintStart_toEndOf="@+id/eventClubLogo"
+                    app:layout_constraintTop_toTopOf="@+id/eventClubLogo" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout"
@@ -60,7 +60,7 @@
                     android:background="@drawable/eventdetails_background"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6">
+                    app:layout_constraintTop_toBottomOf="@+id/eventClubName">
 
                     <TextView
                         android:id="@+id/textView7"
@@ -108,7 +108,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView10"
+                        android:id="@+id/eventDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -122,7 +122,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
                     <TextView
-                        android:id="@+id/textView11"
+                        android:id="@+id/eventPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -135,7 +135,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/eventDuration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -149,7 +149,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/eventDescription"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -176,10 +176,10 @@
                     android:textSize="17dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button" />
+                    app:layout_constraintTop_toBottomOf="@+id/eventRegisterNow" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/eventRegisterNow"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -195,7 +195,7 @@
                     android:textSize="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintTop_toBottomOf="@+id/eventDescription" />
 
                 <ImageView
                     android:id="@+id/imageView8"
@@ -208,7 +208,7 @@
                     android:src="@drawable/ic_line"
                     app:layout_constraintEnd_toStartOf="@+id/textView4"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button" />
+                    app:layout_constraintTop_toBottomOf="@+id/eventRegisterNow" />
 
                 <ImageView
                     android:id="@+id/imageView9"
@@ -221,7 +221,7 @@
                     android:src="@drawable/ic_line"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView4"
-                    app:layout_constraintTop_toBottomOf="@+id/button" />
+                    app:layout_constraintTop_toBottomOf="@+id/eventRegisterNow" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
@@ -234,7 +234,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView4">
 
                     <ImageView
-                        android:id="@+id/imageView10"
+                        android:id="@+id/eventSave"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -252,8 +252,8 @@
                         android:textColor="#7F54FA"
                         android:textSize="15dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView10"
-                        app:layout_constraintTop_toTopOf="@+id/imageView10" />
+                        app:layout_constraintStart_toEndOf="@+id/eventSave"
+                        app:layout_constraintTop_toTopOf="@+id/eventSave" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -275,7 +275,7 @@
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/eventImage"
                     android:layout_width="match_parent"
                     android:layout_height="430dp"
                     android:scaleType="centerCrop"
@@ -287,7 +287,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/eventName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -300,12 +300,12 @@
                     android:theme="@style/Widget.AppCompat.TextView"
                     app:layout_collapseMode="pin"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                    app:layout_constraintEnd_toStartOf="@+id/eventLike"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView4" />
+                    app:layout_constraintTop_toTopOf="@+id/eventImage" />
 
                 <ImageView
-                    android:id="@+id/imageView5"
+                    android:id="@+id/eventLike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="320dp"
@@ -313,12 +313,12 @@
                     android:padding="5dp"
                     android:src="@drawable/ic_likebig"
                     app:layout_collapseMode="pin"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                    app:layout_constraintBottom_toBottomOf="@+id/eventName"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView5" />
+                    app:layout_constraintTop_toTopOf="@+id/eventName" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/eventBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
@@ -328,7 +328,7 @@
                     android:src="@drawable/ic_back"
                     app:layout_collapseMode="pin"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView4" />
+                    app:layout_constraintTop_toTopOf="@+id/eventImage" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
