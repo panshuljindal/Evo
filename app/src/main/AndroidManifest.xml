@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Evo">
+        <activity android:name=".Activity.LandingPage"></activity>
         <activity android:name=".Activity.NavigationAcitivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
