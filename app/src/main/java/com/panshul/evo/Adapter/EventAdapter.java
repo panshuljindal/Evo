@@ -1,5 +1,6 @@
 package com.panshul.evo.Adapter;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -7,9 +8,21 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.panshul.evo.Object.EventObject;
 import com.panshul.evo.R;
 
+import java.util.List;
+
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder> {
+
+    List<EventObject> list;
+    Context context;
+
+    public EventAdapter(List<EventObject> list, Context context) {
+        this.list = list;
+        this.context = context;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         return null;

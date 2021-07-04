@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 import nl.joery.animatedbottombar.AnimatedBottomBar;
 
-public class NavigationAcitivity extends AppCompatActivity {
+public class NavigationActivity extends AppCompatActivity {
     AnimatedBottomBar animatedBottomBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
