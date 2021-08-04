@@ -2,15 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.panshul.evo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Evo">
-        <activity android:name=".Activity.NavigationActivity"></activity>
-        <activity android:name=".Activity.LandingPage">
+        <activity android:name=".Activity.SeeAllActivity"></activity>
+        <activity android:name=".Activity.MusicActivity" />
+        <activity android:name=".Activity.LandingPage" >
+
+        </activity>
+        <activity android:name=".Activity.NavigationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

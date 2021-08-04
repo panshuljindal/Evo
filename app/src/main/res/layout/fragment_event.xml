@@ -27,6 +27,7 @@
         android:layout_marginStart="21dp"
         android:layout_marginTop="15dp"
         android:scrollbars="none"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
@@ -52,7 +53,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/eventSpeakers"
+                android:id="@+id/eventGravitas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -61,11 +62,48 @@
                 android:paddingTop="5dp"
                 android:paddingRight="22dp"
                 android:paddingBottom="5dp"
-                android:text="Speakers"
+                android:text="Gravitas"
                 android:textColor="@color/white"
                 android:textSize="14dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/eventAll"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/eventRiviera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/event_unselected"
+                android:paddingLeft="22dp"
+                android:paddingTop="5dp"
+                android:paddingRight="22dp"
+                android:paddingBottom="5dp"
+                android:text="Riviera"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/eventGravitas"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/eventHackathon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/event_unselected"
+                android:paddingLeft="22dp"
+                android:paddingTop="5dp"
+                android:paddingRight="22dp"
+                android:paddingBottom="5dp"
+                android:text="Hackathons"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/eventRiviera"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -76,17 +114,54 @@
                 android:background="@drawable/event_unselected"
                 android:paddingLeft="22dp"
                 android:paddingTop="5dp"
+                android:visibility="gone"
                 android:paddingRight="22dp"
                 android:paddingBottom="5dp"
                 android:text="Workshops"
                 android:textColor="@color/white"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/eventSpeakers"
+                app:layout_constraintStart_toEndOf="@id/eventHackathon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/eventHackathon"
+                android:id="@+id/eventSpeakers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/event_unselected"
+                android:paddingLeft="22dp"
+                android:paddingTop="5dp"
+                android:paddingRight="22dp"
+                android:paddingBottom="5dp"
+                android:visibility="gone"
+                android:text="Speakers"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/eventWorkshops"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/eventCultural"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/event_unselected"
+                android:paddingLeft="22dp"
+                android:paddingTop="5dp"
+                android:paddingRight="22dp"
+                android:paddingBottom="5dp"
+                android:visibility="gone"
+                android:text="Cultural"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/eventSpeakers"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/eventNGO"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -94,14 +169,15 @@
                 android:background="@drawable/event_unselected"
                 android:paddingLeft="22dp"
                 android:paddingTop="5dp"
+                android:visibility="gone"
                 android:paddingRight="22dp"
                 android:paddingBottom="5dp"
-                android:text="Hackathons"
+                android:text="NGO"
                 android:textColor="@color/white"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/eventWorkshops"
+                app:layout_constraintStart_toEndOf="@id/eventCultural"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -111,7 +187,6 @@
         android:id="@+id/eventsRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
