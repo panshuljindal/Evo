@@ -78,29 +78,38 @@ public class EventFragment extends Fragment {
 
     }
     private void addData(int i){
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Drawables.base_url)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        Api api = retrofit.create(Api.class);
         Call<EventMainObject> call;
-        call = api.getAllEvents();
-//        if (i==1){
-//
-//        }
-//        else if(i==2){
-//            call = api.getGravitasEvents();
-//        }
-//        else if(i==3){
-//            call = api.getRivieraEvents();
-//        }
-//        else {
-//            call = api.getAllEvents();
-//        }
+        Api api = Drawables.api;
+        if (i==1){
+            call = api.getAllEvents();
+        }
+        else if(i==2){
+            call = api.getGravitasEvents();
+        }
+        else if(i==3){
+            call = api.getRivieraEvents();
+        }
+        else if(i==4){
+            call = api.getHackathonEvents();
+        }
+
+        else if(i==5){
+            call = api.getSpeakerEvents();
+        }
+
+        else if(i==6){
+            call = api.getWorkshopEvents();
+        }
+
+        else if(i==7){
+            call = api.getCulturalEvents();
+        }
+
+        else if(i==8){
+            call = api.getNGOEvents();
+        }else {
+            call=api.getAllEvents();
+        }
         call.enqueue(new Callback<EventMainObject>() {
             @Override
             public void onResponse(Call<EventMainObject> call, Response<EventMainObject> response) {

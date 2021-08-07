@@ -1,46 +1,38 @@
 package com.panshul.evo.Object.Search;
 
 public class SearchObject {
-    String type;
-    String eventName;
+    int type;
     String eventId;
-    String eventClubName;
-    long timestamp;
-    int price;
-    String clubId;
+    String poster;
+    String eventName;
     String clubName;
-    String clubType;
-    String eventPoster;
+    String clubId;
+    long timestamp;
     String clubLogo;
+    String clubBackdrop;
+    String _id;
+    int __v;
 
-    public SearchObject(String type, String eventName, String eventId, String eventClubName, long timestamp, int price, String clubId, String clubName, String clubType, String eventPoster, String clubLogo) {
+    public SearchObject(int type, String eventId, String poster, String eventName, String clubName, String clubId, long timestamp, String clubLogo, String clubBackdrop, String _id, int __v) {
         this.type = type;
-        this.eventName = eventName;
         this.eventId = eventId;
-        this.eventClubName = eventClubName;
-        this.timestamp = timestamp;
-        this.price = price;
-        this.clubId = clubId;
+        this.poster = poster;
+        this.eventName = eventName;
         this.clubName = clubName;
-        this.clubType = clubType;
-        this.eventPoster = eventPoster;
+        this.clubId = clubId;
+        this.timestamp = timestamp;
         this.clubLogo = clubLogo;
+        this.clubBackdrop = clubBackdrop;
+        this._id = _id;
+        this.__v = __v;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
-    }
-
-    public String getEventName() {
-        return eventName;
-    }
-
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
     }
 
     public String getEventId() {
@@ -51,36 +43,20 @@ public class SearchObject {
         this.eventId = eventId;
     }
 
-    public String getEventClubName() {
-        return eventClubName;
+    public String getPoster() {
+        return poster;
     }
 
-    public void setEventClubName(String eventClubName) {
-        this.eventClubName = eventClubName;
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 
-    public long getTimestamp() {
-        return timestamp;
+    public String getEventName() {
+        return eventName;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getClubId() {
-        return clubId;
-    }
-
-    public void setClubId(String clubId) {
-        this.clubId = clubId;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getClubName() {
@@ -91,20 +67,20 @@ public class SearchObject {
         this.clubName = clubName;
     }
 
-    public String getClubType() {
-        return clubType;
+    public String getClubId() {
+        return clubId;
     }
 
-    public void setClubType(String clubType) {
-        this.clubType = clubType;
+    public void setClubId(String clubId) {
+        this.clubId = clubId;
     }
 
-    public String getEventPoster() {
-        return eventPoster;
+    public long getTimestamp() {
+        return timestamp;
     }
 
-    public void setEventPoster(String eventPoster) {
-        this.eventPoster = eventPoster;
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getClubLogo() {
@@ -113,5 +89,29 @@ public class SearchObject {
 
     public void setClubLogo(String clubLogo) {
         this.clubLogo = clubLogo;
+    }
+
+    public String getClubBackdrop() {
+        return clubBackdrop;
+    }
+
+    public void setClubBackdrop(String clubBackdrop) {
+        this.clubBackdrop = clubBackdrop;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public int get__v() {
+        return __v;
+    }
+
+    public void set__v(int __v) {
+        this.__v = __v;
     }
 }

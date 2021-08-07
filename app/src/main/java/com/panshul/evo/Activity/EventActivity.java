@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,9 @@ import com.panshul.evo.R;
 import com.panshul.evo.Services.Api;
 import com.panshul.evo.Services.Drawables;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,11 +32,6 @@ public class EventActivity extends AppCompatActivity {
     ImageView back,photo,like,clubLogo,save;
     TextView eventName,likeTextView,clubName,eventDate,eventPrice,eventDuration,eventDescription;
     Button registerNow;
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(Drawables.base_url)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    Api api = retrofit.create(Api.class);
     EventSpecificObject object;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +41,13 @@ public class EventActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String eventId = intent.getStringExtra("eventId");
-        String poster = intent.getStringExtra("eventPoster");
-        Glide.with(EventActivity.this).load(poster).into(photo);
-        Call<EventSpecificObject> call = api.getSpecificEvent(eventId);
+        Call<EventSpecificObject> call = Drawables.api.getSpecificEvent(eventId);
         call.enqueue(new Callback<EventSpecificObject>() {
             @Override
             public void onResponse(Call<EventSpecificObject> call, Response<EventSpecificObject> response) {
                 object=response.body();
-                setOption();
+                Log.i("logo",object.getClubId().getLogo());
+               // setOption();
             }
 
             @Override
@@ -70,15 +68,30 @@ public class EventActivity extends AppCompatActivity {
         clubLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
     }
     private void setOption(){
-        //Glide.with(EventActivity.this).load(object.get)
+        Glide.with(EventActivity.this).load(object.getClubId().getLogo()).into(clubLogo);
+        Glide.with(EventActivity.this).load(object.getPoster()).into(photo);
         eventName.setText(object.getName());
         likeTextView.setText(object.getLikes()+" likes");
         clubName.setText(object.getClubName());
+        eventDate.setText(getDate(object.getTimestamp()));
+        if (object.getIsPaid()==true){
+            eventPrice.setText(object.getEventCost()+" Rs");
+        }else {
+            eventPrice.setText("Free");
+        }
+        eventDuration.setText(object.getDuration()+" hours");
+        //eventDescription.setText(object.get);
+    }
+    public static String getDate(long time) {
+        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+        cal.setTimeInMillis(time * 1000);
+        String date = DateFormat.format("MMM dd, yyyy", cal).toString();
+        return date;
     }
     private void findViewByIds(){
         back=findViewById(R.id.eventBack);

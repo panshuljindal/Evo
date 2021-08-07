@@ -42,7 +42,6 @@ public class PopularPopularAdapter extends RecyclerView.Adapter<PopularPopularAd
         PopularEventObject object = list.get(position);
         holder.eventName.setText(object.getName());
         holder.eventName.bringToFront();
-        Log.i(object.getName(),String.valueOf(object.getLikes()));
         Glide.with(context).load(object.getPoster()).into(holder.eventImage);
     }
 

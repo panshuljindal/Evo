@@ -17,26 +17,26 @@ public interface Api {
     @GET("/events")
     Call<EventMainObject> getAllEvents();
 
-    @GET("")
-    Call<List<EventMainObject>> getGravitasEvents();
+    @GET("/events?type=Gravitas")
+    Call<EventMainObject> getGravitasEvents();
 
-    @GET("")
-    Call<List<EventMainObject>> getRivieraEvents();
+    @GET("/events?type=Riviera")
+    Call<EventMainObject> getRivieraEvents();
 
-    @GET("")
-    Call<List<EventMainObject>> getHackathonEvents();
+    @GET("/events?type=Hackathon")
+    Call<EventMainObject> getHackathonEvents();
 
-    @GET("")
-    Call<List<EventMainObject>> getWorkshopEvents();
+    @GET("/events?type=Workshop")
+    Call<EventMainObject> getWorkshopEvents();
 
-    @GET("")
-    Call<List<EventMainObject>> getSpeakerEvents();
+    @GET("/events?type=Speaker")
+    Call<EventMainObject> getSpeakerEvents();
 
-    @GET("")
-    Call<List<EventMainObject>> getCulturalEvents();
+    @GET("/events?type=Cultural")
+    Call<EventMainObject> getCulturalEvents();
 
-    @GET("")
-    Call<List<EventMainObject>> getNGOEvents();
+    @GET("/events?type=NGO")
+    Call<EventMainObject> getNGOEvents();
 
     @GET("/events/popular")
     Call<List<PopularMainObject>> getPopular();
@@ -44,8 +44,8 @@ public interface Api {
     @GET("/events/get/{eventId}")
     Call<EventSpecificObject> getSpecificEvent(@Path("eventId") String eventID);
 
-    @GET("")
-    Call<List<SearchObject>> getSearch( );
+    @GET("/events/search")
+    Call<List<SearchObject>> getSearch(String input);
 
 
 }

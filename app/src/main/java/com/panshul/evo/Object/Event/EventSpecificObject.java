@@ -7,13 +7,10 @@ public class EventSpecificObject {
     String info;
     String clubName;
     String videoLink;
-    String isPaid;
-    String isGravitas;
-    String isRiviera;
-    String isHack;
+    boolean isPaid;
     String eventType;
     int eventCost;
-    String likes;
+    boolean likes;
     long timestamp;
     int duration;
     String registrationLink;
@@ -22,12 +19,12 @@ public class EventSpecificObject {
     String venue;
     String _id;
     String name;
-    String clubId;
+    EventClubObject clubId;
     String createdAt;
     String updatesAt;
     String __v;
 
-    public EventSpecificObject(String shortName, String tagline, String website, String info, String clubName, String videoLink, String isPaid, String isGravitas, String isRiviera, String isHack, String eventType, int eventCost, String likes, long timestamp, int duration, String registrationLink, String meetingLink, String poster, String venue, String _id, String name, String clubId, String createdAt, String updatesAt, String __v) {
+    public EventSpecificObject(String shortName, String tagline, String website, String info, String clubName, String videoLink, boolean isPaid, String eventType, int eventCost, boolean likes, long timestamp, int duration, String registrationLink, String meetingLink, String poster, String venue, String _id, String name, EventClubObject clubId, String createdAt, String updatesAt, String __v) {
         this.shortName = shortName;
         this.tagline = tagline;
         this.website = website;
@@ -35,9 +32,6 @@ public class EventSpecificObject {
         this.clubName = clubName;
         this.videoLink = videoLink;
         this.isPaid = isPaid;
-        this.isGravitas = isGravitas;
-        this.isRiviera = isRiviera;
-        this.isHack = isHack;
         this.eventType = eventType;
         this.eventCost = eventCost;
         this.likes = likes;
@@ -103,36 +97,12 @@ public class EventSpecificObject {
         this.videoLink = videoLink;
     }
 
-    public String getIsPaid() {
+    public boolean getIsPaid() {
         return isPaid;
     }
 
-    public void setIsPaid(String isPaid) {
+    public void setIsPaid(boolean isPaid) {
         this.isPaid = isPaid;
-    }
-
-    public String getIsGravitas() {
-        return isGravitas;
-    }
-
-    public void setIsGravitas(String isGravitas) {
-        this.isGravitas = isGravitas;
-    }
-
-    public String getIsRiviera() {
-        return isRiviera;
-    }
-
-    public void setIsRiviera(String isRiviera) {
-        this.isRiviera = isRiviera;
-    }
-
-    public String getIsHack() {
-        return isHack;
-    }
-
-    public void setIsHack(String isHack) {
-        this.isHack = isHack;
     }
 
     public String getEventType() {
@@ -151,11 +121,11 @@ public class EventSpecificObject {
         this.eventCost = eventCost;
     }
 
-    public String getLikes() {
+    public boolean getLikes() {
         return likes;
     }
 
-    public void setLikes(String likes) {
+    public void setLikes(boolean likes) {
         this.likes = likes;
     }
 
@@ -223,11 +193,11 @@ public class EventSpecificObject {
         this.name = name;
     }
 
-    public String getClubId() {
+    public EventClubObject getClubId() {
         return clubId;
     }
 
-    public void setClubId(String clubId) {
+    public void setClubId(EventClubObject clubId) {
         this.clubId = clubId;
     }
 
