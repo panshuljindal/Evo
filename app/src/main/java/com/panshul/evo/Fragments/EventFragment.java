@@ -127,22 +127,22 @@ public class EventFragment extends Fragment {
                 if (typeList.contains("Gravitas")){
                     gravitas.setVisibility(View.VISIBLE);
                 }
-                else if(typeList.contains("Riviera")){
+                if(typeList.contains("Riviera")){
                     riviera.setVisibility(View.VISIBLE);
                 }
-                else if(typeList.contains("Hackathon")){
+                if(typeList.contains("Hackathon")){
                     hackathons.setVisibility(View.VISIBLE);
                 }
-                else if(typeList.contains("Workshops")){
+                if(typeList.contains("Workshops")){
                     workshops.setVisibility(View.VISIBLE);
                 }
-                else if (typeList.contains("Speakers")){
+                if (typeList.contains("Speakers")){
                     speakers.setVisibility(View.VISIBLE);
                 }
-                else if(typeList.contains("Cultural")){
+                if(typeList.contains("Cultural")){
                     cultural.setVisibility(View.VISIBLE);
                 }
-                else if(typeList.contains("NGO")){
+                if(typeList.contains("NGO")){
                     ngo.setVisibility(View.VISIBLE);
                 }
                 scrollView.setVisibility(View.VISIBLE);
@@ -153,37 +153,6 @@ public class EventFragment extends Fragment {
 
             }
         });
-
-//        list.add(new EventObject("https://res.cloudinary.com/panshuljindal/image/upload/v1625766515/Evo/eventPhoto_zgbsdd.png"
-//                ,1000,"Apple Workshop","Apple Developers Group","https://res.cloudinary.com/panshuljindal/image/upload/v1625766514/Evo/music_club_bex5h9.png"
-//                ,"bvg2e78fwjkfoebin"));
-//        list.add(new EventObject("https://res.cloudinary.com/panshuljindal/image/upload/v1625766515/Evo/eventPhoto_zgbsdd.png"
-//                ,1000,"Apple Workshop","Apple Developers Group","https://res.cloudinary.com/panshuljindal/image/upload/v1625766514/Evo/music_club_bex5h9.png"
-//                ,"bvg2e78fwjkfoebin"));
-//        list.add(new EventObject("https://res.cloudinary.com/panshuljindal/image/upload/v1625766515/Evo/eventPhoto_zgbsdd.png"
-//                ,1000,"Apple Workshop","Apple Developers Group","https://res.cloudinary.com/panshuljindal/image/upload/v1625766514/Evo/music_club_bex5h9.png"
-//                ,"bvg2e78fwjkfoebin"));
-//        list.add(new EventObject("https://res.cloudinary.com/panshuljindal/image/upload/v1625766515/Evo/eventPhoto_zgbsdd.png"
-//                ,1000,"Apple Workshop","Apple Developers Group","https://res.cloudinary.com/panshuljindal/image/upload/v1625766514/Evo/music_club_bex5h9.png"
-//                ,"bvg2e78fwjkfoebin"));
-//        list.add(new EventObject("https://res.cloudinary.com/panshuljindal/image/upload/v1625766515/Evo/eventPhoto_zgbsdd.png"
-//                ,1000,"Apple Workshop","Apple Developers Group","https://res.cloudinary.com/panshuljindal/image/upload/v1625766514/Evo/music_club_bex5h9.png"
-//                ,"bvg2e78fwjkfoebin"));
-//        list.add(new EventObject("https://res.cloudinary.com/panshuljindal/image/upload/v1625766515/Evo/eventPhoto_zgbsdd.png"
-//                ,1000,"Apple Workshop","Apple Developers Group","https://res.cloudinary.com/panshuljindal/image/upload/v1625766514/Evo/music_club_bex5h9.png"
-//                ,"bvg2e78fwjkfoebin"));
-//        list.add(new EventObject("https://res.cloudinary.com/panshuljindal/image/upload/v1625766515/Evo/eventPhoto_zgbsdd.png"
-//                ,1000,"Apple Workshop","Apple Developers Group","https://res.cloudinary.com/panshuljindal/image/upload/v1625766514/Evo/music_club_bex5h9.png"
-//                ,"bvg2e78fwjkfoebin"));
-//        list.add(new EventObject("https://res.cloudinary.com/panshuljindal/image/upload/v1625766515/Evo/eventPhoto_zgbsdd.png"
-//                ,1000,"Apple Workshop","Apple Developers Group","https://res.cloudinary.com/panshuljindal/image/upload/v1625766514/Evo/music_club_bex5h9.png"
-//                ,"bvg2e78fwjkfoebin"));
-//        list.add(new EventObject("https://res.cloudinary.com/panshuljindal/image/upload/v1625766515/Evo/eventPhoto_zgbsdd.png"
-//                ,1000,"Apple Workshop","Apple Developers Group","https://res.cloudinary.com/panshuljindal/image/upload/v1625766514/Evo/music_club_bex5h9.png"
-//                ,"bvg2e78fwjkfoebin"));
-//        list.add(new EventObject("https://res.cloudinary.com/panshuljindal/image/upload/v1625766515/Evo/eventPhoto_zgbsdd.png"
-//                ,1000,"Apple Workshop","Apple Developers Group","https://res.cloudinary.com/panshuljindal/image/upload/v1625766514/Evo/music_club_bex5h9.png"
-//                ,"bvg2e78fwjkfoebin"));
     }
     private void adapter(){
         EventAdapter adapter = new EventAdapter(list,view.getContext());

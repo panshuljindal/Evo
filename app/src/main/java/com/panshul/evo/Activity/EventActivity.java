@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
+import com.panshul.evo.Object.Event.EventRoot;
 import com.panshul.evo.Object.Event.EventSpecificObject;
 import com.panshul.evo.R;
 import com.panshul.evo.Services.Api;
@@ -41,17 +42,16 @@ public class EventActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String eventId = intent.getStringExtra("eventId");
-        Call<EventSpecificObject> call = Drawables.api.getSpecificEvent(eventId);
-        call.enqueue(new Callback<EventSpecificObject>() {
+        Call<EventRoot> call = Drawables.api.getSpecificEvent(eventId);
+        call.enqueue(new Callback<EventRoot>() {
             @Override
-            public void onResponse(Call<EventSpecificObject> call, Response<EventSpecificObject> response) {
-                object=response.body();
-                Log.i("logo",object.getClubId().getLogo());
-               // setOption();
+            public void onResponse(Call<EventRoot> call, Response<EventRoot> response) {
+                object=response.body().getEvent();
+                setOption();
             }
 
             @Override
-            public void onFailure(Call<EventSpecificObject> call, Throwable t) {
+            public void onFailure(Call<EventRoot> call, Throwable t) {
 
             }
         });
@@ -79,7 +79,7 @@ public class EventActivity extends AppCompatActivity {
         likeTextView.setText(object.getLikes()+" likes");
         clubName.setText(object.getClubName());
         eventDate.setText(getDate(object.getTimestamp()));
-        if (object.getIsPaid()==true){
+        if (object.isPaid()==true){
             eventPrice.setText(object.getEventCost()+" Rs");
         }else {
             eventPrice.setText("Free");

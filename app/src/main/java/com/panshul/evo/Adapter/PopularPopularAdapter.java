@@ -1,6 +1,7 @@
 package com.panshul.evo.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.panshul.evo.Activity.ClubActivity;
+import com.panshul.evo.Activity.EventActivity;
 import com.panshul.evo.Object.Popular.PopularEventObject;
 import com.panshul.evo.R;
 
@@ -43,6 +46,14 @@ public class PopularPopularAdapter extends RecyclerView.Adapter<PopularPopularAd
         holder.eventName.setText(object.getName());
         holder.eventName.bringToFront();
         Glide.with(context).load(object.getPoster()).into(holder.eventImage);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, EventActivity.class);
+                i.putExtra("clubId",list.get(position).getEventId());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override

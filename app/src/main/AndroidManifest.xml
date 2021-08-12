@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Evo">
         <activity android:name=".Activity.SeeAllActivity"></activity>
-        <activity android:name=".Activity.MusicActivity" />
+        <activity android:name=".Activity.ClubActivity" />
         <activity android:name=".Activity.LandingPage" >
 
         </activity>

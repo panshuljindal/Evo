@@ -21,13 +21,16 @@ import android.widget.TextView;
 
 import com.panshul.evo.Adapter.EventAdapter;
 import com.panshul.evo.Adapter.PopularAdapter;
+import com.panshul.evo.Adapter.SearchAdapter;
 import com.panshul.evo.Object.Event.EventMainObject;
 import com.panshul.evo.Object.Popular.PopularMainObject;
+import com.panshul.evo.Object.Search.SearchInput;
 import com.panshul.evo.Object.Search.SearchObject;
 import com.panshul.evo.R;
 import com.panshul.evo.Services.Api;
 import com.panshul.evo.Services.Drawables;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,26 +40,40 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.panshul.evo.Services.Drawables.base_url;
+import static com.panshul.evo.Services.Drawables.getClientInstance;
+
 public class SearchFragment extends Fragment {
 
     View view;
-    Context context;
     EditText searchEditText;
     HorizontalScrollView tabLayout;
     RecyclerView searchRecyclerView,popularRecyclerView;
     List<PopularMainObject> popularList;
+    List<SearchObject> searchList;
     ImageView cancel,search;
-    TextView popular,go;
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(Drawables.base_url)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    Api api = retrofit.create(Api.class);
-
+    TextView popular,go,all,club,event;
+    int type;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+    void searchData(String input){
+        searchList=new ArrayList<>();
+        Call<List<SearchObject>> call = Drawables.api.getSearch( new SearchInput(input));
+        call.enqueue(new Callback<List<SearchObject>>() {
+            @Override
+            public void onResponse(Call<List<SearchObject>> call, Response<List<SearchObject>> response) {
+                searchList = response.body();
+                searchAdapter();
+            }
+
+            @Override
+            public void onFailure(Call<List<SearchObject>> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -80,11 +97,15 @@ public class SearchFragment extends Fragment {
         search=view.findViewById(R.id.searchSearch);
         popular=view.findViewById(R.id.popularTextview);
         go=view.findViewById(R.id.searchText);
+        all = view.findViewById(R.id.searchAll);
+        club = view.findViewById(R.id.searchClubs);
+        event=view.findViewById(R.id.searchEvents);
         popularList = new ArrayList<>();
+
     }
     private void addPopularData(){
         Call<List<PopularMainObject>> call;
-        call = api.getPopular();
+        call = Drawables.api.getPopular();
         call.enqueue(new Callback<List<PopularMainObject>>() {
             @Override
             public void onResponse(Call<List<PopularMainObject>> call, Response<List<PopularMainObject>> response) {
@@ -104,6 +125,13 @@ public class SearchFragment extends Fragment {
         manager.setOrientation(RecyclerView.VERTICAL);
         popularRecyclerView.setAdapter(adapter);
         popularRecyclerView.setLayoutManager(manager);
+    }
+    private void searchAdapter(){
+        SearchAdapter adapter = new SearchAdapter(view.getContext(),searchList);
+        LinearLayoutManager manager= new LinearLayoutManager(view.getContext());
+        manager.setOrientation(RecyclerView.VERTICAL);
+        searchRecyclerView.setAdapter(adapter);
+        searchRecyclerView.setLayoutManager(manager);
     }
     private void onclick(){
         searchEditText.setOnClickListener(new View.OnClickListener() {
@@ -195,18 +223,35 @@ public class SearchFragment extends Fragment {
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Call<List<SearchObject>> call=api.getSearch();
-//                call.enqueue(new Callback<List<SearchObject>>() {
-//                    @Override
-//                    public void onResponse(Call<List<SearchObject>> call, Response<List<SearchObject>> response) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<List<SearchObject>> call, Throwable t) {
-//
-//                    }
-//                });
+                hideSoftKeyboard(searchEditText);
+                searchData(searchEditText.getText().toString());
+            }
+        });
+        all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                all.setBackground(getResources().getDrawable(R.drawable.event_selected));
+                club.setBackground(getResources().getDrawable(R.drawable.event_unselected));
+                event.setBackground(getResources().getDrawable(R.drawable.event_unselected));
+
+                for ()
+            }
+        });
+
+        club.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                all.setBackground(getResources().getDrawable(R.drawable.event_unselected));
+                club.setBackground(getResources().getDrawable(R.drawable.event_selected));
+                event.setBackground(getResources().getDrawable(R.drawable.event_unselected));
+            }
+        });
+        event.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                all.setBackground(getResources().getDrawable(R.drawable.event_unselected));
+                club.setBackground(getResources().getDrawable(R.drawable.event_unselected));
+                event.setBackground(getResources().getDrawable(R.drawable.event_selected));
             }
         });
 
@@ -226,7 +271,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        searchEditText.setFocusable(false);
+       // searchEditText.setFocusable(false);
 
 
     }

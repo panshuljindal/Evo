@@ -1,15 +1,18 @@
 package com.panshul.evo.Services;
 
+import com.panshul.evo.Object.Club.ClubSpecificObject;
 import com.panshul.evo.Object.Event.EventMainObject;
-import com.panshul.evo.Object.Event.EventObject;
-import com.panshul.evo.Object.Event.EventSpecificObject;
+import com.panshul.evo.Object.Event.EventRoot;
 import com.panshul.evo.Object.Popular.PopularMainObject;
+import com.panshul.evo.Object.Search.SearchInput;
 import com.panshul.evo.Object.Search.SearchObject;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface Api {
@@ -42,10 +45,13 @@ public interface Api {
     Call<List<PopularMainObject>> getPopular();
 
     @GET("/events/get/{eventId}")
-    Call<EventSpecificObject> getSpecificEvent(@Path("eventId") String eventID);
+    Call<EventRoot> getSpecificEvent(@Path("eventId") String eventID);
 
-    @GET("/events/search")
-    Call<List<SearchObject>> getSearch(String input);
+    @GET("/club/get/{clubId}")
+    Call<ClubSpecificObject> getSpecificClub(@Path("clubId") String clubId);
+
+    @POST("/events/search/")
+    Call<List<SearchObject>> getSearch(@Body SearchInput input);
 
 
 }

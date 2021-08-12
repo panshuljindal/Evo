@@ -10,10 +10,11 @@ public class SearchObject {
     long timestamp;
     String clubLogo;
     String clubBackdrop;
+    int price;
     String _id;
     int __v;
 
-    public SearchObject(int type, String eventId, String poster, String eventName, String clubName, String clubId, long timestamp, String clubLogo, String clubBackdrop, String _id, int __v) {
+    public SearchObject(int type, String eventId, String poster, String eventName, String clubName, String clubId, long timestamp, String clubLogo, String clubBackdrop, int price, String _id, int __v) {
         this.type = type;
         this.eventId = eventId;
         this.poster = poster;
@@ -23,6 +24,7 @@ public class SearchObject {
         this.timestamp = timestamp;
         this.clubLogo = clubLogo;
         this.clubBackdrop = clubBackdrop;
+        this.price = price;
         this._id = _id;
         this.__v = __v;
     }
@@ -97,6 +99,14 @@ public class SearchObject {
 
     public void setClubBackdrop(String clubBackdrop) {
         this.clubBackdrop = clubBackdrop;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String get_id() {

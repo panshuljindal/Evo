@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#141316"
-    tools:context=".Activity.MusicActivity">
+    tools:context=".Activity.ClubActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -52,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="200dp"
                 app:cardCornerRadius="25dp"
+                app:cardBackgroundColor="@android:color/transparent"
                 app:layout_anchorGravity="bottom|center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

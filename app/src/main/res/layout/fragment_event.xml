@@ -7,189 +7,201 @@
     android:background="@color/fragmentBackground"
     tools:context=".Fragments.EventFragment">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="52dp"
-        android:fontFamily="@font/semibold"
-        android:text="Events"
-        android:textColor="@color/whiteText"
-        android:textSize="36dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/fragmentBackground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".Fragments.EventFragment">
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="15dp"
-        android:scrollbars="none"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="52dp"
+            android:fontFamily="@font/semibold"
+            android:text="Events"
+            android:textColor="@color/whiteText"
+            android:textSize="36dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/eventAll"
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="15dp"
+            android:scrollbars="none"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/event_selected"
-                android:paddingLeft="22dp"
-                android:paddingTop="5dp"
-                android:paddingRight="22dp"
-                android:paddingBottom="5dp"
-                android:text="All"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/eventGravitas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/event_unselected"
-                android:paddingLeft="22dp"
-                android:paddingTop="5dp"
-                android:paddingRight="22dp"
-                android:paddingBottom="5dp"
-                android:text="Gravitas"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/eventAll"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/eventAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/event_selected"
+                    android:paddingLeft="22dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="22dp"
+                    android:paddingBottom="5dp"
+                    android:text="All"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/eventRiviera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/event_unselected"
-                android:paddingLeft="22dp"
-                android:paddingTop="5dp"
-                android:paddingRight="22dp"
-                android:paddingBottom="5dp"
-                android:text="Riviera"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/eventGravitas"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/eventGravitas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/event_unselected"
+                    android:paddingLeft="22dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="22dp"
+                    android:paddingBottom="5dp"
+                    android:text="Gravitas"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/eventAll"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/eventHackathon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/event_unselected"
-                android:paddingLeft="22dp"
-                android:paddingTop="5dp"
-                android:paddingRight="22dp"
-                android:paddingBottom="5dp"
-                android:text="Hackathons"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/eventRiviera"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/eventRiviera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/event_unselected"
+                    android:paddingLeft="22dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="22dp"
+                    android:paddingBottom="5dp"
+                    android:text="Riviera"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/eventGravitas"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/eventWorkshops"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/event_unselected"
-                android:paddingLeft="22dp"
-                android:paddingTop="5dp"
-                android:visibility="gone"
-                android:paddingRight="22dp"
-                android:paddingBottom="5dp"
-                android:text="Workshops"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/eventHackathon"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/eventHackathon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/event_unselected"
+                    android:paddingLeft="22dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="22dp"
+                    android:paddingBottom="5dp"
+                    android:text="Hackathons"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/eventRiviera"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/eventSpeakers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/event_unselected"
-                android:paddingLeft="22dp"
-                android:paddingTop="5dp"
-                android:paddingRight="22dp"
-                android:paddingBottom="5dp"
-                android:visibility="gone"
-                android:text="Speakers"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/eventWorkshops"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/eventWorkshops"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/event_unselected"
+                    android:paddingLeft="22dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="22dp"
+                    android:paddingBottom="5dp"
+                    android:text="Workshops"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/eventHackathon"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/eventCultural"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/event_unselected"
-                android:paddingLeft="22dp"
-                android:paddingTop="5dp"
-                android:paddingRight="22dp"
-                android:paddingBottom="5dp"
-                android:visibility="gone"
-                android:text="Cultural"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/eventSpeakers"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/eventSpeakers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/event_unselected"
+                    android:paddingLeft="22dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="22dp"
+                    android:paddingBottom="5dp"
+                    android:text="Speakers"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/eventWorkshops"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/eventNGO"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="21dp"
-                android:background="@drawable/event_unselected"
-                android:paddingLeft="22dp"
-                android:paddingTop="5dp"
-                android:visibility="gone"
-                android:paddingRight="22dp"
-                android:paddingBottom="5dp"
-                android:text="NGO"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/eventCultural"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/eventCultural"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/event_unselected"
+                    android:paddingLeft="22dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="22dp"
+                    android:paddingBottom="5dp"
+                    android:text="Cultural"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/eventSpeakers"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </HorizontalScrollView>
+                <TextView
+                    android:id="@+id/eventNGO"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="21dp"
+                    android:background="@drawable/event_unselected"
+                    android:paddingLeft="22dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="22dp"
+                    android:paddingBottom="5dp"
+                    android:text="NGO"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/eventCultural"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/eventsRecycler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </HorizontalScrollView>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/eventsRecycler"
+            android:layout_width="0dp"
+
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

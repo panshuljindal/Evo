@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.panshul.evo.Activity.EventActivity;
-import com.panshul.evo.Activity.MusicActivity;
+import com.panshul.evo.Activity.ClubActivity;
 import com.panshul.evo.Object.Event.EventObject;
 import com.panshul.evo.R;
 
@@ -40,13 +40,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         Glide.with(context).load(object.getPoster()).into(holder.eventImage);
         Glide.with(context).load(object.getClubId().getLogo()).into(holder.clubLogo);
         holder.eventImage.setClipToOutline(true);
-        holder.like.setText(String.valueOf(object.getLikes()));
+        holder.like.setText(String.valueOf(object.getLikes())+" likes");
         holder.eventName.setText(object.getName());
         holder.clubName.setText(object.getClubName());
         holder.clubLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(v.getContext(), MusicActivity.class) );
+                Intent i =new Intent(v.getContext(), ClubActivity.class);
+                i.putExtra("clubId",list.get(position).getClubId().get_id());
+                context.startActivity(i);
             }
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +56,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             public void onClick(View v) {
                 Intent i = new Intent(context,EventActivity.class);
                 i.putExtra("eventId",list.get(position).get_id());
-                i.putExtra("eventPoster",list.get(position).getPoster());
                 context.startActivity(i);
             }
         });

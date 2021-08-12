@@ -1,6 +1,7 @@
-package com.panshul.evo.Object.Event;
+package com.panshul.evo.Object.Club;
 
-public class EventSpecificObject{
+public class ClubEventObject {
+
     public String shortName;
     public String tagline;
     public String website;
@@ -19,12 +20,12 @@ public class EventSpecificObject{
     public String venue;
     public String _id;
     public String name;
-    public EventClubObject clubId;
+    public String clubId;
     public String createdAt;
     public String updatedAt;
     public int __v;
 
-    public EventSpecificObject(String shortName, String tagline, String website, String info, String clubName, String videoLink, boolean isPaid, String eventType, int eventCost, int likes, int timestamp, int duration, String registrationLink, String meetingLink, String poster, String venue, String _id, String name, EventClubObject clubId, String createdAt, String updatedAt, int __v) {
+    public ClubEventObject(String shortName, String tagline, String website, String info, String clubName, String videoLink, boolean isPaid, String eventType, int eventCost, int likes, int timestamp, int duration, String registrationLink, String meetingLink, String poster, String venue, String _id, String name, String clubId, String createdAt, String updatedAt, int __v) {
         this.shortName = shortName;
         this.tagline = tagline;
         this.website = website;
@@ -193,11 +194,11 @@ public class EventSpecificObject{
         this.name = name;
     }
 
-    public EventClubObject getClubId() {
+    public String getClubId() {
         return clubId;
     }
 
-    public void setClubId(EventClubObject clubId) {
+    public void setClubId(String clubId) {
         this.clubId = clubId;
     }
 
