@@ -2,6 +2,7 @@ package com.panshul.evo.Services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -52,24 +53,26 @@ public class Drawables {
         return list;
     }
 
-    public static void savedEvent(List<String> saveLike, Context context){
-        Gson gson = new Gson();
-        String json = gson.toJson(saveLike);
+    public static void savedEvent(List<String> saved, Context context){
         SharedPreferences pref = context.getSharedPreferences("com.panshul.evo",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(saved);
         editor.putString("event",json);
+        Log.i("save_json",json);
         editor.apply();
     }
-    public static List<String> getEvent(Context context){
+    public static List<String> getSavedEvent(Context context){
         SharedPreferences pref = context.getSharedPreferences("com.panshul.evo",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
         String json = pref.getString("event","");
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> list=new ArrayList<>();
+        list= gson.fromJson(json,type);
         if (list==null){
             list = new ArrayList<>();
         }
+        Log.i("get_json",list.toString());
         return list;
     }
 }

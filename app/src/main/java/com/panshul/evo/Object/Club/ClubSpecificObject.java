@@ -5,6 +5,7 @@ import com.panshul.evo.Object.Event.EventSpecificObject;
 import java.util.List;
 
 public class ClubSpecificObject {
+    String tagline;
     String clubType;
     String description;
     String linkedIn;
@@ -26,7 +27,8 @@ public class ClubSpecificObject {
     String updatedAt;
     int __v;
 
-    public ClubSpecificObject(String clubType, String description, String linkedIn, String instagram, String facebook, String medium, String youtube, String twitter, String logo, String backdrop, boolean isVerified, boolean isPartner, List<ClubEventObject> events, String _id, String email, String password, String name, String createdAt, String updatedAt, int __v) {
+    public ClubSpecificObject(String tagline,String clubType, String description, String linkedIn, String instagram, String facebook, String medium, String youtube, String twitter, String logo, String backdrop, boolean isVerified, boolean isPartner, List<ClubEventObject> events, String _id, String email, String password, String name, String createdAt, String updatedAt, int __v) {
+        this.tagline=tagline;
         this.clubType = clubType;
         this.description = description;
         this.linkedIn = linkedIn;
@@ -47,6 +49,14 @@ public class ClubSpecificObject {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.__v = __v;
+    }
+
+    public String getTagline() {
+        return tagline;
+    }
+
+    public void setTagline(String tagline) {
+        this.tagline = tagline;
     }
 
     public String getClubType() {

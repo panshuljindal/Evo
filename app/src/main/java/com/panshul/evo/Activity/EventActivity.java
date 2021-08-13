@@ -1,6 +1,7 @@
 package com.panshul.evo.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +20,10 @@ import com.panshul.evo.R;
 import com.panshul.evo.Services.Api;
 import com.panshul.evo.Services.Drawables;
 
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -30,16 +34,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EventActivity extends AppCompatActivity {
 
-    ImageView back,photo,like,clubLogo,save;
-    TextView eventName,likeTextView,clubName,eventDate,eventPrice,eventDuration,eventDescription;
+    ImageView back,photo,clubLogo,save;
+    TextView eventName,likeTextView,clubName,eventDate,eventPrice,eventDuration,eventDescription,textViewSave;
     Button registerNow;
+    ConstraintLayout savedCl;
     EventSpecificObject object;
+    List<String> saved;
+   // SparkButton likeButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
+        saved = new ArrayList<>();
         findViewByIds();
-
+        addData();
+        onclick();
+    }
+    private void addData(){
         Intent intent = getIntent();
         String eventId = intent.getStringExtra("eventId");
         Call<EventRoot> call = Drawables.api.getSpecificEvent(eventId);
@@ -55,8 +66,6 @@ public class EventActivity extends AppCompatActivity {
 
             }
         });
-        onclick();
-
     }
     private void onclick(){
         back.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +78,22 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+        savedCl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (saved.contains(object.get_id())){
+                    //save.setImageResource();
+                    textViewSave.setText("Saved For Later");
+                    saved.remove(object.get_id());
+                    Drawables.savedEvent(saved,EventActivity.this);
+                }else {
+                    saved.add(object.get_id());
+                    save.setImageResource(R.drawable.ic_saved);
+                    textViewSave.setText("Saved");
+                    Drawables.savedEvent(saved,EventActivity.this);
+                }
             }
         });
     }
@@ -85,7 +110,16 @@ public class EventActivity extends AppCompatActivity {
             eventPrice.setText("Free");
         }
         eventDuration.setText(object.getDuration()+" hours");
-        //eventDescription.setText(object.get);
+        eventDescription.setText(object.getInfo());
+
+        saved = Drawables.getSavedEvent(EventActivity.this);
+        if (saved.contains(object.get_id())){
+            save.setImageResource(R.drawable.ic_saved);
+            textViewSave.setText("Saved");
+        }else {
+            //save.setImageResource();
+            textViewSave.setText("Saved For Later");
+        }
     }
     public static String getDate(long time) {
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
@@ -96,7 +130,7 @@ public class EventActivity extends AppCompatActivity {
     private void findViewByIds(){
         back=findViewById(R.id.eventBack);
         photo=findViewById(R.id.eventImage);
-        like=findViewById(R.id.eventLike);
+       // likeButton=findViewById(R.id.eventLike);
         clubLogo=findViewById(R.id.eventClubLogo);
         save=findViewById(R.id.eventSave);
         eventName=findViewById(R.id.eventName);
@@ -107,5 +141,7 @@ public class EventActivity extends AppCompatActivity {
         eventDescription=findViewById(R.id.eventDescription);
         registerNow = findViewById(R.id.eventRegisterNow);
         likeTextView = findViewById(R.id.eventLikes);
+        textViewSave = findViewById(R.id.textViewSave);
+        savedCl = findViewById(R.id.savedConstraintLayout);
     }
 }

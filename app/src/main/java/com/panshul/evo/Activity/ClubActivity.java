@@ -40,13 +40,11 @@ public class ClubActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ClubSpecificObject> call, Response<ClubSpecificObject> response) {
                 ClubSpecificObject object=response.body();
-                Log.i("body",response.body().toString());
                 setOption(object);
             }
 
             @Override
             public void onFailure(Call<ClubSpecificObject> call, Throwable t) {
-                Log.i("Failiure",t.getMessage());
             }
         });
 
@@ -55,7 +53,7 @@ public class ClubActivity extends AppCompatActivity {
         Glide.with(ClubActivity.this).load(object.getBackdrop()).into(poster);
         Glide.with(ClubActivity.this).load(object.getLogo()).into(logo);
         name.setText(object.getName());
-        //tagline.setText(object.get);
+        tagline.setText(object.getTagline());
         description.setText(object.getDescription());
         if (object.getInstagram().equals("")){
             insta.setVisibility(View.VISIBLE);

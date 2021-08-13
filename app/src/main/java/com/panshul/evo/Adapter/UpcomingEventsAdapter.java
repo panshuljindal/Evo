@@ -47,7 +47,12 @@ public class UpcomingEventsAdapter extends RecyclerView.Adapter<UpcomingEventsAd
         holder.eventName.setText(object.getName());
         holder.eventClubName.setText(object.getClubName());
         holder.eventDate.setText(getDate(object.getTimestamp()));
-        holder.eventPrice.setText(String.valueOf(object.getEventCost()));
+        if (object.getEventCost()==0){
+            holder.eventPrice.setText("Free");
+        }
+        else {
+            holder.eventPrice.setText(String.valueOf(object.getEventCost()));
+        }
     }
 
     @Override

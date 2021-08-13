@@ -10,7 +10,7 @@
     <item
         android:id="@+id/tab_saved"
         android:icon="@drawable/ic_saved"
-        android:title="Saved" />
+        android:title="Interested" />
     <item
         android:id="@+id/tab_settings"
         android:icon="@drawable/ic_settings"

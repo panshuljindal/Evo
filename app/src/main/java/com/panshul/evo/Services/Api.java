@@ -2,7 +2,9 @@ package com.panshul.evo.Services;
 
 import com.panshul.evo.Object.Club.ClubSpecificObject;
 import com.panshul.evo.Object.Event.EventMainObject;
+import com.panshul.evo.Object.Event.EventObject;
 import com.panshul.evo.Object.Event.EventRoot;
+import com.panshul.evo.Object.Interested.InterestedPost;
 import com.panshul.evo.Object.Popular.PopularMainObject;
 import com.panshul.evo.Object.Search.SearchInput;
 import com.panshul.evo.Object.Search.SearchObject;
@@ -52,6 +54,9 @@ public interface Api {
 
     @POST("/events/search/")
     Call<List<SearchObject>> getSearch(@Body SearchInput input);
+
+    @POST("/events/saved/")
+    Call<List<EventObject>> getSaved(@Body InterestedPost events);
 
 
 }

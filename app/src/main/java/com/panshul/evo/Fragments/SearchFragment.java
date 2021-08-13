@@ -66,7 +66,26 @@ public class SearchFragment extends Fragment {
             @Override
             public void onResponse(Call<List<SearchObject>> call, Response<List<SearchObject>> response) {
                 searchList = response.body();
-                searchAdapter();
+                if (type==0){
+                    searchAdapter(searchList);
+                }else if (type==1){
+                    List<SearchObject> searchListClub = new ArrayList<>();
+                    for (SearchObject item: searchList){
+                        if (item.getType()==1){
+                            searchListClub.add(item);
+                        }
+                    }
+                    searchAdapter(searchListClub);
+                }
+                else if (type==2){
+                    List<SearchObject> searchListEvent = new ArrayList<>();
+                    for (SearchObject item: searchList){
+                        if (item.getType()==2){
+                            searchListEvent.add(item);
+                        }
+                    }
+                    searchAdapter(searchListEvent);
+                }
             }
 
             @Override
@@ -82,6 +101,7 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
          view=inflater.inflate(R.layout.fragment_search, container, false);
          findViewByIds();
+         type=0;
          addPopularData();
          onclick();
          popularAdapter();
@@ -126,8 +146,8 @@ public class SearchFragment extends Fragment {
         popularRecyclerView.setAdapter(adapter);
         popularRecyclerView.setLayoutManager(manager);
     }
-    private void searchAdapter(){
-        SearchAdapter adapter = new SearchAdapter(view.getContext(),searchList);
+    private void searchAdapter(List<SearchObject> searchList1){
+        SearchAdapter adapter = new SearchAdapter(view.getContext(),searchList1);
         LinearLayoutManager manager= new LinearLayoutManager(view.getContext());
         manager.setOrientation(RecyclerView.VERTICAL);
         searchRecyclerView.setAdapter(adapter);
@@ -233,8 +253,14 @@ public class SearchFragment extends Fragment {
                 all.setBackground(getResources().getDrawable(R.drawable.event_selected));
                 club.setBackground(getResources().getDrawable(R.drawable.event_unselected));
                 event.setBackground(getResources().getDrawable(R.drawable.event_unselected));
+                if (type==0){
 
-                for ()
+                }else {
+                    List<SearchObject> searchListAll = new ArrayList<>();
+                    searchListAll.addAll(searchList);
+                    searchAdapter(searchListAll);
+                }
+                type=0;
             }
         });
 
@@ -244,6 +270,18 @@ public class SearchFragment extends Fragment {
                 all.setBackground(getResources().getDrawable(R.drawable.event_unselected));
                 club.setBackground(getResources().getDrawable(R.drawable.event_selected));
                 event.setBackground(getResources().getDrawable(R.drawable.event_unselected));
+                if (type==1){
+
+                }else {
+                    List<SearchObject> searchListClub = new ArrayList<>();
+                    for (SearchObject item: searchList){
+                        if (item.getType()==1){
+                         searchListClub.add(item);
+                        }
+                    }
+                    searchAdapter(searchListClub);
+                }
+                type=1;
             }
         });
         event.setOnClickListener(new View.OnClickListener() {
@@ -252,6 +290,19 @@ public class SearchFragment extends Fragment {
                 all.setBackground(getResources().getDrawable(R.drawable.event_unselected));
                 club.setBackground(getResources().getDrawable(R.drawable.event_unselected));
                 event.setBackground(getResources().getDrawable(R.drawable.event_selected));
+                if (type==2){
+
+                }else {
+                    List<SearchObject> searchListEvent = new ArrayList<>();
+                    for (SearchObject item: searchList){
+                        if (item.getType()==2){
+                            searchListEvent.add(item);
+                        }
+                    }
+                    searchAdapter(searchListEvent);
+                }
+                type=2;
+
             }
         });
 
