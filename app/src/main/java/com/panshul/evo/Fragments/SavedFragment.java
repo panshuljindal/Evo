@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +42,7 @@ public class SavedFragment extends Fragment {
     RecyclerView recyclerView;
     ImageView search;
     List<String> savedId;
-    List<EventObject> list;
+    List<EventObject> list,searchList;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +57,36 @@ public class SavedFragment extends Fragment {
         editText=view.findViewById(R.id.interestedEditText);
         recyclerView=view.findViewById(R.id.interestedRecycler);
         search = view.findViewById(R.id.interestedSearch);
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                searchList=new ArrayList<>();
+                for (EventObject item:list){
+                    if (item.getName().toLowerCase().contains(s.toString().toLowerCase())){
+                        searchList.add(item);
+                    }
+                }
+                EventAdapter adapter = new EventAdapter(searchList,view.getContext());
+                LinearLayoutManager manager = new LinearLayoutManager(view.getContext());
+                manager.setOrientation(RecyclerView.VERTICAL);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(manager);
+            }
+        });
+        return view;
+    }
+    private void addData(){
         savedId = new ArrayList<>();
         savedId = Drawables.getSavedEvent(view.getContext());
         Call<List<EventObject>> call = Drawables.api.getSaved(new InterestedPost(savedId));
@@ -70,7 +102,6 @@ public class SavedFragment extends Fragment {
 
             }
         });
-        return view;
     }
     private void adapter(){
         EventAdapter adapter = new EventAdapter(list,view.getContext());
@@ -78,5 +109,11 @@ public class SavedFragment extends Fragment {
         manager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(manager);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        addData();
     }
 }

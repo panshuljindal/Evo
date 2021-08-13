@@ -55,19 +55,19 @@ public class ClubActivity extends AppCompatActivity {
         name.setText(object.getName());
         tagline.setText(object.getTagline());
         description.setText(object.getDescription());
-        if (object.getInstagram().equals("")){
+        if (!object.getInstagram().equals("")){
             insta.setVisibility(View.VISIBLE);
         }
-        if (object.getFacebook().equals("")){
+        if (!object.getFacebook().equals("")){
             facebook.setVisibility(View.VISIBLE);
         }
-        if (object.getTwitter().equals("")){
+        if (!object.getTwitter().equals("")){
             twitter.setVisibility(View.VISIBLE);
         }
-        if (object.getLinkedIn().equals("")){
+        if (!object.getLinkedIn().equals("")){
             linkedin.setVisibility(View.VISIBLE);
         }
-        if (object.getMedium().equals("")){
+        if (!object.getMedium().equals("")){
             medium.setVisibility(View.VISIBLE);
         }
         upcoming.setText("Upcoming Events ("+String.valueOf(object.getEvents().size())+")");

@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".Fragments.SearchFragment"
     android:background="@color/fragmentBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:background="@color/fragmentBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -141,9 +142,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchRecyclerView"
-            android:overScrollMode="never"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:overScrollMode="never"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -188,16 +189,15 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/popularRecycler"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:overScrollMode="never"
             android:paddingBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/popularTextview"
-            tools:listitem="@layout/popular_item" />
+            app:layout_constraintTop_toBottomOf="@+id/popularTextview" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -57,7 +57,6 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
     void searchData(String input){
         searchList=new ArrayList<>();
@@ -322,8 +321,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-       // searchEditText.setFocusable(false);
-
+        searchEditText.setFocusable(false);
 
     }
 }

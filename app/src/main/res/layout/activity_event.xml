@@ -36,7 +36,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="450dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/eventphoto"
                     app:layout_collapseMode="parallax" />
 
                 <ImageView
@@ -58,7 +57,6 @@
                     android:layout_marginTop="380dp"
                     android:layout_marginEnd="100dp"
                     android:fontFamily="@font/semibold"
-                    android:text="Sessions with Ritviz"
                     android:textColor="#F7F7FC"
                     android:textSize="34dp"
                     android:theme="@style/Widget.AppCompat.TextView" />
@@ -75,7 +73,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:fontFamily="@font/medium"
-                        android:text="1.4k Likes"
                         android:textAlignment="center"
                         android:textColor="#F7F7FC"
                         android:textSize="11dp"
@@ -125,7 +122,7 @@
                         android:id="@+id/eventClubLogo"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/clublogo"
+                        android:scaleType="centerCrop"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.cardview.widget.CardView>
@@ -136,7 +133,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/regular"
-                    android:text="Music Club VIT"
                     android:textColor="#DCD0FF"
                     android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/cardView4"
@@ -207,7 +203,6 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="20dp"
                         android:fontFamily="@font/medium"
-                        android:text="Apr 20, 2021"
                         android:textColor="#F7F7FC"
                         android:textSize="17dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -220,7 +215,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/medium"
-                        android:text="Free"
                         android:textColor="#F7F7FC"
                         android:textSize="17dp"
                         app:layout_constraintEnd_toEndOf="@+id/textView9"
@@ -233,7 +227,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/medium"
-                        android:text="1 Hour"
                         android:textColor="#F7F7FC"
                         android:textSize="17dp"
                         app:layout_constraintEnd_toEndOf="@+id/textView8"
@@ -250,7 +243,6 @@
                     android:layout_marginEnd="30dp"
                     android:fontFamily="@font/regular"
                     android:lineSpacingExtra="4dp"
-                    android:text="Hello, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  "
                     android:textColor="#F7F7FC"
                     android:textSize="14dp"
                     app:layout_constraintEnd_toEndOf="parent"
