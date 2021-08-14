@@ -40,7 +40,7 @@ public class EventFragment extends Fragment {
     public static List<EventObject> list;
     HorizontalScrollView scrollView;
     TextView all,riviera,gravitas,speakers,workshops,hackathons,cultural,ngo;
-    RecyclerView recyclerView;
+    public static RecyclerView recyclerView;
     int type;
 
     @Override
@@ -48,6 +48,7 @@ public class EventFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

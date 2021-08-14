@@ -6,6 +6,8 @@ import com.panshul.evo.Object.Event.EventMainObject;
 import com.panshul.evo.Object.Event.EventObject;
 import com.panshul.evo.Object.Event.EventRoot;
 import com.panshul.evo.Object.Interested.InterestedPost;
+import com.panshul.evo.Object.Like.LikeBody;
+import com.panshul.evo.Object.Like.LikeResponse;
 import com.panshul.evo.Object.Popular.PopularMainObject;
 import com.panshul.evo.Object.Search.SearchInput;
 import com.panshul.evo.Object.Search.SearchObject;
@@ -16,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface Api {
@@ -61,6 +64,9 @@ public interface Api {
 
     @POST("/events/saved/")
     Call<List<EventObject>> getSaved(@Body InterestedPost events);
+
+    @PUT("/events/like")
+    Call<LikeResponse> likeEvent(@Body LikeBody eventId);
 
 
 }

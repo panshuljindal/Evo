@@ -67,11 +67,30 @@
                     android:layout_marginLeft="310dp"
                     android:layout_marginTop="400dp">
 
+                    <xyz.hanks.library.bang.SmallBangView
+                        android:id="@+id/eventImageViewAnimation"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:layout_constraintEnd_toEndOf="@+id/eventLikes"
+                        app:layout_constraintStart_toStartOf="@+id/eventLikes"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/eventLike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:src="@drawable/heart_selector_big"
+                            app:layout_constraintEnd_toEndOf="@+id/eventLikes"
+                            app:layout_constraintStart_toStartOf="@+id/eventLikes"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </xyz.hanks.library.bang.SmallBangView>
+
                     <TextView
                         android:id="@+id/eventLikes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/medium"
                         android:textAlignment="center"
                         android:textColor="#F7F7FC"
@@ -79,17 +98,8 @@
                         android:theme="@style/Widget.AppCompat.TextView"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/eventLike" />
+                        app:layout_constraintTop_toBottomOf="@+id/eventImageViewAnimation" />
 
-                    <ImageView
-                        android:id="@+id/eventLike"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:src="@drawable/ic_likebig"
-                        app:layout_constraintEnd_toEndOf="@+id/eventLikes"
-                        app:layout_constraintStart_toStartOf="@+id/eventLikes"
-                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>

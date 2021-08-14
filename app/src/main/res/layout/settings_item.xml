@@ -29,7 +29,6 @@
             android:textColor="#ffffff"
             android:textFontWeight="400"
             android:textSize="14dp"
-            android:text="Notifications"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/img_settings_card"
             app:layout_constraintTop_toTopOf="parent" />

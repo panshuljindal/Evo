@@ -51,7 +51,7 @@ public class UpcomingEventsAdapter extends RecyclerView.Adapter<UpcomingEventsAd
             holder.eventPrice.setText("Free");
         }
         else {
-            holder.eventPrice.setText(String.valueOf(object.getEventCost()));
+            holder.eventPrice.setText(String.valueOf(object.getEventCost())+" Rs");
         }
     }
 

@@ -39,7 +39,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
     @Override
     public void onBindViewHolder(@NonNull @NotNull SettingsAdapter.SettingsViewHolder holder, int position) {
         holder.img1.setImageResource(list.get(position).getImg());
-        Log.i("int", String.valueOf(list.get(position).getImg()));
+        //Log.i("int", String.valueOf(list.get(position).getImg()));
         holder.settingItem.setText(list.get(position).getText());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

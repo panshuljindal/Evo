@@ -7,6 +7,8 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.panshul.evo.Object.Event.EventSpecificObject;
+import com.panshul.evo.Object.Like.LikeBody;
+import com.panshul.evo.Object.Like.LikeResponse;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -14,6 +16,9 @@ import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -38,6 +43,7 @@ public class Drawables {
         SharedPreferences pref = context.getSharedPreferences("com.panshul.evo",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("likes",json);
+        Log.i("save_json",json);
         editor.apply();
     }
     public static List<String> getLikes(Context context){
@@ -46,10 +52,12 @@ public class Drawables {
         String json = pref.getString("likes","");
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> list=new ArrayList<>();
+        list= gson.fromJson(json,type);
         if (list==null){
             list = new ArrayList<>();
         }
+        Log.i("get_json",list.toString());
         return list;
     }
 
@@ -72,7 +80,26 @@ public class Drawables {
         if (list==null){
             list = new ArrayList<>();
         }
-        Log.i("get_json",list.toString());
+       // Log.i("get_json",list.toString());
         return list;
+    }
+    public static void likeEvent(String eventId){
+//        Call<LikeResponse> call = api.likeEvent(new LikeBody(eventId));
+//        call.enqueue(new Callback<LikeResponse>() {
+//            @Override
+//            public void onResponse(Call<LikeResponse> call, Response<LikeResponse> response) {
+//                LikeResponse object = response.body();
+//                if (object.getMessage().equals("Likes updated!")){
+//
+//                }else {
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<LikeResponse> call, Throwable t) {
+//
+//            }
+//        });
     }
 }

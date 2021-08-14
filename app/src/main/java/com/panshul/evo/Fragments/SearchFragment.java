@@ -52,7 +52,7 @@ public class SearchFragment extends Fragment {
     List<PopularMainObject> popularList;
     List<SearchObject> searchList;
     ImageView cancel,search;
-    TextView popular,go,all,club,event;
+    TextView popular,all,club,event;
     int type;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,7 +115,6 @@ public class SearchFragment extends Fragment {
         cancel=view.findViewById(R.id.searchCancel);
         search=view.findViewById(R.id.searchSearch);
         popular=view.findViewById(R.id.popularTextview);
-        go=view.findViewById(R.id.searchText);
         all = view.findViewById(R.id.searchAll);
         club = view.findViewById(R.id.searchClubs);
         event=view.findViewById(R.id.searchEvents);
@@ -161,7 +160,7 @@ public class SearchFragment extends Fragment {
                 popular.setVisibility(View.INVISIBLE);
                 popularRecyclerView.setVisibility(View.INVISIBLE);
                 tabLayout.setVisibility(View.VISIBLE);
-                go.setVisibility(View.VISIBLE);
+                cancel.setVisibility(View.VISIBLE);
                 searchRecyclerView.setVisibility(View.VISIBLE);
             }
         });
@@ -176,7 +175,8 @@ public class SearchFragment extends Fragment {
                     popular.setVisibility(View.INVISIBLE);
                     popularRecyclerView.setVisibility(View.INVISIBLE);
                     tabLayout.setVisibility(View.VISIBLE);
-                    go.setVisibility(View.VISIBLE);
+                    cancel.setVisibility(View.VISIBLE);
+
                     searchRecyclerView.setVisibility(View.VISIBLE);
                 }
                 else {
@@ -185,7 +185,7 @@ public class SearchFragment extends Fragment {
                     popular.setVisibility(View.VISIBLE);
                     popularRecyclerView.setVisibility(View.VISIBLE);
                     tabLayout.setVisibility(View.INVISIBLE);
-                    go.setVisibility(View.INVISIBLE);
+                    cancel.setVisibility(View.GONE);
                     searchRecyclerView.setVisibility(View.INVISIBLE);
                 }
             }
@@ -198,7 +198,7 @@ public class SearchFragment extends Fragment {
                 popular.setVisibility(View.INVISIBLE);
                 popularRecyclerView.setVisibility(View.INVISIBLE);
                 tabLayout.setVisibility(View.VISIBLE);
-                go.setVisibility(View.VISIBLE);
+                cancel.setVisibility(View.VISIBLE);
                 searchRecyclerView.setVisibility(View.VISIBLE);
             }
         });
@@ -211,9 +211,12 @@ public class SearchFragment extends Fragment {
                 popular.setVisibility(View.VISIBLE);
                 popularRecyclerView.setVisibility(View.VISIBLE);
                 tabLayout.setVisibility(View.INVISIBLE);
-                go.setVisibility(View.INVISIBLE);
+
                 cancel.setVisibility(View.INVISIBLE);
                 searchRecyclerView.setVisibility(View.INVISIBLE);
+                searchList=new ArrayList<>();
+                searchAdapter(searchList);
+                searchEditText.setText("");
             }
         });
         searchEditText.addTextChangedListener(new TextWatcher() {
@@ -229,21 +232,6 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length()==0){
-                    go.setVisibility(View.INVISIBLE);
-                    cancel.setVisibility(View.VISIBLE);
-                }
-                else {
-                    go.setVisibility(View.VISIBLE);
-                    cancel.setVisibility(View.INVISIBLE);
-                }
-                searchData(searchEditText.getText().toString());
-            }
-        });
-        go.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideSoftKeyboard(searchEditText);
                 searchData(searchEditText.getText().toString());
             }
         });
@@ -322,7 +310,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        searchEditText.setFocusable(false);
+        //searchEditText.setFocusable(false);
 
     }
 }

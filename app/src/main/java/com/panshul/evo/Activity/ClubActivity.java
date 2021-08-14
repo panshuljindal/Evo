@@ -1,6 +1,7 @@
 package com.panshul.evo.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +27,7 @@ public class ClubActivity extends AppCompatActivity {
     TextView name,tagline,description,knowMore,upcoming,seeAll;
     RecyclerView recyclerView;
     ClubSpecificObject object;
+    ConstraintLayout cl;
     String clubId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class ClubActivity extends AppCompatActivity {
         Glide.with(ClubActivity.this).load(object.getLogo()).into(logo);
         name.setText(object.getName());
         tagline.setText(object.getTagline());
-        description.setText(object.getDescription());
+        description.setText(object.getDescription().substring(0,120));
         if (!object.getInstagram().equals("")){
             insta.setVisibility(View.VISIBLE);
         }
@@ -97,6 +99,7 @@ public class ClubActivity extends AppCompatActivity {
         upcoming = findViewById(R.id.clubUpcoming);
         seeAll = findViewById(R.id.clubSeeAll);
         recyclerView = findViewById(R.id.clubRecyclerView);
+        cl=findViewById(R.id.eventConstraintLayout);
     }
     void onclick(){
         back.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +114,21 @@ public class ClubActivity extends AppCompatActivity {
                 Intent i =new Intent(ClubActivity.this,SeeAllActivity.class);
                 i.putExtra("clubId",object.get_id());
                 startActivity(i);
+            }
+        });
+        knowMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if (knowMore.getText().toString().equals("Know more")){
+                   description.setText(object.getDescription());
+                   knowMore.setText("See Less");
+                   cl.setVisibility(View.GONE);
+               }
+               else {
+                   description.setText(object.getDescription().substring(0,120));
+                   knowMore.setText("Know more");
+                   cl.setVisibility(View.VISIBLE);
+               }
             }
         });
     }

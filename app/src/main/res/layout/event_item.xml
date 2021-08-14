@@ -36,9 +36,11 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/eventphoto" />
+                app:layout_constraintVertical_bias="0.0"
+                android:src="@drawable/eventphoto"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -78,52 +80,59 @@
                 android:layout_marginTop="22dp"
                 android:layout_marginEnd="20dp"
                 android:fontFamily="@font/medium"
-                android:text="Sessions with Ritviz"
                 android:textColor="@color/white"
                 android:textSize="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/eventItemLike"
+                android:text="Sessions with Ritviz"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewAnimation"
                 app:layout_constraintStart_toStartOf="@+id/eventItemClubName"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/eventItemClubName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="15dp"
                 android:fontFamily="@font/light"
-                android:text="Music Club VIT"
                 android:textColor="#DCD0FF"
                 android:textSize="10dp"
+                android:text="Music Club VIT"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewAnimation"
                 app:layout_constraintStart_toEndOf="@+id/cardView3"
                 app:layout_constraintTop_toBottomOf="@+id/eventItemName" />
 
-            <ImageView
-                android:id="@+id/eventItemLike"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="27dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="1dp"
-                android:padding="5dp"
-                app:layout_constraintBottom_toTopOf="@+id/eventItemLikeTextView"
+            <xyz.hanks.library.bang.SmallBangView
+                android:id="@+id/imageViewAnimation"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_like" />
+                app:layout_constraintTop_toTopOf="@+id/eventItemName">
+
+                <ImageView
+                    android:id="@+id/eventItemLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/heart_selector"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </xyz.hanks.library.bang.SmallBangView>
 
             <TextView
                 android:id="@+id/eventItemLikeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/regular"
-                android:text="1.4K Likes"
+                android:text="4 likes"
                 android:textColor="@color/white"
                 android:textSize="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/eventItemLike"
-                app:layout_constraintStart_toStartOf="@+id/eventItemLike" />
+                app:layout_constraintEnd_toEndOf="@+id/imageViewAnimation"
+                app:layout_constraintStart_toStartOf="@+id/imageViewAnimation"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewAnimation" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

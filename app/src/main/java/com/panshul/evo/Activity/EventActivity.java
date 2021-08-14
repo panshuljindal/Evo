@@ -14,11 +14,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
+import com.panshul.evo.Fragments.EventFragment;
 import com.panshul.evo.Object.Event.EventRoot;
 import com.panshul.evo.Object.Event.EventSpecificObject;
 import com.panshul.evo.R;
 import com.panshul.evo.Services.Api;
 import com.panshul.evo.Services.Drawables;
+import com.varunest.sparkbutton.SparkButton;
+import com.varunest.sparkbutton.SparkEventListener;
 
 
 import java.util.ArrayList;
@@ -29,18 +32,18 @@ import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import xyz.hanks.library.bang.SmallBangView;
 
 public class EventActivity extends AppCompatActivity {
 
-    ImageView back,photo,clubLogo,save;
+    ImageView back,photo,clubLogo,save,imageLike;
     TextView eventName,likeTextView,clubName,eventDate,eventPrice,eventDuration,eventDescription,textViewSave;
     Button registerNow;
     ConstraintLayout savedCl;
     EventSpecificObject object;
     List<String> saved;
-   // SparkButton likeButton;
+    SmallBangView likeImage;
+    List<String> likes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +99,22 @@ public class EventActivity extends AppCompatActivity {
                 }
             }
         });
+        likeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (likes.contains(object.get_id())){
+
+                }else {
+                    Drawables.likeEvent(object.get_id());
+                    likes.add(object.get_id());
+                    Drawables.saveLiked(likes,EventActivity.this);
+                    likeTextView.setText(String.valueOf(object.getLikes()+1)+" likes");
+                    likeImage.setSelected(true);
+                    likeImage.likeAnimation();
+                }
+            }
+        });
+
     }
     private void setOption(){
         Glide.with(EventActivity.this).load(object.getClubId().getLogo()).into(clubLogo);
@@ -120,6 +139,13 @@ public class EventActivity extends AppCompatActivity {
             //save.setImageResource();
             textViewSave.setText("Saved For Later");
         }
+        likes = Drawables.getLikes(EventActivity.this);
+        if (likes.contains(object.get_id())){
+            likeImage.setSelected(true);
+        }
+        else {
+            likeImage.setSelected(false);
+        }
     }
     public static String getDate(long time) {
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
@@ -130,7 +156,7 @@ public class EventActivity extends AppCompatActivity {
     private void findViewByIds(){
         back=findViewById(R.id.eventBack);
         photo=findViewById(R.id.eventImage);
-       // likeButton=findViewById(R.id.eventLike);
+        likeImage=findViewById(R.id.eventImageViewAnimation);
         clubLogo=findViewById(R.id.eventClubLogo);
         save=findViewById(R.id.eventSave);
         eventName=findViewById(R.id.eventName);

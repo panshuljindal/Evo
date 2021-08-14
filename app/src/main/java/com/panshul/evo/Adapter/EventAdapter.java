@@ -2,6 +2,7 @@ package com.panshul.evo.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.panshul.evo.Activity.EventActivity;
 import com.panshul.evo.Activity.ClubActivity;
+import com.panshul.evo.Fragments.EventFragment;
 import com.panshul.evo.Object.Event.EventObject;
 import com.panshul.evo.R;
+import com.panshul.evo.Services.Drawables;
 
 import java.util.List;
+
+import xyz.hanks.library.bang.SmallBangView;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder> {
 
@@ -59,6 +64,32 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
                 context.startActivity(i);
             }
         });
+        List<String> likes = Drawables.getLikes(context);
+        if (likes.contains(object.get_id())){
+            holder.imageView.setSelected(true);
+        }
+        else {
+            holder.imageView.setSelected(false);
+        }
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<String> like = Drawables.getLikes(context);
+                if (like.contains(list.get(position).get_id())){
+                    holder.imageView.setSelected(true);
+                }else {
+                    //Log.i("Saved","No");
+                    Drawables.likeEvent(list.get(position).get_id());
+                    like.add(list.get(position).get_id());
+                    Drawables.saveLiked(like,context);
+                    holder.like.setText(String.valueOf(list.get(position).getLikes()+1)+" likes");
+                    holder.imageView.setSelected(true);
+                    holder.imageView.likeAnimation();
+
+                }
+            }
+        });
 
         int i = holder.getAdapterPosition();
 //        if (i==list.size()-2){
@@ -75,6 +106,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView eventImage,clubLogo,eventLike;
         TextView eventName,clubName,like;
+        SmallBangView imageView;
         public MyViewHolder(View itemView) {
             super(itemView);
             eventImage=itemView.findViewById(R.id.eventItemImage);
@@ -83,6 +115,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             eventName=itemView.findViewById(R.id.eventItemName);
             clubName=itemView.findViewById(R.id.eventItemClubName);
             like = itemView.findViewById(R.id.eventItemLikeTextView);
+            imageView = itemView.findViewById(R.id.imageViewAnimation);
         }
     }
 }
