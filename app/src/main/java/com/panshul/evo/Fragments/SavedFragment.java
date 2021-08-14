@@ -89,19 +89,24 @@ public class SavedFragment extends Fragment {
     private void addData(){
         savedId = new ArrayList<>();
         savedId = Drawables.getSavedEvent(view.getContext());
-        Call<List<EventObject>> call = Drawables.api.getSaved(new InterestedPost(savedId));
-        call.enqueue(new Callback<List<EventObject>>() {
-            @Override
-            public void onResponse(Call<List<EventObject>> call, Response<List<EventObject>> response) {
-                list=response.body();
-                adapter();
-            }
+        if (savedId.size()==0){
 
-            @Override
-            public void onFailure(Call<List<EventObject>> call, Throwable t) {
+        }else {
+            Call<List<EventObject>> call = Drawables.api.getSaved(new InterestedPost(savedId));
+            call.enqueue(new Callback<List<EventObject>>() {
+                @Override
+                public void onResponse(Call<List<EventObject>> call, Response<List<EventObject>> response) {
+                    list=response.body();
+                    adapter();
+                }
 
-            }
-        });
+                @Override
+                public void onFailure(Call<List<EventObject>> call, Throwable t) {
+
+                }
+            });
+        }
+
     }
     private void adapter(){
         EventAdapter adapter = new EventAdapter(list,view.getContext());

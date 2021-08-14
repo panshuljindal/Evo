@@ -29,6 +29,7 @@
         android:layout_marginEnd="21dp"
         android:background="@drawable/search_background"
         android:ems="10"
+        android:textColor="@color/whiteText"
         android:fontFamily="@font/medium"
         android:hint="Search for Events."
         android:inputType="textCapSentences"

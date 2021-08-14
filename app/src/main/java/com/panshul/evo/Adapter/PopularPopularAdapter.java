@@ -50,7 +50,7 @@ public class PopularPopularAdapter extends RecyclerView.Adapter<PopularPopularAd
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, EventActivity.class);
-                i.putExtra("clubId",list.get(position).getEventId());
+                i.putExtra("eventId",list.get(position).getEventId());
                 context.startActivity(i);
             }
         });

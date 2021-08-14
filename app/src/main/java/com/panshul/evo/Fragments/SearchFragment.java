@@ -237,6 +237,7 @@ public class SearchFragment extends Fragment {
                     go.setVisibility(View.VISIBLE);
                     cancel.setVisibility(View.INVISIBLE);
                 }
+                searchData(searchEditText.getText().toString());
             }
         });
         go.setOnClickListener(new View.OnClickListener() {

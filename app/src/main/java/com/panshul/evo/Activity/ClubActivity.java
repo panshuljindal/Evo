@@ -25,7 +25,7 @@ public class ClubActivity extends AppCompatActivity {
     ImageView back,poster,logo,insta,facebook,twitter,linkedin,medium;
     TextView name,tagline,description,knowMore,upcoming,seeAll;
     RecyclerView recyclerView;
-
+    ClubSpecificObject object;
     String clubId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +39,8 @@ public class ClubActivity extends AppCompatActivity {
         call.enqueue(new Callback<ClubSpecificObject>() {
             @Override
             public void onResponse(Call<ClubSpecificObject> call, Response<ClubSpecificObject> response) {
-                ClubSpecificObject object=response.body();
-                setOption(object);
+                object=response.body();
+                setOption();
             }
 
             @Override
@@ -49,7 +49,7 @@ public class ClubActivity extends AppCompatActivity {
         });
 
     }
-    private void setOption(ClubSpecificObject object){
+    private void setOption(){
         Glide.with(ClubActivity.this).load(object.getBackdrop()).into(poster);
         Glide.with(ClubActivity.this).load(object.getLogo()).into(logo);
         name.setText(object.getName());
@@ -108,7 +108,9 @@ public class ClubActivity extends AppCompatActivity {
         seeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ClubActivity.this,SeeAllActivity.class));
+                Intent i =new Intent(ClubActivity.this,SeeAllActivity.class);
+                i.putExtra("clubId",object.get_id());
+                startActivity(i);
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.panshul.evo.Services;
 
+import com.panshul.evo.Object.Club.ClubAllEvents;
 import com.panshul.evo.Object.Club.ClubSpecificObject;
 import com.panshul.evo.Object.Event.EventMainObject;
 import com.panshul.evo.Object.Event.EventObject;
@@ -51,6 +52,9 @@ public interface Api {
 
     @GET("/club/get/{clubId}")
     Call<ClubSpecificObject> getSpecificClub(@Path("clubId") String clubId);
+
+    @GET("/events/club/{clubId}")
+    Call<ClubAllEvents> getAllClubEvents(@Path("clubId") String clubId);
 
     @POST("/events/search/")
     Call<List<SearchObject>> getSearch(@Body SearchInput input);
