@@ -42,6 +42,7 @@ public class EventFragment extends Fragment {
     TextView all,riviera,gravitas,speakers,workshops,hackathons,cultural,ngo;
     public static RecyclerView recyclerView;
     int type;
+    public static EventAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -156,7 +157,7 @@ public class EventFragment extends Fragment {
         });
     }
     private void adapter(){
-        EventAdapter adapter = new EventAdapter(list,view.getContext());
+        adapter = new EventAdapter(list,view.getContext());
         LinearLayoutManager manager = new LinearLayoutManager(view.getContext());
         manager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setAdapter(adapter);

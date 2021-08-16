@@ -36,7 +36,6 @@ public class ClubActivity extends AppCompatActivity {
         findViewByIds();
         onclick();
         clubId=getIntent().getStringExtra("clubId");
-        Log.i("clubId",clubId);
         Call<ClubSpecificObject> call = Drawables.api.getSpecificClub(clubId);
         call.enqueue(new Callback<ClubSpecificObject>() {
             @Override
@@ -56,7 +55,11 @@ public class ClubActivity extends AppCompatActivity {
         Glide.with(ClubActivity.this).load(object.getLogo()).into(logo);
         name.setText(object.getName());
         tagline.setText(object.getTagline());
-        description.setText(object.getDescription().substring(0,120));
+        if (object.getDescription().length()<=120){
+            description.setText(object.getDescription().substring(0,object.getDescription().length()/2));
+        }else {
+            description.setText(object.getDescription().substring(0,120));
+        }
         if (!object.getInstagram().equals("")){
             insta.setVisibility(View.VISIBLE);
         }
@@ -125,7 +128,11 @@ public class ClubActivity extends AppCompatActivity {
                    cl.setVisibility(View.GONE);
                }
                else {
-                   description.setText(object.getDescription().substring(0,120));
+                   if (object.getDescription().length()<=120){
+                       description.setText(object.getDescription().substring(0,object.getDescription().length()/2));
+                   }else {
+                       description.setText(object.getDescription().substring(0,120));
+                   }
                    knowMore.setText("Know more");
                    cl.setVisibility(View.VISIBLE);
                }

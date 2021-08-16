@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
+import com.panshul.evo.Adapter.EventAdapter;
 import com.panshul.evo.Fragments.EventFragment;
 import com.panshul.evo.Object.Event.EventRoot;
 import com.panshul.evo.Object.Event.EventSpecificObject;
@@ -36,7 +37,7 @@ import xyz.hanks.library.bang.SmallBangView;
 
 public class EventActivity extends AppCompatActivity {
 
-    ImageView back,photo,clubLogo,save,imageLike;
+    ImageView back,photo,clubLogo,save;
     TextView eventName,likeTextView,clubName,eventDate,eventPrice,eventDuration,eventDescription,textViewSave;
     Button registerNow;
     ConstraintLayout savedCl;
@@ -108,13 +109,13 @@ public class EventActivity extends AppCompatActivity {
                     Drawables.likeEvent(object.get_id());
                     likes.add(object.get_id());
                     Drawables.saveLiked(likes,EventActivity.this);
+                    EventFragment.adapter.notifyDataSetChanged();
                     likeTextView.setText(String.valueOf(object.getLikes()+1)+" likes");
                     likeImage.setSelected(true);
                     likeImage.likeAnimation();
                 }
             }
         });
-
     }
     private void setOption(){
         Glide.with(EventActivity.this).load(object.getClubId().getLogo()).into(clubLogo);

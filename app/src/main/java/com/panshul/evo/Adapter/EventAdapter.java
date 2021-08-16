@@ -98,6 +98,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
 
     }
 
+
     @Override
     public int getItemCount() {
         return list.size();
@@ -118,4 +119,5 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             imageView = itemView.findViewById(R.id.imageViewAnimation);
         }
     }
+
 }
