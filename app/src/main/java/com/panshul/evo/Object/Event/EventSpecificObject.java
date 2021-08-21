@@ -8,7 +8,6 @@ public class EventSpecificObject{
     public String clubName;
     public String videoLink;
     public boolean isPaid;
-    public String eventType;
     public int eventCost;
     public int likes;
     public int timestamp;
@@ -24,7 +23,7 @@ public class EventSpecificObject{
     public String updatedAt;
     public int __v;
 
-    public EventSpecificObject(String shortName, String tagline, String website, String info, String clubName, String videoLink, boolean isPaid, String eventType, int eventCost, int likes, int timestamp, int duration, String registrationLink, String meetingLink, String poster, String venue, String _id, String name, EventClubObject clubId, String createdAt, String updatedAt, int __v) {
+    public EventSpecificObject(String shortName, String tagline, String website, String info, String clubName, String videoLink, boolean isPaid, int eventCost, int likes, int timestamp, int duration, String registrationLink, String meetingLink, String poster, String venue, String _id, String name, EventClubObject clubId, String createdAt, String updatedAt, int __v) {
         this.shortName = shortName;
         this.tagline = tagline;
         this.website = website;
@@ -32,7 +31,6 @@ public class EventSpecificObject{
         this.clubName = clubName;
         this.videoLink = videoLink;
         this.isPaid = isPaid;
-        this.eventType = eventType;
         this.eventCost = eventCost;
         this.likes = likes;
         this.timestamp = timestamp;
@@ -105,13 +103,6 @@ public class EventSpecificObject{
         isPaid = paid;
     }
 
-    public String getEventType() {
-        return eventType;
-    }
-
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
-    }
 
     public int getEventCost() {
         return eventCost;

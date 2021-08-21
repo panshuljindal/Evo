@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,14 +37,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.View.GONE;
+
 public class SavedFragment extends Fragment {
 
     View view;
     EditText editText;
     RecyclerView recyclerView;
     ImageView search;
+    TextView text;
     List<String> savedId;
     List<EventObject> list,searchList;
+    ConstraintLayout empty;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +63,8 @@ public class SavedFragment extends Fragment {
         editText=view.findViewById(R.id.interestedEditText);
         recyclerView=view.findViewById(R.id.interestedRecycler);
         search = view.findViewById(R.id.interestedSearch);
-
+        empty = view.findViewById(R.id.interestedEmpty);
+        text = view.findViewById(R.id.interestedTextView);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -90,8 +97,15 @@ public class SavedFragment extends Fragment {
         savedId = new ArrayList<>();
         savedId = Drawables.getSavedEvent(view.getContext());
         if (savedId.size()==0){
-
+            empty.setVisibility(View.VISIBLE);
+            search.setVisibility(GONE);
+            recyclerView.setVisibility(GONE);
+            editText.setVisibility(GONE);
         }else {
+            empty.setVisibility(GONE);
+            search.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
+            editText.setVisibility(View.VISIBLE);
             Call<List<EventObject>> call = Drawables.api.getSaved(new InterestedPost(savedId));
             call.enqueue(new Callback<List<EventObject>>() {
                 @Override
@@ -102,7 +116,10 @@ public class SavedFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<List<EventObject>> call, Throwable t) {
-
+                    empty.setVisibility(View.VISIBLE);
+                    search.setVisibility(GONE);
+                    recyclerView.setVisibility(GONE);
+                    editText.setVisibility(GONE);
                 }
             });
         }

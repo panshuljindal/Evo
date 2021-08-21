@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.panshul.evo.Activity.Notifications;
 import com.panshul.evo.Object.SettingsObject;
 import com.panshul.evo.R;
 
@@ -46,6 +48,10 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
             public void onClick(View v) {
                 if (list.get(position).getText().equals("Appearance")){
                     //context.startActivity(new Intent(context, Appearance.class));
+                }
+                if (list.get(position).getText().equals("Notifications")){
+                    Intent i = new Intent(context, Notifications.class);
+                    context.startActivity(i);
                 }
             }
         });

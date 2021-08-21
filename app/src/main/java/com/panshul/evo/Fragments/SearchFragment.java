@@ -3,6 +3,7 @@ package com.panshul.evo.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -53,6 +55,7 @@ public class SearchFragment extends Fragment {
     List<SearchObject> searchList;
     ImageView cancel,search;
     TextView popular,all,club,event;
+    ConstraintLayout popularEmpty;
     int type;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -119,7 +122,7 @@ public class SearchFragment extends Fragment {
         club = view.findViewById(R.id.searchClubs);
         event=view.findViewById(R.id.searchEvents);
         popularList = new ArrayList<>();
-
+        popularEmpty = view.findViewById(R.id.popularEmpty);
     }
     private void addPopularData(){
         Call<List<PopularMainObject>> call;
@@ -127,8 +130,17 @@ public class SearchFragment extends Fragment {
         call.enqueue(new Callback<List<PopularMainObject>>() {
             @Override
             public void onResponse(Call<List<PopularMainObject>> call, Response<List<PopularMainObject>> response) {
+                popularList=new ArrayList<>();
                 popularList = response.body();
-                popularAdapter();
+                if (popularList.size()==0){
+                    //Log.i("popular","Empty");
+                    popularEmpty.setVisibility(View.VISIBLE);
+                    popularRecyclerView.setVisibility(View.GONE);
+                }else {
+                    popularEmpty.setVisibility(View.GONE);
+                    popularRecyclerView.setVisibility(View.VISIBLE);
+                    popularAdapter();
+                }
             }
 
             @Override
@@ -164,30 +176,19 @@ public class SearchFragment extends Fragment {
                 searchRecyclerView.setVisibility(View.VISIBLE);
             }
         });
-        searchEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        searchEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-               // Log.i("focus",String.valueOf(hasFocus));
-                if (hasFocus){
-                    showSoftKeyboard(searchEditText);
-                    search.setVisibility(View.INVISIBLE);
-                    searchEditText.setPadding(40,40,40,40);
-                    popular.setVisibility(View.INVISIBLE);
-                    popularRecyclerView.setVisibility(View.INVISIBLE);
-                    tabLayout.setVisibility(View.VISIBLE);
-                    cancel.setVisibility(View.VISIBLE);
-
-                    searchRecyclerView.setVisibility(View.VISIBLE);
-                }
-                else {
-                    search.setVisibility(View.VISIBLE);
-                    searchEditText.setPadding(120,40,40,40);
-                    popular.setVisibility(View.VISIBLE);
-                    popularRecyclerView.setVisibility(View.VISIBLE);
-                    tabLayout.setVisibility(View.INVISIBLE);
-                    cancel.setVisibility(View.GONE);
-                    searchRecyclerView.setVisibility(View.INVISIBLE);
-                }
+            public boolean onTouch(View v, MotionEvent event) {
+                showSoftKeyboard(searchEditText);
+                search.setVisibility(View.INVISIBLE);
+                searchEditText.setPadding(40,40,40,40);
+                popular.setVisibility(View.INVISIBLE);
+                popularRecyclerView.setVisibility(View.INVISIBLE);
+                tabLayout.setVisibility(View.VISIBLE);
+                cancel.setVisibility(View.VISIBLE);
+                popularEmpty.setVisibility(View.GONE);
+                searchRecyclerView.setVisibility(View.VISIBLE);
+                return false;
             }
         });
         search.setOnClickListener(new View.OnClickListener() {
@@ -205,18 +206,28 @@ public class SearchFragment extends Fragment {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideSoftKeyboard(searchEditText);
+
                 search.setVisibility(View.VISIBLE);
                 searchEditText.setPadding(120,40,40,40);
                 popular.setVisibility(View.VISIBLE);
-                popularRecyclerView.setVisibility(View.VISIBLE);
                 tabLayout.setVisibility(View.INVISIBLE);
 
                 cancel.setVisibility(View.INVISIBLE);
                 searchRecyclerView.setVisibility(View.INVISIBLE);
                 searchList=new ArrayList<>();
+
                 searchAdapter(searchList);
                 searchEditText.setText("");
+                if (popularList.size()==0){
+                    //Log.i("popular","Empty");
+                    popularEmpty.setVisibility(View.VISIBLE);
+                    popularRecyclerView.setVisibility(View.GONE);
+                }else {
+                    popularEmpty.setVisibility(View.GONE);
+                    popularRecyclerView.setVisibility(View.VISIBLE);
+                    popularAdapter();
+                }
+                hideSoftKeyboard(searchEditText);
             }
         });
         searchEditText.addTextChangedListener(new TextWatcher() {
@@ -232,7 +243,11 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                searchData(searchEditText.getText().toString());
+                if (searchEditText.getText().toString().equals("")){
+
+                }else {
+                    searchData(searchEditText.getText().toString());
+                }
             }
         });
         all.setOnClickListener(new View.OnClickListener() {
@@ -262,12 +277,16 @@ public class SearchFragment extends Fragment {
 
                 }else {
                     List<SearchObject> searchListClub = new ArrayList<>();
-                    for (SearchObject item: searchList){
-                        if (item.getType()==1){
-                         searchListClub.add(item);
+                    try {
+                        for (SearchObject item: searchList){
+                            if (item.getType()==1){
+                                searchListClub.add(item);
+                            }
                         }
+                        searchAdapter(searchListClub);
+                    }catch (Exception e){
+
                     }
-                    searchAdapter(searchListClub);
                 }
                 type=1;
             }
@@ -281,13 +300,18 @@ public class SearchFragment extends Fragment {
                 if (type==2){
 
                 }else {
-                    List<SearchObject> searchListEvent = new ArrayList<>();
-                    for (SearchObject item: searchList){
-                        if (item.getType()==2){
-                            searchListEvent.add(item);
+                    try {
+                        List<SearchObject> searchListEvent = new ArrayList<>();
+                        for (SearchObject item: searchList){
+                            if (item.getType()==2){
+                                searchListEvent.add(item);
+                            }
                         }
+                        searchAdapter(searchListEvent);
                     }
-                    searchAdapter(searchListEvent);
+                    catch (Exception e){
+
+                    }
                 }
                 type=2;
 

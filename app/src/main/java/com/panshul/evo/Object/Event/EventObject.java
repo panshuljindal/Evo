@@ -1,8 +1,10 @@
 package com.panshul.evo.Object.Event;
 
+import java.util.List;
+
 public class EventObject {
 
-    String eventType;
+    List<String> eventType;
     int likes;
     String _id;
     String name;
@@ -10,7 +12,7 @@ public class EventObject {
     EventClubObject clubId;
     String clubName;
 
-    public EventObject(String eventType, int likes, String _id, String name, String poster, EventClubObject clubId, String clubName) {
+    public EventObject(List<String> eventType, int likes, String _id, String name, String poster, EventClubObject clubId, String clubName) {
         this.eventType = eventType;
         this.likes = likes;
         this._id = _id;
@@ -20,11 +22,11 @@ public class EventObject {
         this.clubName = clubName;
     }
 
-    public String getEventType() {
+    public List<String> getEventType() {
         return eventType;
     }
 
-    public void setEventType(String eventType) {
+    public void setEventType(List<String> eventType) {
         this.eventType = eventType;
     }
 

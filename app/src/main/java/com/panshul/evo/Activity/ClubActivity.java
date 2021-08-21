@@ -27,7 +27,7 @@ public class ClubActivity extends AppCompatActivity {
     TextView name,tagline,description,knowMore,upcoming,seeAll;
     RecyclerView recyclerView;
     ClubSpecificObject object;
-    ConstraintLayout cl;
+    ConstraintLayout cl,clubLogoCl;
     String clubId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class ClubActivity extends AppCompatActivity {
     private void setOption(){
         Glide.with(ClubActivity.this).load(object.getBackdrop()).into(poster);
         Glide.with(ClubActivity.this).load(object.getLogo()).into(logo);
+        //logo.setClipToOutline(true);
         name.setText(object.getName());
         tagline.setText(object.getTagline());
         if (object.getDescription().length()<=120){
@@ -103,6 +104,7 @@ public class ClubActivity extends AppCompatActivity {
         seeAll = findViewById(R.id.clubSeeAll);
         recyclerView = findViewById(R.id.clubRecyclerView);
         cl=findViewById(R.id.eventConstraintLayout);
+        //clubLogoCl=findViewById(R.id.clubLogoCl);
     }
     void onclick(){
         back.setOnClickListener(new View.OnClickListener() {

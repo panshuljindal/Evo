@@ -3,6 +3,7 @@ package com.panshul.evo.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,8 +41,9 @@ public class EventFragment extends Fragment {
     public static List<EventObject> list;
     HorizontalScrollView scrollView;
     TextView all,riviera,gravitas,speakers,workshops,hackathons,cultural,ngo;
+    ConstraintLayout empty;
     public static RecyclerView recyclerView;
-    int type;
+    public static int type;
     public static EventAdapter adapter;
 
     @Override
@@ -60,7 +62,6 @@ public class EventFragment extends Fragment {
         findViewByIds();
         type=1;
         list=new ArrayList<>();
-        //startActivity(new Intent(view.getContext(),EventActivity.class));
         addData(1);
         adapter();
         Onclick();
@@ -77,7 +78,7 @@ public class EventFragment extends Fragment {
         ngo=view.findViewById(R.id.eventNGO);
         recyclerView=view.findViewById(R.id.eventsRecycler);
         scrollView = view.findViewById(R.id.horizontalScrollView);
-
+        empty = view.findViewById(R.id.eventsEmpty);
     }
     private void addData(int i){
         Call<EventMainObject> call;
@@ -117,42 +118,53 @@ public class EventFragment extends Fragment {
             public void onResponse(Call<EventMainObject> call, Response<EventMainObject> response) {
                 EventMainObject object = response.body();
                 list = object.getData();
-                adapter();
+                //Log.i("list",String.valueOf(list.size()));
+                if (list.size()==0){
+                    empty.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.GONE);
+                }
+                else {
+                    adapter();
+                    empty.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    scrollView.setVisibility(View.VISIBLE);
+                    List<EventMetadataObject> metaList = new ArrayList<>();
+                    metaList = object.getMetadata();
+                    List<String> typeList = new ArrayList<>();
 
-                List<EventMetadataObject> metaList = new ArrayList<>();
-                metaList = object.getMetadata();
-                List<String> typeList = new ArrayList<>();
-
-                for (EventMetadataObject metaData: metaList){
-                    typeList.add(metaData.get_id());
+                    for (EventMetadataObject metaData : metaList) {
+                        typeList.add(metaData.get_id());
+                    }
+                    if (typeList.contains("Gravitas")) {
+                        gravitas.setVisibility(View.VISIBLE);
+                    }
+                    if (typeList.contains("Riviera")) {
+                        riviera.setVisibility(View.VISIBLE);
+                    }
+                    if (typeList.contains("Hackathon")) {
+                        hackathons.setVisibility(View.VISIBLE);
+                    }
+                    if (typeList.contains("Workshops")) {
+                        workshops.setVisibility(View.VISIBLE);
+                    }
+                    if (typeList.contains("Speakers")) {
+                        speakers.setVisibility(View.VISIBLE);
+                    }
+                    if (typeList.contains("Cultural")) {
+                        cultural.setVisibility(View.VISIBLE);
+                    }
+                    if (typeList.contains("NGO")) {
+                        ngo.setVisibility(View.VISIBLE);
+                    }
                 }
-                if (typeList.contains("Gravitas")){
-                    gravitas.setVisibility(View.VISIBLE);
-                }
-                if(typeList.contains("Riviera")){
-                    riviera.setVisibility(View.VISIBLE);
-                }
-                if(typeList.contains("Hackathon")){
-                    hackathons.setVisibility(View.VISIBLE);
-                }
-                if(typeList.contains("Workshops")){
-                    workshops.setVisibility(View.VISIBLE);
-                }
-                if (typeList.contains("Speakers")){
-                    speakers.setVisibility(View.VISIBLE);
-                }
-                if(typeList.contains("Cultural")){
-                    cultural.setVisibility(View.VISIBLE);
-                }
-                if(typeList.contains("NGO")){
-                    ngo.setVisibility(View.VISIBLE);
-                }
-                scrollView.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(Call<EventMainObject> call, Throwable t) {
-
+                empty.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+                scrollView.setVisibility(View.GONE);
             }
         });
     }
