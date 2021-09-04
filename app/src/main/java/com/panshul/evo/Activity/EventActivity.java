@@ -95,7 +95,7 @@ public class EventActivity extends AppCompatActivity {
                 }else {
                     saved.add(object.get_id());
                     save.setImageResource(R.drawable.ic_saved);
-                    textViewSave.setText("Saved");
+                    textViewSave.setText("Interested");
                     Drawables.savedEvent(saved,EventActivity.this);
                 }
             }

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -76,8 +77,13 @@ public class ClubActivity extends AppCompatActivity {
         if (!object.getMedium().equals("")){
             medium.setVisibility(View.VISIBLE);
         }
-        upcoming.setText("Upcoming Events ("+String.valueOf(object.getEvents().size())+")");
-
+        if (object.getEvents().size()>0){
+            upcoming.setText("Upcoming Events ("+String.valueOf(object.getEvents().size())+")");
+            knowMore.setVisibility(View.VISIBLE);
+        }else {
+            upcoming.setText("");
+            seeAll.setVisibility(View.GONE);
+        }
         upcomingAdapter(object);
     }
     private void upcomingAdapter(ClubSpecificObject object){
@@ -107,6 +113,52 @@ public class ClubActivity extends AppCompatActivity {
         //clubLogoCl=findViewById(R.id.clubLogoCl);
     }
     void onclick(){
+
+        insta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setData(Uri.parse(object.getInstagram()));
+                startActivity(intent);
+            }
+        });
+        facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setData(Uri.parse(object.getFacebook()));
+                startActivity(intent);
+            }
+        });
+        twitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setData(Uri.parse(object.getTwitter()));
+                startActivity(intent);
+            }
+        });
+        linkedin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setData(Uri.parse(object.getLinkedIn()));
+                startActivity(intent);
+            }
+        });
+        medium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setData(Uri.parse(object.getMedium()));
+                startActivity(intent);
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

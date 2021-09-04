@@ -16,7 +16,8 @@
         <activity android:name=".Activity.SeeAllActivity" />
         <activity android:name=".Activity.ClubActivity" />
         <activity android:name=".Activity.LandingPage"></activity>
-        <activity android:name=".Activity.NavigationActivity">
+        <activity android:name=".Activity.NavigationActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

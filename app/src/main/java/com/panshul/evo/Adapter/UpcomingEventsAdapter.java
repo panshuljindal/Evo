@@ -1,6 +1,7 @@
 package com.panshul.evo.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.panshul.evo.Activity.EventActivity;
 import com.panshul.evo.Object.Club.ClubEventObject;
 import com.panshul.evo.Object.Event.EventSpecificObject;
 import com.panshul.evo.Object.Search.SearchObject;
@@ -53,6 +55,14 @@ public class UpcomingEventsAdapter extends RecyclerView.Adapter<UpcomingEventsAd
         else {
             holder.eventPrice.setText(String.valueOf(object.getEventCost())+" Rs");
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, EventActivity.class);
+                i.putExtra("eventId",list.get(position).get_id());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override

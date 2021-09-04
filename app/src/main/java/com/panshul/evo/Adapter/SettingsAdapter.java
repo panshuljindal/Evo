@@ -2,6 +2,7 @@ package com.panshul.evo.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,12 +47,89 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (list.get(position).getText().equals("Appearance")){
-                    //context.startActivity(new Intent(context, Appearance.class));
-                }
+//                if (list.get(position).getText().equals("Appearance")){
+//                    //context.startActivity(new Intent(context, Appearance.class));
+//                }
                 if (list.get(position).getText().equals("Notifications")){
                     Intent i = new Intent(context, Notifications.class);
                     context.startActivity(i);
+                }
+
+                if (list.get(position).getText().equals("Contact Us")){
+//                    Intent i = new Intent(context, Notifications.class);
+//                    context.startActivity(i);
+                }
+
+                if (list.get(position).getText().equals("Share with Peers")){
+//                    Intent i = new Intent(context, Notifications.class);
+//                    context.startActivity(i);
+                }
+
+
+                if (list.get(position).getText().equals("Our Instagram")){
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setData(Uri.parse("https://www.instagram.com/evo.app.in/"));
+                    try {
+                        context.startActivity(intent);
+                    }catch (Exception e){
+
+                    }
+                }
+
+                if (list.get(position).getText().equals("Our Twitter")){
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setData(Uri.parse("https://twitter.com/EvoAppIn"));
+                    try {
+                        context.startActivity(intent);
+                    }catch (Exception e){
+
+                    }
+                }
+
+                if (list.get(position).getText().equals("Our Facebook")){
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setData(Uri.parse(""));
+                    try {
+                        context.startActivity(intent);
+                    }catch (Exception e){
+
+                    }
+                }
+
+                if (list.get(position).getText().equals("Our Linkedin")){
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setData(Uri.parse(""));
+                    try {
+                        context.startActivity(intent);
+                    }catch (Exception e){
+
+                    }
+                }
+
+                if (list.get(position).getText().equals("About Us")){
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setData(Uri.parse(""));
+                    try {
+                        context.startActivity(intent);
+                    }catch (Exception e){
+
+                    }
+                }
+
+                if (list.get(position).getText().equals("Privacy Policy")){
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setData(Uri.parse(""));
+                    try {
+                        context.startActivity(intent);
+                    }catch (Exception e){
+
+                    }
                 }
             }
         });

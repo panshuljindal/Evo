@@ -59,6 +59,28 @@ public interface Api {
     @GET("/events/club/{clubId}")
     Call<ClubAllEvents> getAllClubEvents(@Path("clubId") String clubId);
 
+    @GET("/events/club/{clubId}?type=Gravitas")
+    Call<ClubAllEvents> getAllGravitasEvents(@Path("clubId") String clubId);
+
+    @GET("/events/club/{clubId}?type=Riviera")
+    Call<ClubAllEvents> getAllRivieraEvents(@Path("clubId") String clubId);
+
+    @GET("/events/club/{clubId}?type=Hackathon")
+    Call<ClubAllEvents> getAllHackathonEvents(@Path("clubId") String clubId);
+
+    @GET("/events/club/{clubId}?type=Workshop")
+    Call<ClubAllEvents> getAllWorkshopEvents(@Path("clubId") String clubId);
+
+    @GET("/events/club/{clubId}?type=Speaker")
+    Call<ClubAllEvents> getAllSpeakersEvents(@Path("clubId") String clubId);
+
+    @GET("/events/club/{clubId}?type=Cultural")
+    Call<ClubAllEvents> getAllCulturalEvents(@Path("clubId") String clubId);
+
+    @GET("/events/club/{clubId}?type=NGO")
+    Call<ClubAllEvents> getAllNGOEvents(@Path("clubId") String clubId);
+
+
     @POST("/events/search/")
     Call<List<SearchObject>> getSearch(@Body SearchInput input);
 

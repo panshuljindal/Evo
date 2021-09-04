@@ -86,7 +86,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
                     holder.like.setText(String.valueOf(list.get(position).getLikes()+1)+" likes");
                     holder.imageView.setSelected(true);
                     holder.imageView.likeAnimation();
-
                 }
             }
         });

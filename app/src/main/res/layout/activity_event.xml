@@ -38,6 +38,13 @@
                     android:scaleType="centerCrop"
                     app:layout_collapseMode="parallax" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="450dp"
+                    android:background="@drawable/eventgradient"
+                    app:layout_collapseMode="parallax" />
+
                 <ImageView
                     android:id="@+id/eventBack"
                     android:layout_width="wrap_content"

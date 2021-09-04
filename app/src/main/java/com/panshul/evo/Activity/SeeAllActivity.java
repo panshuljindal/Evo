@@ -48,7 +48,33 @@ public class SeeAllActivity extends AppCompatActivity {
         Call<ClubAllEvents> call;
         Api api = Drawables.api;
 
-        call = api.getAllClubEvents(id);
+
+        if (type==1){
+            call = api.getAllClubEvents(id);
+        }
+        else if(type==2){
+            call = api.getAllHackathonEvents(id);
+        }
+        else if(type==3){
+            call = api.getAllRivieraEvents(id);
+        }
+        else if(type==4){
+            call = api.getAllHackathonEvents(id);
+        }
+        else if(type==5){
+            call = api.getAllWorkshopEvents(id);
+        }
+        else if(type==6){
+            call = api.getAllSpeakersEvents(id);
+        }
+        else if(type==7){
+            call = api.getAllCulturalEvents(id);
+        }
+        else if(type==8){
+            call = api.getAllNGOEvents(id);
+        }else {
+            call = api.getAllClubEvents(id);
+        }
         call.enqueue(new Callback<ClubAllEvents>() {
             @Override
             public void onResponse(Call<ClubAllEvents> call, Response<ClubAllEvents> response) {
@@ -89,36 +115,7 @@ public class SeeAllActivity extends AppCompatActivity {
 
             }
         });
-//        if (i==1){
-//            call = api.getAllEvents();
-//        }
-//        else if(i==2){
-//            call = api.getGravitasEvents();
-//        }
-//        else if(i==3){
-//            call = api.getRivieraEvents();
-//        }
-//        else if(i==4){
-//            call = api.getHackathonEvents();
-//        }
-//
-//        else if(i==5){
-//            call = api.getSpeakerEvents();
-//        }
-//
-//        else if(i==6){
-//            call = api.getWorkshopEvents();
-//        }
-//
-//        else if(i==7){
-//            call = api.getCulturalEvents();
-//        }
-//
-//        else if(i==8){
-//            call = api.getNGOEvents();
-//        }else {
-//            call=api.getAllEvents();
-//        }
+
 
     }
     private void findViewByIds(){
@@ -150,6 +147,8 @@ public class SeeAllActivity extends AppCompatActivity {
                 }
                 else {
                     type=1;
+                    addData();
+
                 }
             }
         });
@@ -169,6 +168,8 @@ public class SeeAllActivity extends AppCompatActivity {
                 }
                 else {
                     type=2;
+                    addData();
+
                 }
             }
         });
@@ -188,6 +189,8 @@ public class SeeAllActivity extends AppCompatActivity {
                 }
                 else {
                     type=3;
+                    addData();
+
                 }
             }
         });
@@ -207,6 +210,8 @@ public class SeeAllActivity extends AppCompatActivity {
                 }
                 else {
                     type=4;
+                    addData();
+
                 }
             }
         });
@@ -226,6 +231,8 @@ public class SeeAllActivity extends AppCompatActivity {
                 }
                 else {
                     type=5;
+                    addData();
+
                 }
             }
         });
@@ -245,6 +252,7 @@ public class SeeAllActivity extends AppCompatActivity {
                 }
                 else {
                     type=6;
+                    addData();
                 }
             }
         });
@@ -264,6 +272,7 @@ public class SeeAllActivity extends AppCompatActivity {
                 }
                 else {
                     type=7;
+                    addData();
                 }
             }
         });
@@ -283,6 +292,7 @@ public class SeeAllActivity extends AppCompatActivity {
                 }
                 else {
                     type=8;
+                    addData();
                 }
             }
         });

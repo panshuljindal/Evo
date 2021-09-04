@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -35,6 +37,7 @@ import com.panshul.evo.Services.Drawables;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,7 +58,7 @@ public class SearchFragment extends Fragment {
     List<SearchObject> searchList;
     ImageView cancel,search;
     TextView popular,all,club,event;
-    ConstraintLayout popularEmpty;
+    ConstraintLayout popularEmpty,searchEmpty;
     int type;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,6 +126,7 @@ public class SearchFragment extends Fragment {
         event=view.findViewById(R.id.searchEvents);
         popularList = new ArrayList<>();
         popularEmpty = view.findViewById(R.id.popularEmpty);
+        searchEmpty = view.findViewById(R.id.searchEmpty);
     }
     private void addPopularData(){
         Call<List<PopularMainObject>> call;
@@ -157,6 +161,14 @@ public class SearchFragment extends Fragment {
         popularRecyclerView.setLayoutManager(manager);
     }
     private void searchAdapter(List<SearchObject> searchList1){
+        if (searchList1.size()==0){
+            popularEmpty.setVisibility(View.GONE);
+            searchEmpty.setVisibility(View.VISIBLE);
+            searchRecyclerView.setVisibility(View.GONE);
+        }else {
+            searchEmpty.setVisibility(View.GONE);
+            searchRecyclerView.setVisibility(View.VISIBLE);
+        }
         SearchAdapter adapter = new SearchAdapter(view.getContext(),searchList1);
         LinearLayoutManager manager= new LinearLayoutManager(view.getContext());
         manager.setOrientation(RecyclerView.VERTICAL);
@@ -206,7 +218,7 @@ public class SearchFragment extends Fragment {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                hideSoftKeyboard(searchEditText);
                 search.setVisibility(View.VISIBLE);
                 searchEditText.setPadding(120,40,40,40);
                 popular.setVisibility(View.VISIBLE);
@@ -218,6 +230,7 @@ public class SearchFragment extends Fragment {
 
                 searchAdapter(searchList);
                 searchEditText.setText("");
+                searchEmpty.setVisibility(View.GONE);
                 if (popularList.size()==0){
                     //Log.i("popular","Empty");
                     popularEmpty.setVisibility(View.VISIBLE);
@@ -243,11 +256,23 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (searchEditText.getText().toString().equals("")){
+                String searchString=searchEditText.getText().toString();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Log.i("Substring",searchString);
+                        if (searchEditText.getText().toString().equals("")){
 
-                }else {
-                    searchData(searchEditText.getText().toString());
-                }
+                        }else {
+                            if (searchEditText.getText().toString().equals(searchString)){
+                                searchData(searchEditText.getText().toString());
+                            }else {
+
+                            }
+                        }
+                    }
+                },400);
+
             }
         });
         all.setOnClickListener(new View.OnClickListener() {
@@ -259,9 +284,13 @@ public class SearchFragment extends Fragment {
                 if (type==0){
 
                 }else {
-                    List<SearchObject> searchListAll = new ArrayList<>();
-                    searchListAll.addAll(searchList);
-                    searchAdapter(searchListAll);
+                    try {
+                        List<SearchObject> searchListAll = new ArrayList<>();
+                        searchListAll.addAll(searchList);
+                        searchAdapter(searchListAll);
+                    }catch (Exception e){
+
+                    }
                 }
                 type=0;
             }
