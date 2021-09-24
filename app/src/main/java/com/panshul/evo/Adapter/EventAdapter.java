@@ -15,18 +15,26 @@ import com.bumptech.glide.Glide;
 import com.panshul.evo.Activity.EventActivity;
 import com.panshul.evo.Activity.ClubActivity;
 import com.panshul.evo.Fragments.EventFragment;
+import com.panshul.evo.Object.Event.EventMainObject;
+import com.panshul.evo.Object.Event.EventMetadataObject;
 import com.panshul.evo.Object.Event.EventObject;
 import com.panshul.evo.R;
+import com.panshul.evo.Services.Api;
 import com.panshul.evo.Services.Drawables;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xyz.hanks.library.bang.SmallBangView;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder> {
 
     List<EventObject> list;
     Context context;
+    ArrayList<Integer> isDone = new ArrayList<>();
 
     public EventAdapter(List<EventObject> list, Context context) {
         this.list = list;
@@ -42,6 +50,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(EventAdapter.MyViewHolder holder, int position) {
         EventObject object = list.get(position);
+        if (position==0){
+            isDone.add(0);
+        }
         Glide.with(context).load(object.getPoster()).into(holder.eventImage);
         Glide.with(context).load(object.getClubId().getLogo()).into(holder.clubLogo);
         holder.eventImage.setClipToOutline(true);
@@ -90,11 +101,64 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             }
         });
 
-        int i = holder.getAdapterPosition();
-//        if (i==list.size()-2){
-//            notifyDataSetChanged();
-//        }
+        if (holder.getAdapterPosition()==list.size()-2){
+            if(!isDone.contains(list.size()/10)){
+                int type = EventFragment.type;
+                addData(type);
+            }
 
+        }
+
+    }
+    private void addData(int i){
+        Call<EventMainObject> call;
+        Api api = Drawables.api;
+
+        isDone.add(list.size()/10);
+        if (i==1){
+            call = api.getAllEvents(list.size()/10);
+        }
+        else if(i==2){
+            call = api.getGravitasEvents(list.size()/10);
+        }
+        else if(i==3){
+            call = api.getRivieraEvents(list.size()/10);
+        }
+        else if(i==4){
+            call = api.getHackathonEvents(list.size()/10);
+        }
+
+        else if(i==5){
+            call = api.getSpeakerEvents(list.size()/10);
+        }
+
+        else if(i==6){
+            call = api.getWorkshopEvents(list.size()/10);
+        }
+
+        else if(i==7){
+            call = api.getCulturalEvents(list.size()/10);
+        }
+
+        else if(i==8){
+            call = api.getNGOEvents(list.size()/10);
+        }else {
+            call=api.getAllEvents(list.size()/10);
+        }
+        call.enqueue(new Callback<EventMainObject>() {
+            @Override
+            public void onResponse(Call<EventMainObject> call, Response<EventMainObject> response) {
+                EventMainObject object = response.body();
+                List<EventObject> list1 = object.getData();
+                list.addAll(list1);
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<EventMainObject> call, Throwable t) {
+
+            }
+        });
     }
 
 

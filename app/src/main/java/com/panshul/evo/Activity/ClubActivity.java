@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.panshul.evo.Adapter.UpcomingEventsAdapter;
 import com.panshul.evo.Object.Club.ClubSpecificObject;
@@ -28,8 +29,10 @@ public class ClubActivity extends AppCompatActivity {
     TextView name,tagline,description,knowMore,upcoming,seeAll;
     RecyclerView recyclerView;
     ClubSpecificObject object;
-    ConstraintLayout cl,clubLogoCl;
+    ConstraintLayout cl,lottie1;
+    LottieAnimationView lottie;
     String clubId;
+    ImageView isPartner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +44,12 @@ public class ClubActivity extends AppCompatActivity {
         call.enqueue(new Callback<ClubSpecificObject>() {
             @Override
             public void onResponse(Call<ClubSpecificObject> call, Response<ClubSpecificObject> response) {
-                object=response.body();
-                setOption();
+                try {
+                    object=response.body();
+                    setOption();
+                }catch (Exception e){
+                    lottie.pauseAnimation();
+                }
             }
 
             @Override
@@ -54,6 +61,9 @@ public class ClubActivity extends AppCompatActivity {
     private void setOption(){
         Glide.with(ClubActivity.this).load(object.getBackdrop()).into(poster);
         Glide.with(ClubActivity.this).load(object.getLogo()).into(logo);
+        if(object.isPartner()){
+            isPartner.setVisibility(View.VISIBLE);
+        }
         //logo.setClipToOutline(true);
         name.setText(object.getName());
         tagline.setText(object.getTagline());
@@ -85,6 +95,9 @@ public class ClubActivity extends AppCompatActivity {
             seeAll.setVisibility(View.GONE);
         }
         upcomingAdapter(object);
+        lottie1.setVisibility(View.GONE);
+        lottie.setVisibility(View.GONE);
+        lottie.pauseAnimation();
     }
     private void upcomingAdapter(ClubSpecificObject object){
         UpcomingEventsAdapter adapter = new UpcomingEventsAdapter(ClubActivity.this,object.getEvents());
@@ -111,6 +124,9 @@ public class ClubActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.clubRecyclerView);
         cl=findViewById(R.id.eventConstraintLayout);
         //clubLogoCl=findViewById(R.id.clubLogoCl);
+        lottie=findViewById(R.id.clubAnimationView);
+        lottie1=findViewById(R.id.clubLottieAnimation);
+        isPartner = findViewById(R.id.clubVerified);
     }
     void onclick(){
 

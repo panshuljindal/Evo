@@ -17,77 +17,110 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface Api {
 
+    String token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoiaGVja2VyIiwiaWF0IjoxNjMyMjA0MjcyfQ.QetSTqHMjmLSZDWFcGidwdjPHD1rbiCdCXP_X_pDPcw";
     @GET("/events")
-    Call<EventMainObject> getAllEvents();
+    @Headers({"auth-token: "+token})
+    Call<EventMainObject> getAllEvents( @Query("page") int number);
 
     @GET("/events?type=Gravitas")
-    Call<EventMainObject> getGravitasEvents();
+    @Headers({"auth-token: "+token})
+    Call<EventMainObject> getGravitasEvents( @Query("page") int number);
 
     @GET("/events?type=Riviera")
-    Call<EventMainObject> getRivieraEvents();
+    @Headers({"auth-token: "+token})
+    Call<EventMainObject> getRivieraEvents( @Query("page") int number);
 
     @GET("/events?type=Hackathon")
-    Call<EventMainObject> getHackathonEvents();
+    @Headers({"auth-token: "+token})
+    Call<EventMainObject> getHackathonEvents( @Query("page") int number);
 
     @GET("/events?type=Workshop")
-    Call<EventMainObject> getWorkshopEvents();
+    @Headers({"auth-token: "+token})
+    Call<EventMainObject> getWorkshopEvents( @Query("page") int number);
 
     @GET("/events?type=Speaker")
-    Call<EventMainObject> getSpeakerEvents();
+    @Headers({"auth-token: "+token})
+    Call<EventMainObject> getSpeakerEvents( @Query("page") int number);
 
     @GET("/events?type=Cultural")
-    Call<EventMainObject> getCulturalEvents();
+    @Headers({"auth-token: "+token})
+    Call<EventMainObject> getCulturalEvents( @Query("page") int number);
 
     @GET("/events?type=NGO")
-    Call<EventMainObject> getNGOEvents();
+    @Headers({"auth-token: "+token})
+    Call<EventMainObject> getNGOEvents( @Query("page") int number);
 
     @GET("/events/popular")
+    @Headers({"auth-token: "+token})
     Call<List<PopularMainObject>> getPopular();
 
     @GET("/events/get/{eventId}")
+    @Headers({"auth-token: "+token})
     Call<EventRoot> getSpecificEvent(@Path("eventId") String eventID);
 
     @GET("/club/get/{clubId}")
+    @Headers({"auth-token: "+token})
     Call<ClubSpecificObject> getSpecificClub(@Path("clubId") String clubId);
 
     @GET("/events/club/{clubId}")
+    @Headers({"auth-token: "+token})
     Call<ClubAllEvents> getAllClubEvents(@Path("clubId") String clubId);
 
     @GET("/events/club/{clubId}?type=Gravitas")
+    @Headers({"auth-token: "+token})
     Call<ClubAllEvents> getAllGravitasEvents(@Path("clubId") String clubId);
 
     @GET("/events/club/{clubId}?type=Riviera")
+    @Headers({"auth-token: "+token})
     Call<ClubAllEvents> getAllRivieraEvents(@Path("clubId") String clubId);
 
     @GET("/events/club/{clubId}?type=Hackathon")
+    @Headers({"auth-token: "+token})
     Call<ClubAllEvents> getAllHackathonEvents(@Path("clubId") String clubId);
 
     @GET("/events/club/{clubId}?type=Workshop")
+    @Headers({"auth-token: "+token})
     Call<ClubAllEvents> getAllWorkshopEvents(@Path("clubId") String clubId);
 
     @GET("/events/club/{clubId}?type=Speaker")
+    @Headers({"auth-token: "+token})
     Call<ClubAllEvents> getAllSpeakersEvents(@Path("clubId") String clubId);
 
     @GET("/events/club/{clubId}?type=Cultural")
+    @Headers({"auth-token: "+token})
     Call<ClubAllEvents> getAllCulturalEvents(@Path("clubId") String clubId);
 
     @GET("/events/club/{clubId}?type=NGO")
+    @Headers({"auth-token: "+token})
     Call<ClubAllEvents> getAllNGOEvents(@Path("clubId") String clubId);
 
 
-    @POST("/events/search/")
-    Call<List<SearchObject>> getSearch(@Body SearchInput input);
+    @POST("/events/search")
+    @Headers({"auth-token: "+token})
+    Call<List<SearchObject>> getSearch(@Body SearchInput input, @Query("page") int number);
+
+    @POST("/events/search?type=2")
+    @Headers({"auth-token: "+token})
+    Call<List<SearchObject>> getSearchEvent(@Body SearchInput input, @Query("page") int number);
+
+    @POST("/events/search?type=1")
+    @Headers({"auth-token: "+token})
+    Call<List<SearchObject>> getSearchClub(@Body SearchInput input, @Query("page") int number);
 
     @POST("/events/saved/")
+    @Headers({"auth-token: "+token})
     Call<List<EventObject>> getSaved(@Body InterestedPost events);
 
     @PUT("/events/like")
+    @Headers({"auth-token: "+token})
     Call<LikeResponse> likeEvent(@Body LikeBody eventId);
 
 

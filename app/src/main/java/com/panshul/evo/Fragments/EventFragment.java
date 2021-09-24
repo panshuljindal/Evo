@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.panshul.evo.Adapter.EventAdapter;
 import com.panshul.evo.Object.Event.EventMainObject;
 import com.panshul.evo.Object.Event.EventMetadataObject;
@@ -45,11 +46,10 @@ public class EventFragment extends Fragment {
     public static RecyclerView recyclerView;
     public static int type;
     public static EventAdapter adapter;
-
+    LottieAnimationView lottie;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
 
@@ -58,8 +58,11 @@ public class EventFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_event, container, false);
-        context=view.getContext();
         findViewByIds();
+        recyclerView.setVisibility(View.GONE);
+        lottie.setVisibility(View.VISIBLE);
+        lottie.playAnimation();
+        context=view.getContext();
         type=1;
         list=new ArrayList<>();
         addData(1);
@@ -79,84 +82,94 @@ public class EventFragment extends Fragment {
         recyclerView=view.findViewById(R.id.eventsRecycler);
         scrollView = view.findViewById(R.id.horizontalScrollView);
         empty = view.findViewById(R.id.eventsEmpty);
+        lottie = view.findViewById(R.id.eventAnimationView);
     }
     private void addData(int i){
         Call<EventMainObject> call;
         Api api = Drawables.api;
         if (i==1){
-            call = api.getAllEvents();
+            call = api.getAllEvents(0);
         }
         else if(i==2){
-            call = api.getGravitasEvents();
+            call = api.getGravitasEvents(0);
         }
         else if(i==3){
-            call = api.getRivieraEvents();
+            call = api.getRivieraEvents(0);
         }
         else if(i==4){
-            call = api.getHackathonEvents();
+            call = api.getHackathonEvents(0);
         }
 
         else if(i==5){
-            call = api.getSpeakerEvents();
+            call = api.getSpeakerEvents(0);
         }
 
         else if(i==6){
-            call = api.getWorkshopEvents();
+            call = api.getWorkshopEvents(0);
         }
 
         else if(i==7){
-            call = api.getCulturalEvents();
+            call = api.getCulturalEvents(0);
         }
 
         else if(i==8){
-            call = api.getNGOEvents();
+            call = api.getNGOEvents(0);
         }else {
-            call=api.getAllEvents();
+            call=api.getAllEvents(0);
         }
         call.enqueue(new Callback<EventMainObject>() {
             @Override
             public void onResponse(Call<EventMainObject> call, Response<EventMainObject> response) {
-                EventMainObject object = response.body();
-                list = object.getData();
-                //Log.i("list",String.valueOf(list.size()));
-                if (list.size()==0){
-                    empty.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.GONE);
-                    scrollView.setVisibility(View.GONE);
-                }
-                else {
-                    adapter();
-                    empty.setVisibility(View.GONE);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    scrollView.setVisibility(View.VISIBLE);
-                    List<EventMetadataObject> metaList = new ArrayList<>();
-                    metaList = object.getMetadata();
-                    List<String> typeList = new ArrayList<>();
+                try {
+                    EventMainObject object = response.body();
+                    list = object.getData();
+                    //Log.i("list",String.valueOf(list.size()));
+                    if (list.size()==0){
+                        empty.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
+                        scrollView.setVisibility(View.GONE);
+                        lottie.setVisibility(View.GONE);
+                        lottie.pauseAnimation();
+                    }
+                    else {
+                        adapter();
+                        lottie.setVisibility(View.GONE);
+                        lottie.pauseAnimation();
+                        empty.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        scrollView.setVisibility(View.VISIBLE);
+                        List<EventMetadataObject> metaList = new ArrayList<>();
+                        metaList = object.getMetadata();
+                        List<String> typeList = new ArrayList<>();
 
-                    for (EventMetadataObject metaData : metaList) {
-                        typeList.add(metaData.get_id());
+                        for (EventMetadataObject metaData : metaList) {
+                            typeList.add(metaData.get_id());
+                        }
+                        if (typeList.contains("Gravitas")) {
+                            gravitas.setVisibility(View.VISIBLE);
+                        }
+                        if (typeList.contains("Riviera")) {
+                            riviera.setVisibility(View.VISIBLE);
+                        }
+                        if (typeList.contains("Hackathon")) {
+                            hackathons.setVisibility(View.VISIBLE);
+                        }
+                        if (typeList.contains("Workshops")) {
+                            workshops.setVisibility(View.VISIBLE);
+                        }
+                        if (typeList.contains("Speakers")) {
+                            speakers.setVisibility(View.VISIBLE);
+                        }
+                        if (typeList.contains("Cultural")) {
+                            cultural.setVisibility(View.VISIBLE);
+                        }
+                        if (typeList.contains("NGO")) {
+                            ngo.setVisibility(View.VISIBLE);
+                        }
                     }
-                    if (typeList.contains("Gravitas")) {
-                        gravitas.setVisibility(View.VISIBLE);
-                    }
-                    if (typeList.contains("Riviera")) {
-                        riviera.setVisibility(View.VISIBLE);
-                    }
-                    if (typeList.contains("Hackathon")) {
-                        hackathons.setVisibility(View.VISIBLE);
-                    }
-                    if (typeList.contains("Workshops")) {
-                        workshops.setVisibility(View.VISIBLE);
-                    }
-                    if (typeList.contains("Speakers")) {
-                        speakers.setVisibility(View.VISIBLE);
-                    }
-                    if (typeList.contains("Cultural")) {
-                        cultural.setVisibility(View.VISIBLE);
-                    }
-                    if (typeList.contains("NGO")) {
-                        ngo.setVisibility(View.VISIBLE);
-                    }
+                }
+                catch (Exception e){
+
                 }
             }
 
@@ -165,6 +178,8 @@ public class EventFragment extends Fragment {
                 empty.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.GONE);
                 scrollView.setVisibility(View.GONE);
+                lottie.setVisibility(View.GONE);
+                lottie.pauseAnimation();
             }
         });
     }
@@ -191,6 +206,9 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    lottie.playAnimation();
+                    lottie.setVisibility(View.VISIBLE);
                     type=1;
                     addData(1);
                 }
@@ -211,6 +229,9 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    lottie.playAnimation();
+                    lottie.setVisibility(View.VISIBLE);
                     type=2;
                     addData(2);
                 }
@@ -231,6 +252,9 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    lottie.playAnimation();
+                    lottie.setVisibility(View.VISIBLE);
                     type=3;
                     addData(3);
                 }
@@ -251,6 +275,9 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    lottie.playAnimation();
+                    lottie.setVisibility(View.VISIBLE);
                     type=4;
                     addData(4);
                 }
@@ -271,6 +298,9 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    lottie.playAnimation();
+                    lottie.setVisibility(View.VISIBLE);
                     type=5;
                     addData(5);
                 }
@@ -291,6 +321,9 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    lottie.playAnimation();
+                    lottie.setVisibility(View.VISIBLE);
                     type=6;
                     addData(6);
                 }
@@ -311,6 +344,9 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    lottie.playAnimation();
+                    lottie.setVisibility(View.VISIBLE);
                     type=7;
                     addData(7);
                 }
@@ -331,6 +367,9 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    lottie.playAnimation();
+                    lottie.setVisibility(View.VISIBLE);
                     type=8;
                     addData(8);
                 }

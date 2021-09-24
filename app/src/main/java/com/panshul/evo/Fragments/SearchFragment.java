@@ -55,42 +55,62 @@ public class SearchFragment extends Fragment {
     HorizontalScrollView tabLayout;
     RecyclerView searchRecyclerView,popularRecyclerView;
     List<PopularMainObject> popularList;
-    List<SearchObject> searchList;
+    public static List<SearchObject> searchList;
     ImageView cancel,search;
     TextView popular,all,club,event;
     ConstraintLayout popularEmpty,searchEmpty;
-    int type;
+
+    public static int type;
+    public static String searchInput;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
     void searchData(String input){
         searchList=new ArrayList<>();
-        Call<List<SearchObject>> call = Drawables.api.getSearch( new SearchInput(input));
+        searchInput=input;
+        Call<List<SearchObject>> call;
+        if(type==0){
+            call= Drawables.api.getSearch( new SearchInput(input),0);
+        }
+        else if(type==1){
+            call=Drawables.api.getSearchClub(new SearchInput(input),0);
+
+
+        }else if(type==2){
+            call=Drawables.api.getSearchEvent(new SearchInput(input),0);
+        }else {
+            call= Drawables.api.getSearch( new SearchInput(input),0);
+        }
         call.enqueue(new Callback<List<SearchObject>>() {
             @Override
             public void onResponse(Call<List<SearchObject>> call, Response<List<SearchObject>> response) {
-                searchList = response.body();
-                if (type==0){
+                try {
+                    searchList = response.body();
                     searchAdapter(searchList);
-                }else if (type==1){
-                    List<SearchObject> searchListClub = new ArrayList<>();
-                    for (SearchObject item: searchList){
-                        if (item.getType()==1){
-                            searchListClub.add(item);
-                        }
-                    }
-                    searchAdapter(searchListClub);
+                }catch (Exception e){
+
                 }
-                else if (type==2){
-                    List<SearchObject> searchListEvent = new ArrayList<>();
-                    for (SearchObject item: searchList){
-                        if (item.getType()==2){
-                            searchListEvent.add(item);
-                        }
-                    }
-                    searchAdapter(searchListEvent);
-                }
+//                if (type==0){
+//
+//                }else if (type==1){
+//                    List<SearchObject> searchListClub = new ArrayList<>();
+//                    for (SearchObject item: searchList){
+//                        if (item.getType()==1){
+//                            searchListClub.add(item);
+//                        }
+//                    }
+//                    searchAdapter(searchListClub);
+//                }
+//                else if (type==2){
+//                    List<SearchObject> searchListEvent = new ArrayList<>();
+//                    for (SearchObject item: searchList){
+//                        if (item.getType()==2){
+//                            searchListEvent.add(item);
+//                        }
+//                    }
+//                    searchAdapter(searchListEvent);
+//                }
             }
 
             @Override
@@ -284,15 +304,10 @@ public class SearchFragment extends Fragment {
                 if (type==0){
 
                 }else {
-                    try {
-                        List<SearchObject> searchListAll = new ArrayList<>();
-                        searchListAll.addAll(searchList);
-                        searchAdapter(searchListAll);
-                    }catch (Exception e){
-
-                    }
+                    type=0;
+                    searchData(searchEditText.getText().toString());
                 }
-                type=0;
+
             }
         });
 
@@ -305,19 +320,20 @@ public class SearchFragment extends Fragment {
                 if (type==1){
 
                 }else {
-                    List<SearchObject> searchListClub = new ArrayList<>();
-                    try {
-                        for (SearchObject item: searchList){
-                            if (item.getType()==1){
-                                searchListClub.add(item);
-                            }
-                        }
-                        searchAdapter(searchListClub);
-                    }catch (Exception e){
-
-                    }
+//                    List<SearchObject> searchListClub = new ArrayList<>();
+//                    try {
+//                        for (SearchObject item: searchList){
+//                            if (item.getType()==1){
+//                                searchListClub.add(item);
+//                            }
+//                        }
+//                        searchAdapter(searchListClub);
+//                    }catch (Exception e){
+//
+//                    }
+                    type=1;
+                    searchData(searchEditText.getText().toString());
                 }
-                type=1;
             }
         });
         event.setOnClickListener(new View.OnClickListener() {
@@ -329,21 +345,21 @@ public class SearchFragment extends Fragment {
                 if (type==2){
 
                 }else {
-                    try {
-                        List<SearchObject> searchListEvent = new ArrayList<>();
-                        for (SearchObject item: searchList){
-                            if (item.getType()==2){
-                                searchListEvent.add(item);
-                            }
-                        }
-                        searchAdapter(searchListEvent);
-                    }
-                    catch (Exception e){
-
-                    }
+//                    try {
+//                        List<SearchObject> searchListEvent = new ArrayList<>();
+//                        for (SearchObject item: searchList){
+//                            if (item.getType()==2){
+//                                searchListEvent.add(item);
+//                            }
+//                        }
+//                        searchAdapter(searchListEvent);
+//                    }
+//                    catch (Exception e){
+//
+//                    }
+                    type=2;
+                    searchData(searchEditText.getText().toString());
                 }
-                type=2;
-
             }
         });
 
