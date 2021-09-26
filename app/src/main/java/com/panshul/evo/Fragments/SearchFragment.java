@@ -23,6 +23,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.panshul.evo.Adapter.EventAdapter;
 import com.panshul.evo.Adapter.PopularAdapter;
 import com.panshul.evo.Adapter.SearchAdapter;
@@ -59,9 +60,10 @@ public class SearchFragment extends Fragment {
     ImageView cancel,search;
     TextView popular,all,club,event;
     ConstraintLayout popularEmpty,searchEmpty;
-
+    LottieAnimationView popularLottie;
     public static int type;
     public static String searchInput;
+    boolean isDonePopular;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,26 +93,6 @@ public class SearchFragment extends Fragment {
                 }catch (Exception e){
 
                 }
-//                if (type==0){
-//
-//                }else if (type==1){
-//                    List<SearchObject> searchListClub = new ArrayList<>();
-//                    for (SearchObject item: searchList){
-//                        if (item.getType()==1){
-//                            searchListClub.add(item);
-//                        }
-//                    }
-//                    searchAdapter(searchListClub);
-//                }
-//                else if (type==2){
-//                    List<SearchObject> searchListEvent = new ArrayList<>();
-//                    for (SearchObject item: searchList){
-//                        if (item.getType()==2){
-//                            searchListEvent.add(item);
-//                        }
-//                    }
-//                    searchAdapter(searchListEvent);
-//                }
             }
 
             @Override
@@ -126,7 +108,21 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
          view=inflater.inflate(R.layout.fragment_search, container, false);
          findViewByIds();
+         isDonePopular=false;
          type=0;
+         int time = Drawables.time;
+         new Handler().postDelayed(new Runnable() {
+             @Override
+             public void run() {
+                 if (isDonePopular){
+
+                 }else {
+                     popularLottie.setVisibility(View.VISIBLE);
+                     popularRecyclerView.setVisibility(View.INVISIBLE);
+                 }
+
+             }
+         },time);
          addPopularData();
          onclick();
          popularAdapter();
@@ -147,6 +143,7 @@ public class SearchFragment extends Fragment {
         popularList = new ArrayList<>();
         popularEmpty = view.findViewById(R.id.popularEmpty);
         searchEmpty = view.findViewById(R.id.searchEmpty);
+        popularLottie=view.findViewById(R.id.popularAnimationView);
     }
     private void addPopularData(){
         Call<List<PopularMainObject>> call;
@@ -154,22 +151,39 @@ public class SearchFragment extends Fragment {
         call.enqueue(new Callback<List<PopularMainObject>>() {
             @Override
             public void onResponse(Call<List<PopularMainObject>> call, Response<List<PopularMainObject>> response) {
-                popularList=new ArrayList<>();
-                popularList = response.body();
-                if (popularList.size()==0){
-                    //Log.i("popular","Empty");
+                try {
+                    popularList=new ArrayList<>();
+                    popularList = response.body();
+                    if (popularList.size()==0){
+                        popularEmpty.setVisibility(View.VISIBLE);
+                        popularRecyclerView.setVisibility(View.GONE);
+                        isDonePopular=true;
+                        popularLottie.setVisibility(View.GONE);
+                        popularLottie.pauseAnimation();
+                    }else {
+                        popularEmpty.setVisibility(View.GONE);
+                        popularRecyclerView.setVisibility(View.VISIBLE);
+                        popularAdapter();
+                        isDonePopular=true;
+                        popularLottie.setVisibility(View.GONE);
+                        popularLottie.pauseAnimation();
+                    }
+                }catch (Exception e){
                     popularEmpty.setVisibility(View.VISIBLE);
                     popularRecyclerView.setVisibility(View.GONE);
-                }else {
-                    popularEmpty.setVisibility(View.GONE);
-                    popularRecyclerView.setVisibility(View.VISIBLE);
-                    popularAdapter();
+                    isDonePopular=true;
+                    popularLottie.setVisibility(View.GONE);
+                    popularLottie.pauseAnimation();
                 }
             }
 
             @Override
             public void onFailure(Call<List<PopularMainObject>> call, Throwable t) {
-
+                popularEmpty.setVisibility(View.VISIBLE);
+                popularRecyclerView.setVisibility(View.GONE);
+                isDonePopular=true;
+                popularLottie.setVisibility(View.GONE);
+                popularLottie.pauseAnimation();
             }
         });
     }
@@ -206,6 +220,9 @@ public class SearchFragment extends Fragment {
                 tabLayout.setVisibility(View.VISIBLE);
                 cancel.setVisibility(View.VISIBLE);
                 searchRecyclerView.setVisibility(View.VISIBLE);
+                isDonePopular=true;
+                popularLottie.setVisibility(View.GONE);
+                popularLottie.pauseAnimation();
             }
         });
         searchEditText.setOnTouchListener(new View.OnTouchListener() {
@@ -220,6 +237,9 @@ public class SearchFragment extends Fragment {
                 cancel.setVisibility(View.VISIBLE);
                 popularEmpty.setVisibility(View.GONE);
                 searchRecyclerView.setVisibility(View.VISIBLE);
+                isDonePopular=true;
+                popularLottie.setVisibility(View.GONE);
+                popularLottie.pauseAnimation();
                 return false;
             }
         });
@@ -260,7 +280,11 @@ public class SearchFragment extends Fragment {
                     popularRecyclerView.setVisibility(View.VISIBLE);
                     popularAdapter();
                 }
+                isDonePopular=true;
+                popularLottie.setVisibility(View.GONE);
+                popularLottie.pauseAnimation();
                 hideSoftKeyboard(searchEditText);
+
             }
         });
         searchEditText.addTextChangedListener(new TextWatcher() {

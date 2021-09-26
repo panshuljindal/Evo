@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
 import com.panshul.evo.Adapter.EventAdapter;
@@ -40,17 +42,33 @@ public class EventActivity extends AppCompatActivity {
     ImageView back,photo,clubLogo,save;
     TextView eventName,likeTextView,clubName,eventDate,eventPrice,eventDuration,eventDescription,textViewSave;
     Button registerNow;
-    ConstraintLayout savedCl;
+    ConstraintLayout savedCl,lottie1;
+    LottieAnimationView lottie;
     EventSpecificObject object;
     List<String> saved;
     SmallBangView likeImage;
     List<String> likes;
+    boolean isDone;
+    int time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
         saved = new ArrayList<>();
         findViewByIds();
+        isDone=false;
+        time=Drawables.time;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (isDone){
+
+                }else {
+                    lottie1.setVisibility(View.VISIBLE);
+                    lottie.setVisibility(View.VISIBLE);
+                }
+            }
+        },time);
         addData();
         onclick();
     }
@@ -61,8 +79,12 @@ public class EventActivity extends AppCompatActivity {
         call.enqueue(new Callback<EventRoot>() {
             @Override
             public void onResponse(Call<EventRoot> call, Response<EventRoot> response) {
-                object=response.body().getEvent();
-                setOption();
+                try {
+                    object=response.body().getEvent();
+                    setOption();
+                }catch (Exception e){
+
+                }
             }
 
             @Override
@@ -81,7 +103,17 @@ public class EventActivity extends AppCompatActivity {
         clubLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i =new Intent(v.getContext(), ClubActivity.class);
+                i.putExtra("clubId",object.getClubId().get_id());
+                startActivity(i);
+            }
+        });
+        eventName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(v.getContext(), ClubActivity.class);
+                i.putExtra("clubId",object.getClubId().get_id());
+                startActivity(i);
             }
         });
         savedCl.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +167,7 @@ public class EventActivity extends AppCompatActivity {
         saved = Drawables.getSavedEvent(EventActivity.this);
         if (saved.contains(object.get_id())){
             save.setImageResource(R.drawable.ic_saved);
-            textViewSave.setText("Saved");
+            textViewSave.setText("Interested");
         }else {
             //save.setImageResource();
             textViewSave.setText("Saved For Later");
@@ -146,7 +178,11 @@ public class EventActivity extends AppCompatActivity {
         }
         else {
             likeImage.setSelected(false);
-        }
+        }isDone=true;
+        lottie.pauseAnimation();
+        lottie.setVisibility(View.GONE);
+        lottie1.setVisibility(View.GONE);
+
     }
     public static String getDate(long time) {
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
@@ -170,5 +206,7 @@ public class EventActivity extends AppCompatActivity {
         likeTextView = findViewById(R.id.eventLikes);
         textViewSave = findViewById(R.id.textViewSave);
         savedCl = findViewById(R.id.savedConstraintLayout);
+        lottie1=findViewById(R.id.eventLottieAnimation);
+        lottie=findViewById(R.id.eventMainAnimationView);
     }
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.panshul.evo.Adapter.EventAdapter;
@@ -49,6 +51,8 @@ public class SavedFragment extends Fragment {
     List<String> savedId;
     List<EventObject> list,searchList;
     ConstraintLayout empty;
+    LottieAnimationView lottie;
+    boolean isDone;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +69,20 @@ public class SavedFragment extends Fragment {
         search = view.findViewById(R.id.interestedSearch);
         empty = view.findViewById(R.id.interestedEmpty);
         text = view.findViewById(R.id.interestedTextView);
+        lottie=view.findViewById(R.id.savedAnimationView);
+        int time = Drawables.time;
+        isDone=false;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (isDone){
+
+                }else {
+                    lottie.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(GONE);
+                }
+            }
+        },time);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -101,17 +119,40 @@ public class SavedFragment extends Fragment {
             search.setVisibility(GONE);
             recyclerView.setVisibility(GONE);
             editText.setVisibility(GONE);
+            isDone=true;
+            lottie.setVisibility(GONE);
+            lottie.pauseAnimation();
         }else {
-            empty.setVisibility(GONE);
-            search.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.VISIBLE);
-            editText.setVisibility(View.VISIBLE);
+
             Call<List<EventObject>> call = Drawables.api.getSaved(new InterestedPost(savedId));
             call.enqueue(new Callback<List<EventObject>>() {
                 @Override
                 public void onResponse(Call<List<EventObject>> call, Response<List<EventObject>> response) {
-                    list=response.body();
-                    adapter();
+                    try {
+                        list=response.body();
+                        if (list.size()==0){
+                            empty.setVisibility(View.VISIBLE);
+                            search.setVisibility(GONE);
+                            recyclerView.setVisibility(GONE);
+                            editText.setVisibility(GONE);
+                            isDone=true;
+                            lottie.setVisibility(GONE);
+                            lottie.pauseAnimation();
+
+                        }
+                        else {
+                            adapter();
+                            empty.setVisibility(GONE);
+                            search.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            editText.setVisibility(View.VISIBLE);
+                            isDone=true;
+                            lottie.setVisibility(GONE);
+                            lottie.pauseAnimation();
+                        }
+                    }catch (Exception e){
+
+                    }
                 }
 
                 @Override
@@ -120,6 +161,8 @@ public class SavedFragment extends Fragment {
                     search.setVisibility(GONE);
                     recyclerView.setVisibility(GONE);
                     editText.setVisibility(GONE);
+                    lottie.setVisibility(GONE);
+                    lottie.pauseAnimation();
                 }
             });
         }

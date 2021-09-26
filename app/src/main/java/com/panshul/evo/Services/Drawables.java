@@ -24,6 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Drawables {
     public static String base_url = "https://vit-events-app.herokuapp.com";
+    public static int time=500;
     public static OkHttpClient getClientInstance() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

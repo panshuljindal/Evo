@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,8 @@ public class EventFragment extends Fragment {
     public static RecyclerView recyclerView;
     public static int type;
     public static EventAdapter adapter;
+    boolean isData;
+    int time;
     LottieAnimationView lottie;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,9 +62,20 @@ public class EventFragment extends Fragment {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_event, container, false);
         findViewByIds();
-        recyclerView.setVisibility(View.GONE);
-        lottie.setVisibility(View.VISIBLE);
-        lottie.playAnimation();
+        isData=false;
+        time=Drawables.time;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(isData){
+
+                }
+                else {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    lottie.setVisibility(View.VISIBLE);
+                }
+            }
+        },time);
         context=view.getContext();
         type=1;
         list=new ArrayList<>();
@@ -167,9 +181,14 @@ public class EventFragment extends Fragment {
                             ngo.setVisibility(View.VISIBLE);
                         }
                     }
+                    isData=true;
                 }
                 catch (Exception e){
-
+                    empty.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.GONE);
+                    lottie.setVisibility(View.GONE);
+                    lottie.pauseAnimation();
                 }
             }
 
@@ -206,9 +225,20 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
-                    recyclerView.setVisibility(View.INVISIBLE);
-                    lottie.playAnimation();
-                    lottie.setVisibility(View.VISIBLE);
+                    isData=false;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(isData){
+
+                            }
+                            else {
+                                recyclerView.setVisibility(View.INVISIBLE);
+                                lottie.playAnimation();
+                                lottie.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    },time);
                     type=1;
                     addData(1);
                 }
@@ -229,9 +259,20 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
-                    recyclerView.setVisibility(View.INVISIBLE);
-                    lottie.playAnimation();
-                    lottie.setVisibility(View.VISIBLE);
+                    isData=false;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(isData){
+
+                            }
+                            else {
+                                recyclerView.setVisibility(View.INVISIBLE);
+                                lottie.playAnimation();
+                                lottie.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    },time);
                     type=2;
                     addData(2);
                 }
@@ -252,9 +293,20 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
-                    recyclerView.setVisibility(View.INVISIBLE);
-                    lottie.playAnimation();
-                    lottie.setVisibility(View.VISIBLE);
+                    isData=false;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(isData){
+
+                            }
+                            else {
+                                recyclerView.setVisibility(View.INVISIBLE);
+                                lottie.playAnimation();
+                                lottie.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    },time);
                     type=3;
                     addData(3);
                 }
@@ -275,9 +327,20 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
-                    recyclerView.setVisibility(View.INVISIBLE);
-                    lottie.playAnimation();
-                    lottie.setVisibility(View.VISIBLE);
+                    isData=false;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(isData){
+
+                            }
+                            else {
+                                recyclerView.setVisibility(View.INVISIBLE);
+                                lottie.playAnimation();
+                                lottie.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    },time);
                     type=4;
                     addData(4);
                 }
@@ -298,9 +361,20 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
-                    recyclerView.setVisibility(View.INVISIBLE);
-                    lottie.playAnimation();
-                    lottie.setVisibility(View.VISIBLE);
+                    isData=false;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(isData){
+
+                            }
+                            else {
+                                recyclerView.setVisibility(View.INVISIBLE);
+                                lottie.playAnimation();
+                                lottie.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    },time);
                     type=5;
                     addData(5);
                 }
@@ -321,9 +395,20 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
-                    recyclerView.setVisibility(View.INVISIBLE);
-                    lottie.playAnimation();
-                    lottie.setVisibility(View.VISIBLE);
+                    isData=false;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(isData){
+
+                            }
+                            else {
+                                recyclerView.setVisibility(View.INVISIBLE);
+                                lottie.playAnimation();
+                                lottie.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    },time);
                     type=6;
                     addData(6);
                 }
@@ -344,9 +429,20 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
-                    recyclerView.setVisibility(View.INVISIBLE);
-                    lottie.playAnimation();
-                    lottie.setVisibility(View.VISIBLE);
+                    isData=false;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(isData){
+
+                            }
+                            else {
+                                recyclerView.setVisibility(View.INVISIBLE);
+                                lottie.playAnimation();
+                                lottie.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    },time);
                     type=7;
                     addData(7);
                 }
@@ -367,9 +463,20 @@ public class EventFragment extends Fragment {
 
                 }
                 else {
-                    recyclerView.setVisibility(View.INVISIBLE);
-                    lottie.playAnimation();
-                    lottie.setVisibility(View.VISIBLE);
+                    isData=false;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(isData){
+
+                            }
+                            else {
+                                recyclerView.setVisibility(View.INVISIBLE);
+                                lottie.playAnimation();
+                                lottie.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    },time);
                     type=8;
                     addData(8);
                 }

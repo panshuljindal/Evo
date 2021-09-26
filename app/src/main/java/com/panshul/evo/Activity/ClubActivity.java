@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,12 +34,27 @@ public class ClubActivity extends AppCompatActivity {
     LottieAnimationView lottie;
     String clubId;
     ImageView isPartner;
+    boolean isDone;
+    int time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club);
         findViewByIds();
         onclick();
+        isDone=false;
+        time=Drawables.time;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (isDone){
+
+                }else {
+                    lottie1.setVisibility(View.VISIBLE);
+                    lottie.setVisibility(View.VISIBLE);
+                }
+            }
+        },time);
         clubId=getIntent().getStringExtra("clubId");
         Call<ClubSpecificObject> call = Drawables.api.getSpecificClub(clubId);
         call.enqueue(new Callback<ClubSpecificObject>() {
@@ -48,7 +64,7 @@ public class ClubActivity extends AppCompatActivity {
                     object=response.body();
                     setOption();
                 }catch (Exception e){
-                    lottie.pauseAnimation();
+                    //lottie.pauseAnimation();
                 }
             }
 
@@ -95,9 +111,11 @@ public class ClubActivity extends AppCompatActivity {
             seeAll.setVisibility(View.GONE);
         }
         upcomingAdapter(object);
+        isDone=true;
         lottie1.setVisibility(View.GONE);
         lottie.setVisibility(View.GONE);
         lottie.pauseAnimation();
+
     }
     private void upcomingAdapter(ClubSpecificObject object){
         UpcomingEventsAdapter adapter = new UpcomingEventsAdapter(ClubActivity.this,object.getEvents());
