@@ -29,13 +29,11 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
         this.context = context;
         this.list = list;
     }
-
     @NonNull
     @NotNull
     @Override
     public SettingsViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.settings_item, parent, false);
-
         return new SettingsViewHolder(view);
     }
 
@@ -63,6 +61,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                 if (list.get(position).getText().equals("Share with Peers")){
 //                    Intent i = new Intent(context, Notifications.class);
 //                    context.startActivity(i);
+                    //throw new RuntimeException();
                 }
 
 
@@ -91,7 +90,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                 if (list.get(position).getText().equals("Our Facebook")){
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setData(Uri.parse(""));
+                    intent.setData(Uri.parse("https://www.facebook.com/Evo-App-261498562420388"));
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
@@ -102,7 +101,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                 if (list.get(position).getText().equals("Our Linkedin")){
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setData(Uri.parse(""));
+                    intent.setData(Uri.parse("https://www.linkedin.com/in/evoappin/"));
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
@@ -144,7 +143,6 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
     class SettingsViewHolder extends RecyclerView.ViewHolder {
         ImageView img1;
         TextView settingItem;
-
 
         public SettingsViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);

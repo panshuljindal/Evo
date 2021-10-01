@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
@@ -30,12 +32,13 @@ public class ClubActivity extends AppCompatActivity {
     TextView name,tagline,description,knowMore,upcoming,seeAll;
     RecyclerView recyclerView;
     ClubSpecificObject object;
-    ConstraintLayout cl,lottie1;
+    ConstraintLayout cl,lottie1,serverError;
     LottieAnimationView lottie;
     String clubId;
     ImageView isPartner;
     boolean isDone;
     int time;
+    Button tryAgain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,10 @@ public class ClubActivity extends AppCompatActivity {
                 }
             }
         },time);
+        addData();
+
+    }
+    private void addData(){
         clubId=getIntent().getStringExtra("clubId");
         Call<ClubSpecificObject> call = Drawables.api.getSpecificClub(clubId);
         call.enqueue(new Callback<ClubSpecificObject>() {
@@ -64,15 +71,23 @@ public class ClubActivity extends AppCompatActivity {
                     object=response.body();
                     setOption();
                 }catch (Exception e){
-                    //lottie.pauseAnimation();
+                    isDone=true;
+                    lottie1.setVisibility(View.GONE);
+                    lottie.setVisibility(View.GONE);
+                    lottie.pauseAnimation();
+                    serverError.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<ClubSpecificObject> call, Throwable t) {
+                isDone=true;
+                lottie1.setVisibility(View.GONE);
+                lottie.setVisibility(View.GONE);
+                lottie.pauseAnimation();
+                serverError.setVisibility(View.VISIBLE);
             }
         });
-
     }
     private void setOption(){
         Glide.with(ClubActivity.this).load(object.getBackdrop()).into(poster);
@@ -145,9 +160,25 @@ public class ClubActivity extends AppCompatActivity {
         lottie=findViewById(R.id.clubAnimationView);
         lottie1=findViewById(R.id.clubLottieAnimation);
         isPartner = findViewById(R.id.clubVerified);
+        serverError=findViewById(R.id.clubEmptyCl);
+        tryAgain = findViewById(R.id.clubTryAgain);
     }
     void onclick(){
-
+        tryAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Drawables.isNetworkAvailable(ClubActivity.this)){
+                    serverError.setVisibility(View.GONE);
+                    isDone=false;
+                    lottie1.setVisibility(View.VISIBLE);
+                    lottie.setVisibility(View.VISIBLE);
+                    lottie.playAnimation();
+                    addData();
+                }else {
+                    Toast.makeText(ClubActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         insta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

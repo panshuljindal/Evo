@@ -60,74 +60,107 @@ public class SearchFragment extends Fragment {
     ImageView cancel,search;
     TextView popular,all,club,event;
     ConstraintLayout popularEmpty,searchEmpty;
-    LottieAnimationView popularLottie;
+    LottieAnimationView popularLottie,searchLottie;
     public static int type;
     public static String searchInput;
-    boolean isDonePopular;
+    boolean isDonePopular,isDoneSearch;
+
+    Call<List<SearchObject>> callPopular;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view=inflater.inflate(R.layout.fragment_search, container, false);
+        findViewByIds();
+        isDonePopular=false;
+        type=0;
+        int time = Drawables.time;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (isDonePopular){
+
+                }else {
+                    popularLottie.setVisibility(View.VISIBLE);
+                    popularRecyclerView.setVisibility(View.INVISIBLE);
+                }
+
+            }
+        },time);
+        addPopularData();
+        onclick();
+        popularAdapter();
+        return view;
+    }
     void searchData(String input){
         searchList=new ArrayList<>();
         searchInput=input;
-        Call<List<SearchObject>> call;
         if(type==0){
-            call= Drawables.api.getSearch( new SearchInput(input),0);
+            callPopular= Drawables.api.getSearch( new SearchInput(input),0);
         }
         else if(type==1){
-            call=Drawables.api.getSearchClub(new SearchInput(input),0);
+            callPopular=Drawables.api.getSearchClub(new SearchInput(input),0);
 
 
         }else if(type==2){
-            call=Drawables.api.getSearchEvent(new SearchInput(input),0);
+            callPopular=Drawables.api.getSearchEvent(new SearchInput(input),0);
         }else {
-            call= Drawables.api.getSearch( new SearchInput(input),0);
+            callPopular= Drawables.api.getSearch( new SearchInput(input),0);
         }
-        call.enqueue(new Callback<List<SearchObject>>() {
+        callPopular.enqueue(new Callback<List<SearchObject>>() {
             @Override
             public void onResponse(Call<List<SearchObject>> call, Response<List<SearchObject>> response) {
                 try {
                     searchList = response.body();
                     searchAdapter(searchList);
                 }catch (Exception e){
-
+                    popularEmpty.setVisibility(View.GONE);
+                    searchEmpty.setVisibility(View.VISIBLE);
+                    searchRecyclerView.setVisibility(View.GONE);
+                    isDoneSearch=true;
+                    searchLottie.setVisibility(View.GONE);
+                    searchLottie.pauseAnimation();
                 }
             }
 
             @Override
             public void onFailure(Call<List<SearchObject>> call, Throwable t) {
-
+                popularEmpty.setVisibility(View.GONE);
+                searchEmpty.setVisibility(View.VISIBLE);
+                searchRecyclerView.setVisibility(View.GONE);
+                isDoneSearch=true;
+                searchLottie.setVisibility(View.GONE);
+                searchLottie.pauseAnimation();
             }
         });
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-         view=inflater.inflate(R.layout.fragment_search, container, false);
-         findViewByIds();
-         isDonePopular=false;
-         type=0;
-         int time = Drawables.time;
-         new Handler().postDelayed(new Runnable() {
-             @Override
-             public void run() {
-                 if (isDonePopular){
-
-                 }else {
-                     popularLottie.setVisibility(View.VISIBLE);
-                     popularRecyclerView.setVisibility(View.INVISIBLE);
-                 }
-
-             }
-         },time);
-         addPopularData();
-         onclick();
-         popularAdapter();
-         return view;
+    private void searchAdapter(List<SearchObject> searchList1){
+        if (searchList1.size()==0){
+            popularEmpty.setVisibility(View.GONE);
+            searchEmpty.setVisibility(View.VISIBLE);
+            searchRecyclerView.setVisibility(View.GONE);
+            isDoneSearch=true;
+            searchLottie.setVisibility(View.GONE);
+            searchLottie.pauseAnimation();
+        }else {
+            searchEmpty.setVisibility(View.GONE);
+            searchRecyclerView.setVisibility(View.VISIBLE);
+            isDoneSearch=true;
+            searchLottie.setVisibility(View.GONE);
+            searchLottie.pauseAnimation();
+        }
+        SearchAdapter adapter = new SearchAdapter(view.getContext(),searchList1);
+        LinearLayoutManager manager= new LinearLayoutManager(view.getContext());
+        manager.setOrientation(RecyclerView.VERTICAL);
+        searchRecyclerView.setAdapter(adapter);
+        searchRecyclerView.setLayoutManager(manager);
     }
+
+
 
     private void findViewByIds() {
         searchEditText=view.findViewById(R.id.searchEditText);
@@ -144,6 +177,7 @@ public class SearchFragment extends Fragment {
         popularEmpty = view.findViewById(R.id.popularEmpty);
         searchEmpty = view.findViewById(R.id.searchEmpty);
         popularLottie=view.findViewById(R.id.popularAnimationView);
+        searchLottie=view.findViewById(R.id.searchAnimationView);
     }
     private void addPopularData(){
         Call<List<PopularMainObject>> call;
@@ -194,21 +228,7 @@ public class SearchFragment extends Fragment {
         popularRecyclerView.setAdapter(adapter);
         popularRecyclerView.setLayoutManager(manager);
     }
-    private void searchAdapter(List<SearchObject> searchList1){
-        if (searchList1.size()==0){
-            popularEmpty.setVisibility(View.GONE);
-            searchEmpty.setVisibility(View.VISIBLE);
-            searchRecyclerView.setVisibility(View.GONE);
-        }else {
-            searchEmpty.setVisibility(View.GONE);
-            searchRecyclerView.setVisibility(View.VISIBLE);
-        }
-        SearchAdapter adapter = new SearchAdapter(view.getContext(),searchList1);
-        LinearLayoutManager manager= new LinearLayoutManager(view.getContext());
-        manager.setOrientation(RecyclerView.VERTICAL);
-        searchRecyclerView.setAdapter(adapter);
-        searchRecyclerView.setLayoutManager(manager);
-    }
+
     private void onclick(){
         searchEditText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -308,8 +328,33 @@ public class SearchFragment extends Fragment {
                         if (searchEditText.getText().toString().equals("")){
 
                         }else {
+                            searchEmpty.setVisibility(View.GONE);
+                            int time=Drawables.searchTime;
                             if (searchEditText.getText().toString().equals(searchString)){
-                                searchData(searchEditText.getText().toString());
+                                isDoneSearch=false;
+                                if (searchEditText.getText().toString().length()==0){
+
+                                }
+                                else {
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (isDoneSearch){
+
+                                            }else {
+                                                searchLottie.playAnimation();
+                                                searchLottie.setVisibility(View.VISIBLE);
+                                            }
+                                        }
+                                    },time);
+                                    try {
+                                        callPopular.cancel();
+                                        searchData(searchEditText.getText().toString());
+                                    }catch (Exception e){
+                                        searchData(searchEditText.getText().toString());
+
+                                    }
+                                }
                             }else {
 
                             }

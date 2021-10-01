@@ -35,7 +35,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     List<EventObject> list;
     Context context;
     ArrayList<Integer> isDone = new ArrayList<>();
-
     public EventAdapter(List<EventObject> list, Context context) {
         this.list = list;
         this.context = context;
@@ -88,20 +87,27 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             public void onClick(View v) {
                 List<String> like = Drawables.getLikes(context);
                 if (like.contains(list.get(position).get_id())){
-                    holder.imageView.setSelected(true);
+                    Drawables.unlikeEvent(list.get(position).get_id());
+                    like.remove(list.get(position).get_id());
+                    Drawables.saveLiked(like,context);
+                    list.get(position).setLikes(list.get(position).getLikes()-1);
+                    holder.like.setText(String.valueOf(list.get(position).getLikes())+" likes");
+                    holder.imageView.setSelected(false);
+                    holder.imageView.likeAnimation();
                 }else {
                     //Log.i("Saved","No");
                     Drawables.likeEvent(list.get(position).get_id());
                     like.add(list.get(position).get_id());
                     Drawables.saveLiked(like,context);
-                    holder.like.setText(String.valueOf(list.get(position).getLikes()+1)+" likes");
+                    list.get(position).setLikes(list.get(position).getLikes()+1);
+                    holder.like.setText(String.valueOf(list.get(position).getLikes())+" likes");
                     holder.imageView.setSelected(true);
                     holder.imageView.likeAnimation();
                 }
             }
         });
 
-        if (holder.getAdapterPosition()==list.size()-2){
+        if (holder.getAdapterPosition()==list.size()-3){
             if(!isDone.contains(list.size()/10)){
                 int type = EventFragment.type;
                 addData(type);
@@ -148,10 +154,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         call.enqueue(new Callback<EventMainObject>() {
             @Override
             public void onResponse(Call<EventMainObject> call, Response<EventMainObject> response) {
-                EventMainObject object = response.body();
-                List<EventObject> list1 = object.getData();
-                list.addAll(list1);
-                notifyDataSetChanged();
+                try {
+                    EventMainObject object = response.body();
+                    List<EventObject> list1 = object.getData();
+                        //EventFragment.endCl.setVisibility(View.GONE);
+                        list.addAll(list1);
+                        notifyDataSetChanged();
+                }catch (Exception e){
+
+                }
             }
 
             @Override

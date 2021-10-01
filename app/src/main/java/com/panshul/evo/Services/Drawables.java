@@ -2,6 +2,7 @@ package com.panshul.evo.Services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -24,7 +25,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Drawables {
     public static String base_url = "https://vit-events-app.herokuapp.com";
-    public static int time=500;
+    public static int time=200;
+    public static int searchTime=500;
     public static OkHttpClient getClientInstance() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -37,7 +39,6 @@ public class Drawables {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     public static Api api = retrofit.create(Api.class);
-
     public static void saveLiked(List<String> saveLike, Context context){
         Gson gson = new Gson();
         String json = gson.toJson(saveLike);
@@ -60,6 +61,10 @@ public class Drawables {
         }
         Log.i("get_json",list.toString());
         return list;
+    }
+    public static boolean isNetworkAvailable(final Context context) {
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 
     public static void savedEvent(List<String> saved, Context context){
@@ -96,7 +101,24 @@ public class Drawables {
 //
 //                }
 //            }
+//            @Override
+//            public void onFailure(Call<LikeResponse> call, Throwable t) {
 //
+//            }
+//        });
+    }
+    public static void unlikeEvent(String eventId){
+//        Call<LikeResponse> call = api.likeEvent(new LikeBody(eventId));
+//        call.enqueue(new Callback<LikeResponse>() {
+//            @Override
+//            public void onResponse(Call<LikeResponse> call, Response<LikeResponse> response) {
+//                LikeResponse object = response.body();
+//                if (object.getMessage().equals("Likes updated!")){
+//
+//                }else {
+//
+//                }
+//            }
 //            @Override
 //            public void onFailure(Call<LikeResponse> call, Throwable t) {
 //

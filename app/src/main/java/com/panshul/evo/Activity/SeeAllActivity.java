@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class SeeAllActivity extends AppCompatActivity {
     int type;
     RecyclerView recyclerView;
     HorizontalScrollView scrollView;
+    ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,8 +131,15 @@ public class SeeAllActivity extends AppCompatActivity {
         ngo=findViewById(R.id.seeAllNGO);
         scrollView = findViewById(R.id.seeAll);
         recyclerView = findViewById(R.id.seeAllRecyclerView);
+        back=findViewById(R.id.seeAllBack);
     }
     private void Onclick(){
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -64,6 +64,7 @@
                     android:layout_marginTop="380dp"
                     android:layout_marginEnd="100dp"
                     android:fontFamily="@font/semibold"
+                    android:text="The Node Js Event"
                     android:textColor="#F7F7FC"
                     android:textSize="34dp"
                     android:theme="@style/Widget.AppCompat.TextView" />
@@ -155,6 +156,18 @@
                     app:layout_constraintBottom_toBottomOf="@+id/cardView4"
                     app:layout_constraintStart_toEndOf="@+id/cardView4"
                     app:layout_constraintTop_toTopOf="@+id/cardView4" />
+
+                <ImageView
+                    android:id="@+id/eventMainVerified"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="3dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_verified_small"
+                    app:layout_constraintBottom_toBottomOf="@+id/eventClubName"
+                    app:layout_constraintStart_toEndOf="@+id/eventClubName"
+                    app:layout_constraintTop_toTopOf="@+id/eventClubName" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout"
@@ -379,6 +392,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/fragmentBackground"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -397,6 +411,92 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/lottie" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/eventEmptyCl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/fragmentBackground"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clubEmptyCl1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:layout_marginEnd="65dp"
+            android:layout_marginBottom="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/servererror"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/medium"
+                android:text="Uh’Oh.... Your Network Seems to be Down"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:alpha="0.6"
+                android:fontFamily="@font/light"
+                android:text="Check your Internet Connection and try again"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="11dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/clubTryAgain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="80dp"
+            android:background="@drawable/event_registernow"
+            android:fontFamily="@font/semibold"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="Try Again"
+            android:textAllCaps="false"
+            android:textColor="@color/whiteText"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clubEmptyCl1" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

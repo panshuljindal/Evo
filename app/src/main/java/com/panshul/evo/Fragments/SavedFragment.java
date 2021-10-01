@@ -24,6 +24,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.panshul.evo.Adapter.EventAdapter;
+import com.panshul.evo.Adapter.SaveAdapter;
 import com.panshul.evo.Object.Event.EventClubObject;
 import com.panshul.evo.Object.Event.EventMainObject;
 import com.panshul.evo.Object.Event.EventObject;
@@ -102,7 +103,7 @@ public class SavedFragment extends Fragment {
                         searchList.add(item);
                     }
                 }
-                EventAdapter adapter = new EventAdapter(searchList,view.getContext());
+                SaveAdapter adapter = new SaveAdapter(searchList,view.getContext());
                 LinearLayoutManager manager = new LinearLayoutManager(view.getContext());
                 manager.setOrientation(RecyclerView.VERTICAL);
                 recyclerView.setAdapter(adapter);
@@ -151,7 +152,13 @@ public class SavedFragment extends Fragment {
                             lottie.pauseAnimation();
                         }
                     }catch (Exception e){
-
+                        empty.setVisibility(View.VISIBLE);
+                        search.setVisibility(GONE);
+                        recyclerView.setVisibility(GONE);
+                        editText.setVisibility(GONE);
+                        isDone=true;
+                        lottie.setVisibility(GONE);
+                        lottie.pauseAnimation();
                     }
                 }
 
@@ -169,7 +176,7 @@ public class SavedFragment extends Fragment {
 
     }
     private void adapter(){
-        EventAdapter adapter = new EventAdapter(list,view.getContext());
+        SaveAdapter adapter = new SaveAdapter(list,view.getContext());
         LinearLayoutManager manager = new LinearLayoutManager(view.getContext());
         manager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setAdapter(adapter);

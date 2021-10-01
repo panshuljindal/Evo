@@ -136,7 +136,13 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (likes.contains(object.get_id())){
-
+                    Drawables.unlikeEvent(object.get_id());
+                    likes.remove(object.get_id());
+                    Drawables.saveLiked(likes,EventActivity.this);
+                    EventFragment.adapter.notifyDataSetChanged();
+                    likeTextView.setText(String.valueOf(object.getLikes()-1)+" likes");
+                    likeImage.setSelected(false);
+                    likeImage.likeAnimation();
                 }else {
                     Drawables.likeEvent(object.get_id());
                     likes.add(object.get_id());
