@@ -74,35 +74,6 @@ public interface Api {
     @Headers({"auth-token: "+token})
     Call<ClubAllEvents> getAllClubEvents(@Path("clubId") String clubId);
 
-    @GET("/events/club/{clubId}?type=Gravitas")
-    @Headers({"auth-token: "+token})
-    Call<ClubAllEvents> getAllGravitasEvents(@Path("clubId") String clubId);
-
-    @GET("/events/club/{clubId}?type=Riviera")
-    @Headers({"auth-token: "+token})
-    Call<ClubAllEvents> getAllRivieraEvents(@Path("clubId") String clubId);
-
-    @GET("/events/club/{clubId}?type=Hackathon")
-    @Headers({"auth-token: "+token})
-    Call<ClubAllEvents> getAllHackathonEvents(@Path("clubId") String clubId);
-
-    @GET("/events/club/{clubId}?type=Workshop")
-    @Headers({"auth-token: "+token})
-    Call<ClubAllEvents> getAllWorkshopEvents(@Path("clubId") String clubId);
-
-    @GET("/events/club/{clubId}?type=Speaker")
-    @Headers({"auth-token: "+token})
-    Call<ClubAllEvents> getAllSpeakersEvents(@Path("clubId") String clubId);
-
-    @GET("/events/club/{clubId}?type=Cultural")
-    @Headers({"auth-token: "+token})
-    Call<ClubAllEvents> getAllCulturalEvents(@Path("clubId") String clubId);
-
-    @GET("/events/club/{clubId}?type=NGO")
-    @Headers({"auth-token: "+token})
-    Call<ClubAllEvents> getAllNGOEvents(@Path("clubId") String clubId);
-
-
     @POST("/events/search")
     @Headers({"auth-token: "+token})
     Call<List<SearchObject>> getSearch(@Body SearchInput input, @Query("page") int number);
@@ -123,5 +94,8 @@ public interface Api {
     @Headers({"auth-token: "+token})
     Call<LikeResponse> likeEvent(@Body LikeBody eventId);
 
+    @PUT("/events/dislike")
+    @Headers({"auth-token: "+token})
+    Call<LikeResponse> dislikeEvent(@Body LikeBody eventId);
 
 }

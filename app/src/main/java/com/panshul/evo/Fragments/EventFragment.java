@@ -1,6 +1,7 @@
 package com.panshul.evo.Fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.panshul.evo.Adapter.EventAdapter;
+import com.panshul.evo.Object.Event.EventClubObject;
 import com.panshul.evo.Object.Event.EventMainObject;
 import com.panshul.evo.Object.Event.EventMetadataObject;
 import com.panshul.evo.Object.Event.EventObject;
@@ -44,13 +46,12 @@ public class EventFragment extends Fragment {
     HorizontalScrollView scrollView;
     TextView all,riviera,gravitas,speakers,workshops,hackathons,cultural,ngo;
     ConstraintLayout empty;
-    public ConstraintLayout endCl;
     public static RecyclerView recyclerView;
     public static int type;
     public static EventAdapter adapter;
     boolean isData;
     int time;
-    LottieAnimationView lottie;
+    public static LottieAnimationView lottie;
     Call<EventMainObject> call;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class EventFragment extends Fragment {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_event, container, false);
         findViewByIds();
+        //Log.i("uuid", view.getContext().getSharedPreferences("com.panshul.evo.start",Context.MODE_PRIVATE).getString("token",""));
         isData=false;
         time=Drawables.time;
         new Handler().postDelayed(new Runnable() {
@@ -99,7 +101,6 @@ public class EventFragment extends Fragment {
         scrollView = view.findViewById(R.id.horizontalScrollView);
         empty = view.findViewById(R.id.eventsEmpty);
         lottie = view.findViewById(R.id.eventAnimationView);
-        endCl=view.findViewById(R.id.eventsEndCl);
     }
     private void addData(int i){
         Api api = Drawables.api;
@@ -145,11 +146,15 @@ public class EventFragment extends Fragment {
                         recyclerView.setVisibility(View.GONE);
                         scrollView.setVisibility(View.GONE);
                         isData=true;
-                        endCl.setVisibility(View.GONE);
                         lottie.setVisibility(View.GONE);
                         lottie.pauseAnimation();
                     }
                     else {
+                        if (list.size()<10){
+                            List<String>list2 = new ArrayList<>();
+                            list2.add("Hello");
+                            list.add(new EventObject(list2,0,"isDone","","",new EventClubObject("","",true),""));
+                        }
                         adapter();
                         isData=true;
 
@@ -159,7 +164,6 @@ public class EventFragment extends Fragment {
                         recyclerView.setVisibility(View.VISIBLE);
                         scrollView.setVisibility(View.VISIBLE);
                         List<EventMetadataObject> metaList = new ArrayList<>();
-                        endCl.setVisibility(View.VISIBLE);
                         metaList = object.getMetadata();
                         List<String> typeList = new ArrayList<>();
 
@@ -196,7 +200,6 @@ public class EventFragment extends Fragment {
                     recyclerView.setVisibility(View.GONE);
                     scrollView.setVisibility(View.GONE);
                     isData=true;
-                    endCl.setVisibility(View.GONE);
                     lottie.setVisibility(View.GONE);
                     lottie.pauseAnimation();
                 }
@@ -208,7 +211,6 @@ public class EventFragment extends Fragment {
                 recyclerView.setVisibility(View.GONE);
                 scrollView.setVisibility(View.GONE);
                 isData=true;
-                endCl.setVisibility(View.GONE);
                 lottie.setVisibility(View.GONE);
                 lottie.pauseAnimation();
             }
@@ -272,7 +274,6 @@ public class EventFragment extends Fragment {
                 }
                 else {
                     isData=false;
-                    endCl.setVisibility(View.GONE);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -307,8 +308,6 @@ public class EventFragment extends Fragment {
                 }
                 else {
                     isData=false;
-
-                    endCl.setVisibility(View.GONE);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -343,7 +342,6 @@ public class EventFragment extends Fragment {
                 }
                 else {
                     isData=false;
-                    endCl.setVisibility(View.GONE);
 
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -379,7 +377,6 @@ public class EventFragment extends Fragment {
                 }
                 else {
                     isData=false;
-                    endCl.setVisibility(View.GONE);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -414,7 +411,6 @@ public class EventFragment extends Fragment {
                 }
                 else {
                     isData=false;
-                    endCl.setVisibility(View.GONE);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -449,7 +445,6 @@ public class EventFragment extends Fragment {
                 }
                 else {
                     isData=false;
-                    endCl.setVisibility(View.GONE);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -484,7 +479,6 @@ public class EventFragment extends Fragment {
                 }
                 else {
                     isData=false;
-                    endCl.setVisibility(View.GONE);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {

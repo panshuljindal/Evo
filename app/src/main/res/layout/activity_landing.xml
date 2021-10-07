@@ -77,7 +77,7 @@
         android:fontFamily="@font/semibold"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:text="Let's Go  "
+        android:text="Let's Go "
         android:textAllCaps="false"
         android:textColor="@color/whiteText"
         android:textSize="16dp"

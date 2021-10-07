@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Drawables {
     public static String base_url = "https://vit-events-app.herokuapp.com";
-    public static int time=200;
+    public static int time=400;
     public static int searchTime=500;
     public static OkHttpClient getClientInstance() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -45,7 +45,7 @@ public class Drawables {
         SharedPreferences pref = context.getSharedPreferences("com.panshul.evo",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("likes",json);
-        Log.i("save_json",json);
+        //Log.i("save_json",json);
         editor.apply();
     }
     public static List<String> getLikes(Context context){
@@ -59,7 +59,7 @@ public class Drawables {
         if (list==null){
             list = new ArrayList<>();
         }
-        Log.i("get_json",list.toString());
+        //Log.i("get_json",list.toString());
         return list;
     }
     public static boolean isNetworkAvailable(final Context context) {
@@ -90,39 +90,39 @@ public class Drawables {
         return list;
     }
     public static void likeEvent(String eventId){
-//        Call<LikeResponse> call = api.likeEvent(new LikeBody(eventId));
-//        call.enqueue(new Callback<LikeResponse>() {
-//            @Override
-//            public void onResponse(Call<LikeResponse> call, Response<LikeResponse> response) {
-//                LikeResponse object = response.body();
-//                if (object.getMessage().equals("Likes updated!")){
-//
-//                }else {
-//
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<LikeResponse> call, Throwable t) {
-//
-//            }
-//        });
+        Call<LikeResponse> call = api.likeEvent(new LikeBody(eventId));
+        call.enqueue(new Callback<LikeResponse>() {
+            @Override
+            public void onResponse(Call<LikeResponse> call, Response<LikeResponse> response) {
+                LikeResponse object = response.body();
+                if (object.getMessage().equals("Likes updated!")){
+
+                }else {
+
+                }
+            }
+            @Override
+            public void onFailure(Call<LikeResponse> call, Throwable t) {
+
+            }
+        });
     }
     public static void unlikeEvent(String eventId){
-//        Call<LikeResponse> call = api.likeEvent(new LikeBody(eventId));
-//        call.enqueue(new Callback<LikeResponse>() {
-//            @Override
-//            public void onResponse(Call<LikeResponse> call, Response<LikeResponse> response) {
-//                LikeResponse object = response.body();
-//                if (object.getMessage().equals("Likes updated!")){
-//
-//                }else {
-//
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<LikeResponse> call, Throwable t) {
-//
-//            }
-//        });
+        Call<LikeResponse> call = api.dislikeEvent(new LikeBody(eventId));
+        call.enqueue(new Callback<LikeResponse>() {
+            @Override
+            public void onResponse(Call<LikeResponse> call, Response<LikeResponse> response) {
+                LikeResponse object = response.body();
+                if (object.getMessage().equals("Likes updated!")){
+
+                }else {
+
+                }
+            }
+            @Override
+            public void onFailure(Call<LikeResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

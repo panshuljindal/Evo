@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
@@ -39,10 +43,11 @@ import xyz.hanks.library.bang.SmallBangView;
 
 public class EventActivity extends AppCompatActivity {
 
-    ImageView back,photo,clubLogo,save;
+    ImageView back,photo,clubLogo,save,verified;
     TextView eventName,likeTextView,clubName,eventDate,eventPrice,eventDuration,eventDescription,textViewSave;
     Button registerNow;
-    ConstraintLayout savedCl,lottie1;
+    ConstraintLayout savedCl,lottie1,eventChoose,eventChooseMain;
+    Button yesVit,noVit;
     LottieAnimationView lottie;
     EventSpecificObject object;
     List<String> saved;
@@ -64,6 +69,7 @@ public class EventActivity extends AppCompatActivity {
                 if (isDone){
 
                 }else {
+                   // Log.i("isdone",String.valueOf(isDone));
                     lottie1.setVisibility(View.VISIBLE);
                     lottie.setVisibility(View.VISIBLE);
                 }
@@ -82,8 +88,12 @@ public class EventActivity extends AppCompatActivity {
                 try {
                     object=response.body().getEvent();
                     setOption();
+                    isDone=true;
+                    lottie.pauseAnimation();
+                    lottie.setVisibility(View.GONE);
+                    lottie1.setVisibility(View.GONE);
                 }catch (Exception e){
-
+                    Log.i("exception",e.getMessage());
                 }
             }
 
@@ -94,6 +104,52 @@ public class EventActivity extends AppCompatActivity {
         });
     }
     private void onclick(){
+        registerNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventChoose.setVisibility(View.VISIBLE);
+                eventChooseMain.setVisibility(View.VISIBLE);
+                Animation Anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fadein);
+                eventChoose.setAnimation(Anim);
+                eventChooseMain.setAnimation(Anim);
+
+            }
+        });
+        yesVit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setData(Uri.parse("https://vtop.vit.ac.in/vtop/initialProcess"));
+                try {
+                    startActivity(intent);
+                }catch (Exception e){
+                    Toast.makeText(EventActivity.this, "Error Occurred. Please try again", Toast.LENGTH_SHORT).show();
+                }
+                eventChoose.setVisibility(View.GONE);
+                eventChooseMain.setVisibility(View.GONE);
+            }
+        });
+        noVit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setData(Uri.parse(object.getRegistrationLink()));
+                if(object.getRegistrationLink().length()==0){
+                    Toast.makeText(EventActivity.this, "", Toast.LENGTH_SHORT).show();
+                }else {
+                    try {
+                        startActivity(intent);
+                    }catch (Exception e){
+                        Toast.makeText(EventActivity.this, "Error Occurred. Please try again", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                eventChoose.setVisibility(View.GONE);
+                eventChooseMain.setVisibility(View.GONE);
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,13 +176,13 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (saved.contains(object.get_id())){
-                    //save.setImageResource();
+                    save.setImageResource(R.drawable.ic_saved);
                     textViewSave.setText("Saved For Later");
                     saved.remove(object.get_id());
                     Drawables.savedEvent(saved,EventActivity.this);
                 }else {
                     saved.add(object.get_id());
-                    save.setImageResource(R.drawable.ic_saved);
+                    save.setImageResource(R.drawable.ic_savednot);
                     textViewSave.setText("Interested");
                     Drawables.savedEvent(saved,EventActivity.this);
                 }
@@ -162,6 +218,11 @@ public class EventActivity extends AppCompatActivity {
         likeTextView.setText(object.getLikes()+" likes");
         clubName.setText(object.getClubName());
         eventDate.setText(getDate(object.getTimestamp()));
+        if (object.getClubId().isPartner()){
+            verified.setVisibility(View.VISIBLE);
+        }else {
+            verified.setVisibility(View.INVISIBLE);
+        }
         if (object.isPaid()==true){
             eventPrice.setText(object.getEventCost()+" Rs");
         }else {
@@ -172,10 +233,10 @@ public class EventActivity extends AppCompatActivity {
 
         saved = Drawables.getSavedEvent(EventActivity.this);
         if (saved.contains(object.get_id())){
-            save.setImageResource(R.drawable.ic_saved);
+            save.setImageResource(R.drawable.ic_savednot);
             textViewSave.setText("Interested");
         }else {
-            //save.setImageResource();
+            save.setImageResource(R.drawable.ic_saved);
             textViewSave.setText("Saved For Later");
         }
         likes = Drawables.getLikes(EventActivity.this);
@@ -184,10 +245,7 @@ public class EventActivity extends AppCompatActivity {
         }
         else {
             likeImage.setSelected(false);
-        }isDone=true;
-        lottie.pauseAnimation();
-        lottie.setVisibility(View.GONE);
-        lottie1.setVisibility(View.GONE);
+        }
 
     }
     public static String getDate(long time) {
@@ -214,5 +272,24 @@ public class EventActivity extends AppCompatActivity {
         savedCl = findViewById(R.id.savedConstraintLayout);
         lottie1=findViewById(R.id.eventLottieAnimation);
         lottie=findViewById(R.id.eventMainAnimationView);
+        verified=findViewById(R.id.eventMainVerified);
+        eventChoose=findViewById(R.id.eventChoose);
+        eventChooseMain=findViewById(R.id.eventChooseMain);
+        yesVit = findViewById(R.id.yesVit);
+        noVit=findViewById(R.id.noVit);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if (eventChooseMain.getVisibility()==View.VISIBLE){
+            Animation Anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fadeout);
+            eventChooseMain.setAnimation(Anim);
+            eventChoose.setAnimation(Anim);
+            eventChooseMain.setVisibility(View.GONE);
+            eventChoose.setVisibility(View.GONE);
+        }else {
+            finish();
+        }
     }
 }

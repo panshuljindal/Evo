@@ -19,9 +19,13 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.panshul.evo.Adapter.UpcomingEventsAdapter;
+import com.panshul.evo.Object.Club.ClubEventObject;
 import com.panshul.evo.Object.Club.ClubSpecificObject;
 import com.panshul.evo.R;
 import com.panshul.evo.Services.Drawables;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -96,12 +100,17 @@ public class ClubActivity extends AppCompatActivity {
             isPartner.setVisibility(View.VISIBLE);
         }
         //logo.setClipToOutline(true);
-        name.setText(object.getName());
+
         tagline.setText(object.getTagline());
-        if (object.getDescription().length()<=120){
-            description.setText(object.getDescription().substring(0,object.getDescription().length()/2));
+        if (object.getEvents().size()>2){
+            seeAll.setVisibility(View.VISIBLE);
         }else {
-            description.setText(object.getDescription().substring(0,120));
+            seeAll.setVisibility(View.INVISIBLE);
+        }
+        if (object.getDescription().length()<=120){
+            description.setText(object.getDescription().substring(0,object.getDescription().length()/2-2)+"..");
+        }else {
+            description.setText(object.getDescription().substring(0,118)+"..");
         }
         if (!object.getInstagram().equals("")){
             insta.setVisibility(View.VISIBLE);
@@ -118,9 +127,17 @@ public class ClubActivity extends AppCompatActivity {
         if (!object.getMedium().equals("")){
             medium.setVisibility(View.VISIBLE);
         }
+        if (object.getName().length()>25){
+            name.setText(object.getName().substring(0,23)+"..");
+        }else {
+            name.setText(object.getName());
+        }
         if (object.getEvents().size()>0){
-            upcoming.setText("Upcoming Events ("+String.valueOf(object.getEvents().size())+")");
-            knowMore.setVisibility(View.VISIBLE);
+            if(object.getEvents().size()>2){
+                upcoming.setText("Upcoming Events(2)");
+            }else {
+                upcoming.setText("Upcoming Events ("+String.valueOf(object.getEvents().size())+")");
+            }
         }else {
             upcoming.setText("");
             seeAll.setVisibility(View.GONE);
@@ -132,8 +149,15 @@ public class ClubActivity extends AppCompatActivity {
         lottie.pauseAnimation();
 
     }
-    private void upcomingAdapter(ClubSpecificObject object){
-        UpcomingEventsAdapter adapter = new UpcomingEventsAdapter(ClubActivity.this,object.getEvents());
+    private void upcomingAdapter(ClubSpecificObject object1){
+        List<ClubEventObject> finalList = new ArrayList<>();
+        for (int i=0;i<object1.getEvents().size();i++){
+            finalList.add(object1.getEvents().get(i));
+            if (i==1){
+                break;
+            }
+        }
+        UpcomingEventsAdapter adapter = new UpcomingEventsAdapter(ClubActivity.this,finalList);
         LinearLayoutManager manager = new LinearLayoutManager(ClubActivity.this);
         manager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setAdapter(adapter);
@@ -248,9 +272,9 @@ public class ClubActivity extends AppCompatActivity {
                }
                else {
                    if (object.getDescription().length()<=120){
-                       description.setText(object.getDescription().substring(0,object.getDescription().length()/2));
+                       description.setText(object.getDescription().substring(0,object.getDescription().length()/2-2)+"..");
                    }else {
-                       description.setText(object.getDescription().substring(0,120));
+                       description.setText(object.getDescription().substring(0,118)+"..");
                    }
                    knowMore.setText("Know more");
                    cl.setVisibility(View.VISIBLE);

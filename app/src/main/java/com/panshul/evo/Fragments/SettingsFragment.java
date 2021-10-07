@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsFragment extends Fragment {
-    RecyclerView recy1,recy2,recy3;
+    RecyclerView recy2,recy3;
     List<SettingsObject> lst1,lst2,lst3;
     View view;
     Context context;
@@ -38,16 +38,15 @@ public class SettingsFragment extends Fragment {
         lst2 = new ArrayList<>();
         lst3 = new ArrayList<>();
         context = view.getContext();
-        recy1 = view.findViewById(R.id.rcy1);
         recy2 = view.findViewById(R.id.rcy2);
         recy3=view.findViewById(R.id.rcy3);
 
-        recy1.setLayoutManager(new LinearLayoutManager(context));
+       // recy1.setLayoutManager(new LinearLayoutManager(context));
         recy2.setLayoutManager(new LinearLayoutManager(context));
         recy3.setLayoutManager(new LinearLayoutManager(context));
 
-        lst1.add(new SettingsObject(R.drawable.ic_notifications, "Notifications"));
-        recy1.setAdapter(new SettingsAdapter(context,lst1));
+        //lst1.add(new SettingsObject(R.drawable.ic_notifications, "Notifications"));
+        //recy1.setAdapter(new SettingsAdapter(context,lst1));
 
         lst2.add(new SettingsObject(R.drawable.ic_contact_us,"Contact Us"));
         lst2.add(new SettingsObject(R.drawable.ic_share,"Share with Peers"));
@@ -60,6 +59,8 @@ public class SettingsFragment extends Fragment {
 
 
         lst3.add(new SettingsObject(R.drawable.ic_about_us,"About Us"));
+        lst3.add(new SettingsObject(R.drawable.ic_privacy,"FAQ"));
+        lst3.add(new SettingsObject(R.drawable.ic_privacy,"Terms And Conditions"));
         lst3.add(new SettingsObject(R.drawable.ic_privacy,"Privacy Policy"));
         recy3.setAdapter(new SettingsAdapter(context,lst3));
         return view;

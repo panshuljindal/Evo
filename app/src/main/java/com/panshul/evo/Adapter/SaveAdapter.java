@@ -62,6 +62,12 @@ public class SaveAdapter extends RecyclerView.Adapter<SaveAdapter.MyViewHolder> 
                 context.startActivity(i);
             }
         });
+        if (list.get(position).getClubId().isPartner()){
+            holder.verify.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.verify.setVisibility(View.INVISIBLE);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,8 +118,10 @@ public class SaveAdapter extends RecyclerView.Adapter<SaveAdapter.MyViewHolder> 
         ImageView eventImage,clubLogo,eventLike;
         TextView eventName,clubName,like;
         SmallBangView imageView;
+        ImageView verify;
         public MyViewHolder(View itemView) {
             super(itemView);
+            verify=itemView.findViewById(R.id.eventItemVerified);
             eventImage=itemView.findViewById(R.id.eventItemImage);
             clubLogo=itemView.findViewById(R.id.eventItemClubLogo);
             eventLike=itemView.findViewById(R.id.eventItemLike);

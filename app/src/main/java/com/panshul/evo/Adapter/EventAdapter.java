@@ -9,21 +9,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.panshul.evo.Activity.EventActivity;
 import com.panshul.evo.Activity.ClubActivity;
 import com.panshul.evo.Fragments.EventFragment;
+import com.panshul.evo.Object.Event.EventClubObject;
 import com.panshul.evo.Object.Event.EventMainObject;
 import com.panshul.evo.Object.Event.EventMetadataObject;
 import com.panshul.evo.Object.Event.EventObject;
 import com.panshul.evo.R;
 import com.panshul.evo.Services.Api;
 import com.panshul.evo.Services.Drawables;
-
+import android.os.Handler;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.LogRecord;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +38,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     List<EventObject> list;
     Context context;
     ArrayList<Integer> isDone = new ArrayList<>();
+    boolean lottie=false;
     public EventAdapter(List<EventObject> list, Context context) {
         this.list = list;
         this.context = context;
@@ -52,12 +56,19 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         if (position==0){
             isDone.add(0);
         }
-        Glide.with(context).load(object.getPoster()).into(holder.eventImage);
-        Glide.with(context).load(object.getClubId().getLogo()).into(holder.clubLogo);
-        holder.eventImage.setClipToOutline(true);
-        holder.like.setText(String.valueOf(object.getLikes())+" likes");
-        holder.eventName.setText(object.getName());
-        holder.clubName.setText(object.getClubName());
+        if (list.get(position).get_id().equals("isDone")){
+            holder.endCl.setVisibility(View.VISIBLE);
+            holder.cl.setVisibility(View.GONE);
+            Log.i("isDone",list.get(position).get_id());
+        }else {
+            holder.endCl.setVisibility(View.GONE);
+            Glide.with(context).load(object.getPoster()).into(holder.eventImage);
+            Glide.with(context).load(object.getClubId().getLogo()).into(holder.clubLogo);
+            holder.eventImage.setClipToOutline(true);
+            holder.like.setText(String.valueOf(object.getLikes())+" likes");
+            holder.eventName.setText(object.getName());
+            holder.clubName.setText(object.getClubName());
+        }
         holder.clubLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +91,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         }
         else {
             holder.imageView.setSelected(false);
+        }
+        if (list.get(position).getClubId().isPartner()){
+            holder.verify.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.verify.setVisibility(View.INVISIBLE);
         }
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +127,20 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         if (holder.getAdapterPosition()==list.size()-3){
             if(!isDone.contains(list.size()/10)){
                 int type = EventFragment.type;
+                Handler handler = new Handler();
+                int time = Drawables.time;
+                lottie=false;
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                      if (lottie){
+
+                      }else {
+                          EventFragment.lottie.playAnimation();
+                          EventFragment.lottie.setVisibility(View.VISIBLE);
+                      }
+                    }
+                },time);
                 addData(type);
             }
 
@@ -157,11 +188,25 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
                 try {
                     EventMainObject object = response.body();
                     List<EventObject> list1 = object.getData();
-                        //EventFragment.endCl.setVisibility(View.GONE);
+                    if (list1.size()<10){
+                        list.addAll(list1);
+                        List<String>list2 = new ArrayList<>();
+                        list2.add("Hello");
+                        list.add(new EventObject(list2,0,"isDone","","",new EventClubObject("","",true),""));
+                        notifyDataSetChanged();
+                    }else {
                         list.addAll(list1);
                         notifyDataSetChanged();
+                    }
+                    lottie=true;
+                    EventFragment.lottie.pauseAnimation();
+                    EventFragment.lottie.setVisibility(View.GONE);
+
                 }catch (Exception e){
 
+                    lottie=true;
+                    EventFragment.lottie.pauseAnimation();
+                    EventFragment.lottie.setVisibility(View.GONE);
                 }
             }
 
@@ -182,8 +227,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         ImageView eventImage,clubLogo,eventLike;
         TextView eventName,clubName,like;
         SmallBangView imageView;
+        ImageView verify;
+        ConstraintLayout endCl,cl;
         public MyViewHolder(View itemView) {
             super(itemView);
+            verify=itemView.findViewById(R.id.eventItemVerified);
             eventImage=itemView.findViewById(R.id.eventItemImage);
             clubLogo=itemView.findViewById(R.id.eventItemClubLogo);
             eventLike=itemView.findViewById(R.id.eventItemLike);
@@ -191,6 +239,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             clubName=itemView.findViewById(R.id.eventItemClubName);
             like = itemView.findViewById(R.id.eventItemLikeTextView);
             imageView = itemView.findViewById(R.id.imageViewAnimation);
+            endCl = itemView.findViewById(R.id.eventsEndCl);
+            cl = itemView.findViewById(R.id.constraintLayout4);
         }
     }
 

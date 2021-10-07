@@ -6,4 +6,5 @@
     <string name="base_url">https://vit-events-app.herokuapp.com</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="token">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoiaGVja2VyIiwiaWF0IjoxNjMyMjA0MjcyfQ.QetSTqHMjmLSZDWFcGidwdjPHD1rbiCdCXP_X_pDPcw</string>
 </resources>

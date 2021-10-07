@@ -29,42 +29,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/genral"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/semibold"
-            android:text="General"
-            android:textColor="#858487"
-            android:textFontWeight="600"
-            android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_header" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcy1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="21dp"
-            android:overScrollMode="never"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/genral" />
-
-        <TextView
             android:id="@+id/stay_in_touch"
             android:layout_width="343dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="21dp"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/semibold"
             android:text="Stay in Touch"
             android:textColor="#858487"
             android:textFontWeight="600"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rcy1" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_header" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcy2"

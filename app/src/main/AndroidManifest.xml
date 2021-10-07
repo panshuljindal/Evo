@@ -16,14 +16,16 @@
         <activity android:name=".Activity.Notifications"></activity>
         <activity android:name=".Activity.SeeAllActivity" />
         <activity android:name=".Activity.ClubActivity" />
-        <activity android:name=".Activity.LandingPage"></activity>
-        <activity android:name=".Activity.NavigationActivity"
-            android:windowSoftInputMode="adjustPan">
+        <activity android:name=".Activity.LandingPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Activity.NavigationActivity"
+            android:windowSoftInputMode="adjustPan">
+
         </activity>
         <activity android:name=".Activity.EventActivity" />
     </application>

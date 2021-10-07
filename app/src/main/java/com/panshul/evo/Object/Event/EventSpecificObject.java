@@ -1,13 +1,15 @@
 package com.panshul.evo.Object.Event;
 
+import java.util.List;
+
 public class EventSpecificObject{
     public String shortName;
-    public String tagline;
     public String website;
     public String info;
     public String clubName;
     public String videoLink;
     public boolean isPaid;
+    public List<String> eventType;
     public int eventCost;
     public int likes;
     public int timestamp;
@@ -23,14 +25,14 @@ public class EventSpecificObject{
     public String updatedAt;
     public int __v;
 
-    public EventSpecificObject(String shortName, String tagline, String website, String info, String clubName, String videoLink, boolean isPaid, int eventCost, int likes, int timestamp, int duration, String registrationLink, String meetingLink, String poster, String venue, String _id, String name, EventClubObject clubId, String createdAt, String updatedAt, int __v) {
+    public EventSpecificObject(String shortName, String website, String info, String clubName, String videoLink, boolean isPaid, List<String> eventType, int eventCost, int likes, int timestamp, int duration, String registrationLink, String meetingLink, String poster, String venue, String _id, String name, EventClubObject clubId, String createdAt, String updatedAt, int __v) {
         this.shortName = shortName;
-        this.tagline = tagline;
         this.website = website;
         this.info = info;
         this.clubName = clubName;
         this.videoLink = videoLink;
         this.isPaid = isPaid;
+        this.eventType = eventType;
         this.eventCost = eventCost;
         this.likes = likes;
         this.timestamp = timestamp;
@@ -53,14 +55,6 @@ public class EventSpecificObject{
 
     public void setShortName(String shortName) {
         this.shortName = shortName;
-    }
-
-    public String getTagline() {
-        return tagline;
-    }
-
-    public void setTagline(String tagline) {
-        this.tagline = tagline;
     }
 
     public String getWebsite() {
@@ -103,6 +97,13 @@ public class EventSpecificObject{
         isPaid = paid;
     }
 
+    public List<String> getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(List<String> eventType) {
+        this.eventType = eventType;
+    }
 
     public int getEventCost() {
         return eventCost;

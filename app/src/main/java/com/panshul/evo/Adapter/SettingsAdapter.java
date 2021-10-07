@@ -54,21 +54,36 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                 }
 
                 if (list.get(position).getText().equals("Contact Us")){
-//                    Intent i = new Intent(context, Notifications.class);
-//                    context.startActivity(i);
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.putExtra(Intent.EXTRA_EMAIL,new String[] {"evoappin@gmail.com"});
+                    intent.putExtra(Intent.EXTRA_SUBJECT,"");
+                    intent.putExtra(Intent.EXTRA_TEXT,"");
+                    intent.setType("message/rfc822");
+                    try {
+                        context.startActivity(intent);
+                    }catch (Exception e){
+
+                    }
                 }
 
+
                 if (list.get(position).getText().equals("Share with Peers")){
-//                    Intent i = new Intent(context, Notifications.class);
-//                    context.startActivity(i);
-                    //throw new RuntimeException();
+
+                    String app_url = " https://play.google.com/store/apps/details?id=com.panshul.evo";
+                    Intent shareIntent =   new Intent(android.content.Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    String text = "Evo is a social media app especially designed and developed for the clubs and chapters to put forward their events for the world to see.\n"
+                            +"App Link: "+app_url;
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT,"");
+                    shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,text+app_url);
+                    v.getContext().startActivity(Intent.createChooser(shareIntent,"Share via"));
                 }
 
 
                 if (list.get(position).getText().equals("Our Instagram")){
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setData(Uri.parse("https://www.instagram.com/evo.app.in/"));
+                    intent.setData(Uri.parse("https://www.instagram.com/evoappin/"));
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
@@ -101,7 +116,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                 if (list.get(position).getText().equals("Our Linkedin")){
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setData(Uri.parse("https://www.linkedin.com/in/evoappin/"));
+                    intent.setData(Uri.parse("https://www.linkedin.com/company/evoappin/"));
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
@@ -112,7 +127,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                 if (list.get(position).getText().equals("About Us")){
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setData(Uri.parse(""));
+                    intent.setData(Uri.parse("https://evoevents.club/"));
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
@@ -123,7 +138,26 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                 if (list.get(position).getText().equals("Privacy Policy")){
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setData(Uri.parse(""));
+                    intent.setData(Uri.parse("https://privacy.evoevents.club/android"));
+                    try {
+                        context.startActivity(intent);
+                    }catch (Exception e){
+
+                    }
+                }if (list.get(position).getText().equals("Terms And Conditions")){
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setData(Uri.parse("https://privacy.evoevents.club/tnc"));
+                    try {
+                        context.startActivity(intent);
+                    }catch (Exception e){
+
+                    }
+                }
+                if (list.get(position).getText().equals("FAQ")){
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setData(Uri.parse("https://privacy.evoevents.club/faq"));
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){

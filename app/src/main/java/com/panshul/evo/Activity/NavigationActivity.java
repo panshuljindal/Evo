@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.panshul.evo.Fragments.EventFragment;
+import com.panshul.evo.Fragments.PopularFragment;
 import com.panshul.evo.Fragments.SavedFragment;
 import com.panshul.evo.Fragments.SearchFragment;
 import com.panshul.evo.Fragments.SettingsFragment;
@@ -34,7 +35,7 @@ public class NavigationActivity extends AppCompatActivity {
                         fragment=new EventFragment();
                         break;
                     case R.id.tab_search:
-                        fragment= new SearchFragment();
+                        fragment= new PopularFragment();
                         break;
                     case R.id.tab_saved:
                         fragment = new SavedFragment();
