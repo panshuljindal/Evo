@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,9 +46,6 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (list.get(position).getText().equals("Appearance")){
-//                    //context.startActivity(new Intent(context, Appearance.class));
-//                }
                 if (list.get(position).getText().equals("Notifications")){
                     Intent i = new Intent(context, Notifications.class);
                     context.startActivity(i);
@@ -62,21 +60,24 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
-
+                        Toast.makeText(context, "Select Gmail", Toast.LENGTH_SHORT).show();
                     }
                 }
-
 
                 if (list.get(position).getText().equals("Share with Peers")){
 
                     String app_url = " https://play.google.com/store/apps/details?id=com.panshul.evo";
                     Intent shareIntent =   new Intent(android.content.Intent.ACTION_SEND);
                     shareIntent.setType("text/plain");
-                    String text = "Evo is a social media app especially designed and developed for the clubs and chapters to put forward their events for the world to see.\n"
+                    String text = "Hey. I came across this brilliant app that could help you efficiently search through the clutter of events and find the best one that suits your need. Try it out. It is so easy to use.\n"
                             +"App Link: "+app_url;
                     shareIntent.putExtra(Intent.EXTRA_SUBJECT,"");
-                    shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,text+app_url);
-                    v.getContext().startActivity(Intent.createChooser(shareIntent,"Share via"));
+                    shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,text);
+                    try {
+                        v.getContext().startActivity(Intent.createChooser(shareIntent,"Share via"));
+                    }catch (Exception e){
+                        Toast.makeText(context, "Select Whatsapp", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
 
@@ -87,7 +88,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
-
+                        Toast.makeText(context, "Please try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -98,6 +99,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
+                        Toast.makeText(context, "Please try again!", Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -109,17 +111,19 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
+                        Toast.makeText(context, "Please try again!", Toast.LENGTH_SHORT).show();
 
                     }
                 }
 
-                if (list.get(position).getText().equals("Our Linkedin")){
+                if (list.get(position).getText().equals("Our LinkedIn")){
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.setData(Uri.parse("https://www.linkedin.com/company/evoappin/"));
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
+                        Toast.makeText(context, "Please try again!", Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -131,6 +135,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
+                        Toast.makeText(context, "Please try again!", Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -142,6 +147,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
+                        Toast.makeText(context, "Please try again!", Toast.LENGTH_SHORT).show();
 
                     }
                 }if (list.get(position).getText().equals("Terms And Conditions")){
@@ -151,6 +157,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
+                        Toast.makeText(context, "Please try again!", Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -161,12 +168,11 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
-
+                        Toast.makeText(context, "Please try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
-
     }
 
     @Override
@@ -182,7 +188,6 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
             super(itemView);
             img1=itemView.findViewById(R.id.img_settings_card);
             settingItem=itemView.findViewById(R.id.cardview_settings_text);
-            
         }
     }
 }

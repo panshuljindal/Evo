@@ -2,9 +2,11 @@ package com.panshul.evo.Object.Like;
 
 public class LikeBody {
     String eventId;
+    String id;
 
-    public LikeBody(String eventId) {
+    public LikeBody(String eventId, String id) {
         this.eventId = eventId;
+        this.id = id;
     }
 
     public String getEventId() {
@@ -13,5 +15,13 @@ public class LikeBody {
 
     public void setEventId(String eventId) {
         this.eventId = eventId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -57,11 +57,11 @@ public class SettingsFragment extends Fragment {
 
         recy2.setAdapter(new SettingsAdapter(context,lst2));
 
-
-        lst3.add(new SettingsObject(R.drawable.ic_about_us,"About Us"));
-        lst3.add(new SettingsObject(R.drawable.ic_privacy,"FAQ"));
-        lst3.add(new SettingsObject(R.drawable.ic_privacy,"Terms And Conditions"));
         lst3.add(new SettingsObject(R.drawable.ic_privacy,"Privacy Policy"));
+        lst3.add(new SettingsObject(R.drawable.ic_tnc,"Terms And Conditions"));
+        lst3.add(new SettingsObject(R.drawable.ic_faq,"FAQ"));
+        lst3.add(new SettingsObject(R.drawable.ic_aboutus,"About Us"));
+
         recy3.setAdapter(new SettingsAdapter(context,lst3));
         return view;
     }

@@ -140,6 +140,7 @@ public class EventFragment extends Fragment {
                 try {
                     EventMainObject object = response.body();
                     list = object.getData();
+                    //list.addAll(object.getData());
                     //Log.i("list",String.valueOf(list.size()));
                     if (list.size()==0){
                         empty.setVisibility(View.VISIBLE);
@@ -191,7 +192,6 @@ public class EventFragment extends Fragment {
                         if (typeList.contains("NGO")) {
                             ngo.setVisibility(View.VISIBLE);
                         }
-                        recyclerView.getChildAt(0);
                     }
 
                 }

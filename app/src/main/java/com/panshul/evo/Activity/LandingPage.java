@@ -7,10 +7,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.panshul.evo.Object.Like.LikeBody;
+import com.panshul.evo.Object.User.RegisterUser;
 import com.panshul.evo.R;
+import com.panshul.evo.Services.Drawables;
 
 import java.util.UUID;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LandingPage extends AppCompatActivity {
 
@@ -32,14 +40,30 @@ public class LandingPage extends AppCompatActivity {
         letsGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LandingPage.this, NavigationActivity.class));
                 editor.putBoolean("startFinish",true);
 
-                String uuid = UUID.randomUUID().toString();
-                editor.putString("token",uuid);
-                editor.commit();
-                editor.apply();
-                finish();
+                Call<RegisterUser> call = Drawables.api.registerNewDevice();
+                call.enqueue(new Callback<RegisterUser>() {
+                    @Override
+                    public void onResponse(Call<RegisterUser> call, Response<RegisterUser> response) {
+                        try {
+                            RegisterUser object = response.body();
+                            editor.putString("token",object.getId());
+                            editor.commit();
+                            editor.apply();
+                            startActivity(new Intent(LandingPage.this, NavigationActivity.class));
+
+                        }catch (Exception e){
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RegisterUser> call, Throwable t) {
+
+                    }
+                });
+
             }
         });
 

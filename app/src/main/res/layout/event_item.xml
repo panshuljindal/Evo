@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@color/fragmentBackground"
         android:paddingBottom="40dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
@@ -106,36 +107,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/eventItemClubLogo"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_marginStart="15dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="1000dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/eventItemClubLogo"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.cardview.widget.CardView>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/eventItemName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="22dp"
                 android:fontFamily="@font/medium"
                 android:textColor="@color/white"
                 android:textSize="16dp"
-                app:layout_constraintStart_toStartOf="@+id/eventItemClubName"
+                app:layout_constraintStart_toEndOf="@+id/eventItemClubLogo"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -146,6 +137,7 @@
                 android:layout_marginStart="6dp"
                 android:layout_marginBottom="4dp"
                 android:src="@drawable/ic_verified_small"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/eventItemName"
                 app:layout_constraintStart_toEndOf="@+id/eventItemName"
                 app:layout_constraintTop_toTopOf="@+id/eventItemName" />
@@ -162,7 +154,7 @@
                 android:textSize="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewAnimation"
-                app:layout_constraintStart_toEndOf="@+id/cardView3"
+                app:layout_constraintStart_toEndOf="@+id/eventItemClubLogo"
                 app:layout_constraintTop_toBottomOf="@+id/eventItemName" />
 
             <xyz.hanks.library.bang.SmallBangView

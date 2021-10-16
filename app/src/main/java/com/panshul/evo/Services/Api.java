@@ -11,6 +11,8 @@ import com.panshul.evo.Object.Like.LikeResponse;
 import com.panshul.evo.Object.Popular.PopularMainObject;
 import com.panshul.evo.Object.Search.SearchInput;
 import com.panshul.evo.Object.Search.SearchObject;
+import com.panshul.evo.Object.User.RegisterUser;
+import com.panshul.evo.Object.User.UserMetaData;
 
 import java.util.List;
 
@@ -90,12 +92,29 @@ public interface Api {
     @Headers({"auth-token: "+token})
     Call<List<EventObject>> getSaved(@Body InterestedPost events);
 
-    @PUT("/events/like")
+    @POST("/events/newDevice")
+    @Headers({"auth-token: "+token})
+    Call<RegisterUser> registerNewDevice();
+
+    @POST("/events/likeNew")
     @Headers({"auth-token: "+token})
     Call<LikeResponse> likeEvent(@Body LikeBody eventId);
 
-    @PUT("/events/dislike")
+    @POST("/events/dislikeNew")
     @Headers({"auth-token: "+token})
     Call<LikeResponse> dislikeEvent(@Body LikeBody eventId);
+
+    @POST("/events/interested")
+    @Headers({"auth-token: "+token})
+    Call<LikeResponse> interestedEvent(@Body LikeBody eventId);
+
+    @POST("/events/disinterest")
+    @Headers({"auth-token: "+token})
+    Call<LikeResponse> noInterestedEvent(@Body LikeBody eventId);
+
+    @GET("/events/getData/{id}")
+    @Headers({"auth-token: "+token})
+    Call<UserMetaData> getUserData(@Path("id") String id);
+
 
 }

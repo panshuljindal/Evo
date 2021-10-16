@@ -59,7 +59,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         if (list.get(position).get_id().equals("isDone")){
             holder.endCl.setVisibility(View.VISIBLE);
             holder.cl.setVisibility(View.GONE);
-            Log.i("isDone",list.get(position).get_id());
+            //Log.i("isDone",list.get(position).get_id());
         }else {
             holder.endCl.setVisibility(View.GONE);
             Glide.with(context).load(object.getPoster()).into(holder.eventImage);
@@ -70,6 +70,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             holder.clubName.setText(object.getClubName());
         }
         holder.clubLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(v.getContext(), ClubActivity.class);
+                i.putExtra("clubId",list.get(position).getClubId().get_id());
+                context.startActivity(i);
+            }
+        });
+        holder.clubName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i =new Intent(v.getContext(), ClubActivity.class);
@@ -104,7 +112,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             public void onClick(View v) {
                 List<String> like = Drawables.getLikes(context);
                 if (like.contains(list.get(position).get_id())){
-                    Drawables.unlikeEvent(list.get(position).get_id());
+                    Drawables.unlikeEvent(list.get(position).get_id(),context);
                     like.remove(list.get(position).get_id());
                     Drawables.saveLiked(like,context);
                     list.get(position).setLikes(list.get(position).getLikes()-1);
@@ -113,7 +121,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
                     holder.imageView.likeAnimation();
                 }else {
                     //Log.i("Saved","No");
-                    Drawables.likeEvent(list.get(position).get_id());
+                    Drawables.likeEvent(list.get(position).get_id(),context);
                     like.add(list.get(position).get_id());
                     Drawables.saveLiked(like,context);
                     list.get(position).setLikes(list.get(position).getLikes()+1);
@@ -126,6 +134,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
 
         if (holder.getAdapterPosition()==list.size()-3){
             if(!isDone.contains(list.size()/10)){
+                Log.i("listSize",String.valueOf(list.size()));
                 int type = EventFragment.type;
                 Handler handler = new Handler();
                 int time = Drawables.time;

@@ -54,6 +54,7 @@ public class SaveAdapter extends RecyclerView.Adapter<SaveAdapter.MyViewHolder> 
         holder.like.setText(String.valueOf(object.getLikes())+" likes");
         holder.eventName.setText(object.getName());
         holder.clubName.setText(object.getClubName());
+
         holder.clubLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +63,15 @@ public class SaveAdapter extends RecyclerView.Adapter<SaveAdapter.MyViewHolder> 
                 context.startActivity(i);
             }
         });
+        holder.clubName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(v.getContext(), ClubActivity.class);
+                i.putExtra("clubId",list.get(position).getClubId().get_id());
+                context.startActivity(i);
+            }
+        });
+
         if (list.get(position).getClubId().isPartner()){
             holder.verify.setVisibility(View.VISIBLE);
         }
@@ -89,7 +99,7 @@ public class SaveAdapter extends RecyclerView.Adapter<SaveAdapter.MyViewHolder> 
             public void onClick(View v) {
                 List<String> like = Drawables.getLikes(context);
                 if (like.contains(list.get(position).get_id())){
-                    Drawables.unlikeEvent(list.get(position).get_id());
+                    Drawables.unlikeEvent(list.get(position).get_id(),context);
                     like.remove(list.get(position).get_id());
                     Drawables.saveLiked(like,context);
                     holder.like.setText(String.valueOf(list.get(position).getLikes()-1)+" likes");
@@ -97,7 +107,7 @@ public class SaveAdapter extends RecyclerView.Adapter<SaveAdapter.MyViewHolder> 
                     holder.imageView.likeAnimation();
                 }else {
                     //Log.i("Saved","No");
-                    Drawables.likeEvent(list.get(position).get_id());
+                    Drawables.likeEvent(list.get(position).get_id(),context);
                     like.add(list.get(position).get_id());
                     Drawables.saveLiked(like,context);
                     holder.like.setText(String.valueOf(list.get(position).getLikes()+1)+" likes");

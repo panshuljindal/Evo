@@ -8,154 +8,163 @@
     tools:context=".Fragments.PopularFragment"
     android:background="@color/fragmentBackground">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/fragmentBackground"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context=".Fragments.SearchFragment">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/popularAnimationView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="80dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/popularTextview"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/lottie" />
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/popularEmpty"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="65dp"
-            android:layout_marginEnd="65dp"
-            android:layout_marginBottom="20dp"
-            android:visibility="gone"
+            android:background="@color/fragmentBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/popularTextview">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".Fragments.SearchFragment">
 
-            <ImageView
-                android:id="@+id/imageView1"
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/popularAnimationView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginBottom="80dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/popularTextview"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/lottie" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popularEmpty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="65dp"
+                android:layout_marginEnd="65dp"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/popularTextview">
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/popular"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView111"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/medium"
+                    android:text="Nothing Seems to be Poppin’ right now"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView1" />
+
+                <TextView
+                    android:id="@+id/textView121"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:alpha="0.6"
+                    android:fontFamily="@font/light"
+                    android:text="It do be like that sometimes, but don’t worry.... The time will come. You can still Search our catalogue"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="11dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView111" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/popular"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/semibold"
+                android:text="Search"
+                android:textColor="@color/whiteText"
+                android:textSize="36dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView111"
+            <EditText
+                android:id="@+id/popularEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="21dp"
+                android:background="@drawable/search_background"
+                android:ems="10"
                 android:fontFamily="@font/medium"
-                android:text="Nothing Seems to be Poppin’ right now"
-                android:textAlignment="center"
+                android:hint="Search for Events and Clubs."
+                android:imeOptions="actionDone"
+                android:inputType="textCapSentences"
+                android:paddingLeft="120px"
+                android:paddingTop="40px"
+                android:paddingRight="40px"
+                android:paddingBottom="40px"
+                android:text=""
                 android:textColor="@color/white"
-                android:textSize="15dp"
-                app:layout_constraintTop_toBottomOf="@+id/imageView1" />
+                android:textColorHint="#6B657C"
+                android:textSize="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageView
+                android:id="@+id/searchSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_greysearch"
+                app:layout_constraintBottom_toBottomOf="@+id/popularEditText"
+                app:layout_constraintStart_toStartOf="@+id/popularEditText"
+                app:layout_constraintTop_toTopOf="@+id/popularEditText" />
 
             <TextView
-                android:id="@+id/textView121"
-                android:layout_width="0dp"
+                android:id="@+id/popularTextview"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:alpha="0.6"
-                android:fontFamily="@font/light"
-                android:text="It do be like that sometimes, but don’t worry.... The time will come. You can still Search our catalogue"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="11dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView111" />
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/semibold"
+                android:text="Popular"
+                android:textColor="@color/whiteText"
+                android:textSize="22dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/popularEditText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/popularRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:overScrollMode="never"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/popularTextview" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/semibold"
-            android:text="Search"
-            android:textColor="@color/whiteText"
-            android:textSize="36dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/popularEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="21dp"
-            android:background="@drawable/search_background"
-            android:ems="10"
-            android:fontFamily="@font/medium"
-            android:hint="Search for Events and Clubs."
-            android:imeOptions="actionDone"
-            android:inputType="textCapSentences"
-            android:paddingLeft="120px"
-            android:paddingTop="40px"
-            android:paddingRight="40px"
-            android:paddingBottom="40px"
-            android:text=""
-            android:textColor="@color/white"
-            android:textColorHint="#6B657C"
-            android:textSize="13dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-        <ImageView
-            android:id="@+id/searchSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:src="@drawable/ic_greysearch"
-            app:layout_constraintBottom_toBottomOf="@+id/popularEditText"
-            app:layout_constraintStart_toStartOf="@+id/popularEditText"
-            app:layout_constraintTop_toTopOf="@+id/popularEditText" />
-
-        <TextView
-            android:id="@+id/popularTextview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="30dp"
-            android:fontFamily="@font/semibold"
-            android:text="Popular"
-            android:textColor="@color/whiteText"
-            android:textSize="22dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/popularEditText" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/popularRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:overScrollMode="never"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/popularTextview" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

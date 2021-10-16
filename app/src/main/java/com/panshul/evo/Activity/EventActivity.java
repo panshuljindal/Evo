@@ -115,6 +115,16 @@ public class EventActivity extends AppCompatActivity {
 
             }
         });
+        eventChoose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation Anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fadeout);
+                eventChooseMain.setAnimation(Anim);
+                eventChoose.setAnimation(Anim);
+                eventChooseMain.setVisibility(View.GONE);
+                eventChoose.setVisibility(View.GONE);
+            }
+        });
         yesVit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,11 +188,13 @@ public class EventActivity extends AppCompatActivity {
                 if (saved.contains(object.get_id())){
                     save.setImageResource(R.drawable.ic_saved);
                     textViewSave.setText("Saved For Later");
+                    Drawables.noInterestedEvent(object.get_id(),EventActivity.this);
                     saved.remove(object.get_id());
                     Drawables.savedEvent(saved,EventActivity.this);
                 }else {
                     saved.add(object.get_id());
                     save.setImageResource(R.drawable.ic_savednot);
+                    Drawables.interestedEvent(object.get_id(),EventActivity.this);
                     textViewSave.setText("Interested");
                     Drawables.savedEvent(saved,EventActivity.this);
                 }
@@ -192,19 +204,21 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (likes.contains(object.get_id())){
-                    Drawables.unlikeEvent(object.get_id());
+                    Drawables.unlikeEvent(object.get_id(),EventActivity.this);
                     likes.remove(object.get_id());
                     Drawables.saveLiked(likes,EventActivity.this);
                     EventFragment.adapter.notifyDataSetChanged();
                     likeTextView.setText(String.valueOf(object.getLikes()-1)+" likes");
+                    object.setLikes(object.getLikes()-1);
                     likeImage.setSelected(false);
                     likeImage.likeAnimation();
                 }else {
-                    Drawables.likeEvent(object.get_id());
+                    Drawables.likeEvent(object.get_id(),EventActivity.this);
                     likes.add(object.get_id());
                     Drawables.saveLiked(likes,EventActivity.this);
                     EventFragment.adapter.notifyDataSetChanged();
                     likeTextView.setText(String.valueOf(object.getLikes()+1)+" likes");
+                    object.setLikes(object.getLikes()+1);
                     likeImage.setSelected(true);
                     likeImage.likeAnimation();
                 }
