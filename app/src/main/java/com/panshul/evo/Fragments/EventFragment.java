@@ -151,7 +151,7 @@ public class EventFragment extends Fragment {
                         lottie.pauseAnimation();
                     }
                     else {
-                        if (list.size()<10){
+                        if (list.size()<10 && list.size()>1){
                             List<String>list2 = new ArrayList<>();
                             list2.add("Hello");
                             list.add(new EventObject(list2,0,"isDone","","",new EventClubObject("","",true),""));

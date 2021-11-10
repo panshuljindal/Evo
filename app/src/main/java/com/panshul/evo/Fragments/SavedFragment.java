@@ -168,6 +168,7 @@ public class SavedFragment extends Fragment {
                     search.setVisibility(GONE);
                     recyclerView.setVisibility(GONE);
                     editText.setVisibility(GONE);
+                    isDone=true;
                     lottie.setVisibility(GONE);
                     lottie.pauseAnimation();
                 }

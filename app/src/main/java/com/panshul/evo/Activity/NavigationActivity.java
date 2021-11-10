@@ -2,9 +2,13 @@ package com.panshul.evo.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 import com.panshul.evo.Fragments.EventFragment;
@@ -19,6 +23,8 @@ import com.panshul.evo.Services.Drawables;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 import nl.joery.animatedbottombar.AnimatedBottomBar;
 import retrofit2.Call;
@@ -111,4 +117,68 @@ public class NavigationActivity extends AppCompatActivity {
             });
         }
     }
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        tellFragments();
+    }
+    boolean doubleback;
+    private void tellFragments(){
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for(Fragment f : fragments){
+            if(f != null && f instanceof SearchFragment)
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new PopularFragment()).commit();
+            else if (f!=null && f instanceof PopularFragment){
+                EventFragment home = new EventFragment();
+                FragmentManager fragmentManager = ((FragmentActivity) this).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,home);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                animatedBottomBar.selectTabAt(0,true);
+                //animatedBottomBar.setTabEnabledById(0,true);
+            }
+            else if (f!=null && f instanceof SettingsFragment){
+                EventFragment home = new EventFragment();
+                FragmentManager fragmentManager = ((FragmentActivity) this).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,home);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                animatedBottomBar.selectTabAt(0,true);
+                //animatedBottomBar.setTabEnabledById(0,true);
+            }
+            else if (f!=null && f instanceof SavedFragment){
+                EventFragment home = new EventFragment();
+                FragmentManager fragmentManager = ((FragmentActivity) this).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,home);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                animatedBottomBar.selectTabAt(0,true);
+                //animatedBottomBar.setTabEnabledById(0,true);
+            }
+            else if (f!=null && f instanceof EventFragment){
+                if (doubleback) {
+                    //super.onBackPressed();
+                    moveTaskToBack(true);
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    System.exit(0);
+                    //Log.i("doubleback", doubleback.toString());
+                } else {
+                    doubleback = true;
+                    Toast.makeText(this, "Please once again BACK to exit", Toast.LENGTH_SHORT).show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            doubleback = false;
+                            //Log.i("doubleback", doubleback.toString());
+                        }
+                    }, 2000);
+                    //Log.i("doubleback", doubleback.toString());
+                }
+            }
+        }
+    }
+
 }
