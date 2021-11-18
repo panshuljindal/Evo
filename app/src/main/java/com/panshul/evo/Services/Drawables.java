@@ -29,8 +29,8 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Drawables {
     public static String base_url = "https://vit-events-app.herokuapp.com";
-    public static int time=400;
-    public static int searchTime=400;
+    public static int time=500;
+    public static int searchTime=500;
     public static OkHttpClient getClientInstance() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

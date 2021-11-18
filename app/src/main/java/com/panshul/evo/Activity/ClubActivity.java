@@ -96,6 +96,7 @@ public class ClubActivity extends AppCompatActivity {
     private void setOption(){
         Glide.with(ClubActivity.this).load(object.getBackdrop()).into(poster);
         Glide.with(ClubActivity.this).load(object.getLogo()).into(logo);
+        logo.setClipToOutline(true);
         if(object.isPartner()){
             isPartner.setVisibility(View.VISIBLE);
         }

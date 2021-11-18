@@ -25,7 +25,7 @@
         app:abb_indicatorHeight="4dp"
         app:abb_indicatorMargin="16dp"
         app:abb_selectedIndex="0"
-        app:abb_tabColor="#795CCE"
+        app:abb_tabColor="#B05F2EEA"
         app:abb_indicatorLocation="bottom"
         app:abb_tabAnimationSelected="slide"
         app:abb_tabColorSelected="#DCD0FF"
