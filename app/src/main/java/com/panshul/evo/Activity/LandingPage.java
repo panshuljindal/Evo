@@ -40,29 +40,30 @@ public class LandingPage extends AppCompatActivity {
         letsGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.putBoolean("startFinish",true);
-
-                Call<RegisterUser> call = Drawables.api.registerNewDevice();
-                call.enqueue(new Callback<RegisterUser>() {
-                    @Override
-                    public void onResponse(Call<RegisterUser> call, Response<RegisterUser> response) {
-                        try {
-                            RegisterUser object = response.body();
-                            editor.putString("token",object.getId());
-                            editor.commit();
-                            editor.apply();
-                            startActivity(new Intent(LandingPage.this, NavigationActivity.class));
-
-                        }catch (Exception e){
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<RegisterUser> call, Throwable t) {
-
-                    }
-                });
+//                editor.putBoolean("startFinish",true);
+//
+//                Call<RegisterUser> call = Drawables.api.registerNewDevice();
+//                call.enqueue(new Callback<RegisterUser>() {
+//                    @Override
+//                    public void onResponse(Call<RegisterUser> call, Response<RegisterUser> response) {
+//                        try {
+//                            RegisterUser object = response.body();
+//                            editor.putString("token",object.getId());
+//                            editor.commit();
+//                            editor.apply();
+//                            startActivity(new Intent(LandingPage.this, NavigationActivity.class));
+//
+//                        }catch (Exception e){
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<RegisterUser> call, Throwable t) {
+//
+//                    }
+//                });
+                Toast.makeText(LandingPage.this, "Coming Soon!", Toast.LENGTH_SHORT).show();
 
             }
         });
