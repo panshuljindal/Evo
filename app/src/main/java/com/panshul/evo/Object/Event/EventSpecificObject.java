@@ -18,6 +18,8 @@ public class EventSpecificObject{
     public String meetingLink;
     public String poster;
     public String venue;
+    public int views;
+    public boolean vtopRegistrations;
     public String _id;
     public String name;
     public EventClubObject clubId;
@@ -25,7 +27,7 @@ public class EventSpecificObject{
     public String updatedAt;
     public int __v;
 
-    public EventSpecificObject(String shortName, String website, String info, String clubName, String videoLink, boolean isPaid, List<String> eventType, int eventCost, int likes, int timestamp, int duration, String registrationLink, String meetingLink, String poster, String venue, String _id, String name, EventClubObject clubId, String createdAt, String updatedAt, int __v) {
+    public EventSpecificObject(String shortName, String website, String info, String clubName, String videoLink, boolean isPaid, List<String> eventType, int eventCost, int likes, int timestamp, int duration, String registrationLink, String meetingLink, String poster, String venue, int views, boolean vtopRegistrations, String _id, String name, EventClubObject clubId, String createdAt, String updatedAt, int __v) {
         this.shortName = shortName;
         this.website = website;
         this.info = info;
@@ -41,6 +43,8 @@ public class EventSpecificObject{
         this.meetingLink = meetingLink;
         this.poster = poster;
         this.venue = venue;
+        this.views = views;
+        this.vtopRegistrations = vtopRegistrations;
         this._id = _id;
         this.name = name;
         this.clubId = clubId;
@@ -167,6 +171,22 @@ public class EventSpecificObject{
 
     public void setVenue(String venue) {
         this.venue = venue;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public boolean isVtopRegistrations() {
+        return vtopRegistrations;
+    }
+
+    public void setVtopRegistrations(boolean vtopRegistrations) {
+        this.vtopRegistrations = vtopRegistrations;
     }
 
     public String get_id() {

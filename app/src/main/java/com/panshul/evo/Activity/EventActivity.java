@@ -19,16 +19,11 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
-import com.google.android.material.appbar.AppBarLayout;
-import com.panshul.evo.Adapter.EventAdapter;
 import com.panshul.evo.Fragments.EventFragment;
 import com.panshul.evo.Object.Event.EventRoot;
 import com.panshul.evo.Object.Event.EventSpecificObject;
 import com.panshul.evo.R;
-import com.panshul.evo.Services.Api;
 import com.panshul.evo.Services.Drawables;
-import com.varunest.sparkbutton.SparkButton;
-import com.varunest.sparkbutton.SparkEventListener;
 
 
 import java.util.ArrayList;
@@ -131,7 +126,15 @@ public class EventActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setData(Uri.parse("https://vtop.vit.ac.in/vtop/initialProcess"));
+                if(object.isVtopRegistrations()){
+                    intent.setData(Uri.parse("https://vtop.vit.ac.in/vtop/initialProcess"));
+                }else{
+                    if(object.getRegistrationLink().length()==0){
+                        Toast.makeText(EventActivity.this, "Link not found!", Toast.LENGTH_SHORT).show();
+                    }else {
+                        intent.setData(Uri.parse(object.getRegistrationLink()));
+                    }
+                }
                 try {
                     startActivity(intent);
                 }catch (Exception e){
@@ -146,15 +149,16 @@ public class EventActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setData(Uri.parse(object.getRegistrationLink()));
+
                 if(object.getRegistrationLink().length()==0){
-                    Toast.makeText(EventActivity.this, "", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EventActivity.this, "Link not found!", Toast.LENGTH_SHORT).show();
                 }else {
-                    try {
-                        startActivity(intent);
-                    }catch (Exception e){
-                        Toast.makeText(EventActivity.this, "Error Occurred. Please try again", Toast.LENGTH_SHORT).show();
-                    }
+                    intent.setData(Uri.parse(object.getRegistrationLink()));
+                }
+                try {
+                    startActivity(intent);
+                }catch (Exception e){
+                    Toast.makeText(EventActivity.this, "Error Occurred. Please try again", Toast.LENGTH_SHORT).show();
                 }
                 eventChoose.setVisibility(View.GONE);
                 eventChooseMain.setVisibility(View.GONE);
