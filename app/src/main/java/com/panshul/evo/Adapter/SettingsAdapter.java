@@ -53,7 +53,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
 
                 if (list.get(position).getText().equals("Contact Us")){
                     Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.putExtra(Intent.EXTRA_EMAIL,new String[] {"evoappin@gmail.com"});
+                    intent.putExtra(Intent.EXTRA_EMAIL,new String[] {"events.sw@vit.ac.in"});
                     intent.putExtra(Intent.EXTRA_SUBJECT,"");
                     intent.putExtra(Intent.EXTRA_TEXT,"");
                     intent.setType("message/rfc822");
@@ -84,7 +84,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                 if (list.get(position).getText().equals("Our Instagram")){
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setData(Uri.parse("https://www.instagram.com/evoappin/"));
+                    intent.setData(Uri.parse("https://www.instagram.com/swcc_online/?utm_medium=copy_link"));
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
@@ -107,7 +107,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                 if (list.get(position).getText().equals("Our Facebook")){
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setData(Uri.parse("https://www.facebook.com/Evo-App-261498562420388"));
+                    intent.setData(Uri.parse("https://www.facebook.com/VITstudentswelfare"));
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
@@ -131,7 +131,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                 if (list.get(position).getText().equals("About Us")){
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setData(Uri.parse("https://evoevents.club/"));
+                    intent.setData(Uri.parse("https://vit.ac.in/campuslife/studentswelfare"));
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){
@@ -143,7 +143,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                 if (list.get(position).getText().equals("Privacy Policy")){
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setData(Uri.parse("https://privacy.evoevents.club/android"));
+                    intent.setData(Uri.parse("https://fakeyudi.notion.site/fakeyudi/VIT-Nav-87ef1ccf0fcc4dde9d8ed365c616a9f9"));
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){

@@ -51,9 +51,9 @@ public class SettingsFragment extends Fragment {
         lst2.add(new SettingsObject(R.drawable.ic_contact_us,"Contact Us"));
         lst2.add(new SettingsObject(R.drawable.ic_share,"Share with Peers"));
         lst2.add(new SettingsObject(R.drawable.ic_ig,"Our Instagram"));
-        lst2.add(new SettingsObject(R.drawable.ic_twit,"Our Twitter"));
+//        lst2.add(new SettingsObject(R.drawable.ic_twit,"Our Twitter"));
         lst2.add(new SettingsObject(R.drawable.ic_fb,"Our Facebook"));
-        lst2.add(new SettingsObject(R.drawable.ic_linkedin,"Our LinkedIn"));
+//        lst2.add(new SettingsObject(R.drawable.ic_linkedin,"Our LinkedIn"));
 
         recy2.setAdapter(new SettingsAdapter(context,lst2));
 
