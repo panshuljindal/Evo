@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static android.content.Context.MODE_PRIVATE;
 
 public class Drawables {
-    public static String base_url = "https://vit-events-app.herokuapp.com";
+    public static String base_url = "https://gravitas-app-production.up.railway.app";
     public static int time=500;
     public static int searchTime=500;
     public static OkHttpClient getClientInstance() {

@@ -102,12 +102,16 @@ public class EventActivity extends AppCompatActivity {
         registerNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                eventChoose.setVisibility(View.VISIBLE);
-                eventChooseMain.setVisibility(View.VISIBLE);
-                Animation Anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fadein);
-                eventChoose.setAnimation(Anim);
-                eventChooseMain.setAnimation(Anim);
+//                eventChoose.setVisibility(View.VISIBLE);
+//                eventChooseMain.setVisibility(View.VISIBLE);
+//                Animation Anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fadein);
+//                eventChoose.setAnimation(Anim);
+//                eventChooseMain.setAnimation(Anim);
 
+                // redirect to CDC Portal
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://vtop.vit.ac.in/vtop/open/page"));
+                startActivity(i);
             }
         });
         eventChoose.setOnClickListener(new View.OnClickListener() {
@@ -170,14 +174,14 @@ public class EventActivity extends AppCompatActivity {
                 finish();
             }
         });
-        clubLogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =new Intent(v.getContext(), ClubActivity.class);
-                i.putExtra("clubId",object.getClubId().get_id());
-                startActivity(i);
-            }
-        });
+//        clubLogo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i =new Intent(v.getContext(), ClubActivity.class);
+//                i.putExtra("clubId",object.getClubId().get_id());
+//                startActivity(i);
+//            }
+//        });
         eventName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
