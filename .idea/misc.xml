@@ -5,7 +5,9 @@
       <map>
         <entry key="app/src/main/res/layout/activity_club.xml" value="0.21205444335937507" />
         <entry key="app/src/main/res/layout/activity_event.xml" value="0.2462109375" />
-        <entry key="app/src/main/res/layout/activity_landing.xml" value="0.13213806152343743" />
+        <entry key="app/src/main/res/layout/activity_landing.xml" value="0.21941833496093746" />
+        <entry key="app/src/main/res/layout/activity_navigation_acitivity.xml" value="0.2441214194100043" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.35940933439663103" />
       </map>
     </option>
   </component>
