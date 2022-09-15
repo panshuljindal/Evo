@@ -142,7 +142,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                 if (list.get(position).getText().equals("Privacy Policy")){
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setData(Uri.parse("https://fakeyudi.notion.site/fakeyudi/VIT-Nav-87ef1ccf0fcc4dde9d8ed365c616a9f9"));
+                    intent.setData(Uri.parse("https://cloud-spirit-c36.notion.site/Gravitas-89130d036f254fdb824d9ce1f267b8d5"));
                     try {
                         context.startActivity(intent);
                     }catch (Exception e){

@@ -286,14 +286,13 @@
                     >
 
                     <TextView
+                        android:id="@+id/locate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Location:"
                         android:layout_marginTop="11dp"
                         android:fontFamily="@font/regular"
-                        android:textColor="@color/primaryBrand"
-                        android:id="@+id/locate"
-                        />
+                        android:text="Venue:"
+                        android:textColor="@color/primaryBrand" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -305,21 +304,19 @@
                         android:id="@+id/venue"
                         />
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/navigateTextView"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(Click here to Navigate to the Venue)"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/regular"
-                    android:layout_marginTop="11dp"
+                    android:text="@string/navigate"
                     android:textColor="#F7F7FC"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginLeft="30dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/locateLayout"
-                    />
-
+                    android:textSize="13dp"
+                    app:layout_constraintLeft_toLeftOf="@id/savedConstraintLayout"
+                    app:layout_constraintRight_toRightOf="@id/savedConstraintLayout"
+                    app:layout_constraintTop_toBottomOf="@id/savedConstraintLayout" />
 
 
                 <Button
@@ -327,7 +324,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="90dp"
+                    android:layout_marginTop="50dp"
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/event_registernow"
                     android:fontFamily="@font/semibold"

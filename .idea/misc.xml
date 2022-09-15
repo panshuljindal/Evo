@@ -3,75 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/choose_button.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/club_backdrop.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/event_choose_background.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/event_registernow.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/event_selected.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/event_unselected.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/eventdetails_background.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/eventgradient.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/eventimage_backdrop.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/eventimage_background.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/eventitem_background.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/heart_selector.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/heart_selector_big.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_aboutus.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_appicon.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_arrow.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_back.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_cancel.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_choose_drawable.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_contact_us.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_events.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_eventsend.xml" value="0.1885" />
-        <entry key="app/src/main/res/drawable/ic_faq.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_fb.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_greyback.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_greysearch.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_ig.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_like.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_line.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_linkedin.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_locate.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_medium.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_notifications.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_saved.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_savednot.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_searchcalendar.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_searchevo.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_searchruppee.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_settings.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_share.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_tnc.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_twit.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_unlike.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_unlikebig.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_verified.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/ic_verified_small.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/music_cl_background.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/search_background.xml" value="0.2485" />
-        <entry key="app/src/main/res/drawable/social_media_background.xml" value="0.2485" />
         <entry key="app/src/main/res/layout/activity_club.xml" value="0.21205444335937507" />
-        <entry key="app/src/main/res/layout/activity_event.xml" value="0.1496536254882812" />
+        <entry key="app/src/main/res/layout/activity_event.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_landing.xml" value="0.21941833496093746" />
         <entry key="app/src/main/res/layout/activity_navigation_acitivity.xml" value="0.2441214194100043" />
-        <entry key="app/src/main/res/layout/activity_notifications.xml" value="0.29739583333333336" />
-        <entry key="app/src/main/res/layout/activity_see_all.xml" value="0.29739583333333336" />
-        <entry key="app/src/main/res/layout/event_item.xml" value="0.146875" />
-        <entry key="app/src/main/res/layout/fragment_event.xml" value="0.29739583333333336" />
-        <entry key="app/src/main/res/layout/fragment_popular.xml" value="0.29739583333333336" />
-        <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.29739583333333336" />
+        <entry key="app/src/main/res/layout/event_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.35940933439663103" />
-        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.29739583333333336" />
-        <entry key="app/src/main/res/layout/popular_item.xml" value="0.29739583333333336" />
-        <entry key="app/src/main/res/layout/popularitem_item.xml" value="0.29739583333333336" />
-        <entry key="app/src/main/res/layout/search_item.xml" value="0.29739583333333336" />
-        <entry key="app/src/main/res/layout/settings_item.xml" value="0.29739583333333336" />
-        <entry key="app/src/main/res/menu/menu.xml" value="0.29739583333333336" />
+        <entry key="app/src/main/res/layout/search_item.xml" value="0.1" />
       </map>
     </option>
   </component>
