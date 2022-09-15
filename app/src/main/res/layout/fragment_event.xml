@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fragmentBackground"
-    tools:context=".Fragments.EventFragment">
+    tools:context="edu.vit.gravitas.Fragments.EventFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:background="@color/fragmentBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".Fragments.EventFragment">
+        tools:context="edu.vit.gravitas.Fragments.EventFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/eventsEmpty"
@@ -145,7 +145,7 @@
                     android:paddingRight="22dp"
                     android:paddingBottom="5dp"
                     android:text="All"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="14dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.SeeAllActivity"
+    tools:context="edu.vit.gravitas.Activity.SeeAllActivity"
     android:background="@color/fragmentBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".Activity.SeeAllActivity">
+        tools:context="edu.vit.gravitas.Activity.SeeAllActivity">
 
         <ImageView
             android:id="@+id/seeAllBack"
