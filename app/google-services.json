@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "510382374146",
+    "project_id": "evoapp-ebeb6",
+    "storage_bucket": "evoapp-ebeb6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510382374146:android:fbdabc818524a742ba561b",
+        "android_client_info": {
+          "package_name": "com.panshul.evo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510382374146-h89lr0lr4k6o30kn3rldmuo3td5902u1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLI1_VIRpkAeNxgIQjNydBOflHLPQ3YkU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510382374146-h89lr0lr4k6o30kn3rldmuo3td5902u1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
